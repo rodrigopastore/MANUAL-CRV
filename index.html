@@ -147,6 +147,9 @@
   }
 
   /* ── SECTION TITLE ── */
+  [id^="sec-"] {
+    scroll-margin-top: 160px;
+  }
   .section-label {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 11px;
@@ -588,7 +591,146 @@
     .container { padding: 24px 16px; }
   }
 
-  /* ── MODAL ── */
+
+  /* ── NAV MENU ── */
+  .nav-menu {
+    background: #060e1c;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .nav-menu::-webkit-scrollbar { display: none; }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .nav-item {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 11px 16px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-item:hover { color: var(--white); border-bottom-color: var(--accent); }
+  .nav-item.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── INTRO SECTION ── */
+  .intro-section {
+    background: linear-gradient(135deg, #0a1e3d 0%, #0d2448 100%);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+  .intro-section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .intro-section-text {
+    font-size: 13.5px;
+    color: var(--light);
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .intro-section-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .intro-meta-pill {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: rgba(10,22,40,0.6);
+  }
+
+
+  /* ── LEGISLAÇÃO ── */
+  .leg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .leg-card {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--steel);
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .leg-card:hover {
+    border-left-color: var(--accent);
+    background: #0f2040;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  }
+  .leg-card.pending {
+    opacity: 0.6;
+    cursor: default;
+    pointer-events: none;
+  }
+  .leg-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .leg-body { flex: 1; }
+  .leg-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .leg-sub {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .leg-badge {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    margin-top: 6px;
+    display: inline-block;
+  }
+  .leg-badge.ext  { background: rgba(45,90,142,0.3); color: var(--muted); border: 1px solid var(--border); }
+  .leg-badge.pend { background: rgba(232,184,75,0.15); color: var(--accent); border: 1px solid rgba(232,184,75,0.3); }/* ── MODAL ── */
   .modal-overlay {
     display: none;
     position: fixed;
@@ -813,7 +955,31 @@
   </div>
 </header>
 
+<!-- NAV MENU -->
+<nav class="nav-menu">
+  <div class="nav-inner">
+    <a class="nav-item" href="#sec-hipoteses">Hipóteses</a>
+    <a class="nav-item" href="#sec-fluxo">Fluxo Operacional</a>
+    <a class="nav-item" href="#sec-fluxogramas">Diagramas</a>
+    <a class="nav-item" href="#sec-anuencia">Tabela de Anuência</a>
+    <a class="nav-item" href="#sec-documentos">Documentos</a>
+    <a class="nav-item" href="#sec-prazos">Prazos</a>
+    <a class="nav-item" href="#sec-vedacoes">Vedações</a>
+    <a class="nav-item" href="#sec-legislacao">Legislação</a>
+  </div>
+</nav>
+
 <div class="container">
+
+
+<!-- INTRO CONTEXTUAL -->
+<div class="intro-section fade-in" id="sec-intro">
+  <div class="intro-section-title">📋 Sobre este Manual</div>
+  <div class="intro-section-text">
+    Este manual tem por objetivo orientar as unidades prisionais do Estado de Santa Catarina quanto ao procedimento operacional para solicitação e execução de transferências prisionais no âmbito da <strong style="color:var(--accent)">Central de Regulação de Vagas (CRV)</strong>.
+  </div>
+
+</div>
 
   <!-- INTRO -->
   <div class="intro-box fade-in">
@@ -832,7 +998,7 @@
   </div>
 
   <!-- HIPÓTESES -->
-  <div class="section-label">01 — Hipóteses de transferência</div>
+  <div id="sec-hipoteses" class="section-label">01 — Hipóteses de transferência</div>
   <div class="hip-grid" style="grid-template-columns: repeat(4, 1fr);">
     <div class="hip-card danger" onclick="toggleHip(this)">
       <span class="hip-num">I</span>
@@ -1234,7 +1400,11 @@ Florianópolis/SC</div>
   </div>
 
   <!-- FLUXO -->
-  <div class="section-label">02 — Fluxo operacional passo a passo</div>
+
+
+<!-- FLUXOGRAMAS -->
+
+  <div id="sec-fluxo" class="section-label">02 — Fluxo operacional passo a passo</div>
   <div class="flow-wrapper" id="flowWrapper">
 
     <div class="flow-step" id="step1">
@@ -1508,7 +1678,129 @@ Ao(À) Meritíssimo(a) Senhor(a)
   </div>
 
   <!-- ANUÊNCIA -->
-  <div class="section-label">03 — Tabela de anuência por tipo de transferência</div>
+
+
+
+  <!-- FLUXOGRAMAS -->
+  <div id="sec-fluxogramas" class="section-label">03 — Diagrama por hipótese de transferência</div>
+  <div style="margin-bottom:40px;">
+    <p style="font-size:12px; color:var(--muted); margin-bottom:16px;">Clique em cada hipótese para visualizar o diagrama de fluxo correspondente.</p>
+    
+    <div class="diag-item" style="border:1px solid var(--border); border-left:3px solid #c0392b; margin-bottom:10px; overflow:hidden;">
+      <div class="diag-item-header" onclick="toggleDiag('emerg')" style="display:flex; align-items:center; justify-content:space-between; padding:14px 20px; cursor:pointer; background:rgba(10,22,40,0.6); user-select:none; transition:background 0.2s;" onmouseover="this.style.background='rgba(20,40,70,0.8)'" onmouseout="this.style.background='rgba(10,22,40,0.6)'">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-size:20px;">🚨</span>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; color:#f0f4fa; letter-spacing:0.5px;">Hipótese I — Segurança / Emergência</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:2px;">Risco iminente à integridade do preso ou à ordem e segurança da unidade.</div>
+          </div>
+        </div>
+        <span id="diag-arrow-emerg" style="font-size:18px; color:#c0392b; transition:transform 0.3s; display:inline-block;">›</span>
+      </div>
+      <div id="diag-panel-emerg" style="display:none; padding:20px 10px 10px; background:#070f1e;">
+        <div style="display:flex; justify-content:center; overflow-x:auto;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 734" width="500">
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0,7 2.5,0 5" fill="#e87060"/>
+    </marker>
+  </defs>
+  <line x1="250" y1="55" x2="250" y2="148" stroke="#e87060" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="151" x2="250" y2="244" stroke="#e87060" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="247" x2="250" y2="340" stroke="#e87060" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="343" x2="250" y2="436" stroke="#e87060" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="439" x2="250" y2="532" stroke="#e87060" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="535" x2="250" y2="628" stroke="#e87060" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="631" x2="250" y2="692" stroke="#e87060" stroke-width="1.8" marker-end="url(#arr)"/>
+  <rect x="140" y="20" width="220" height="34" rx="17" fill="#c0392b" /><text x="250" y="38" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="12" font-weight="800" letter-spacing="1.5" fill="#fff">🚨  INÍCIO</text><rect x="83" y="87" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="84" width="340" height="66" rx="4" fill="#c0392bcc" stroke="#c0392b" stroke-width="1.5"/><rect x="80" y="84" width="5" height="66" rx="2" fill="#c0392b"/><circle cx="108" cy="117" r="16" fill="#c0392b33"/><text x="108" y="118" text-anchor="middle" dominant-baseline="middle" font-size="15">👤</text><text x="134" y="110" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Unidade Prisional de Origem</text><text x="134" y="127" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#ffffffaa">Elabora ofício + BPI + Rel. Saúde + docs de segurança</text><rect x="83" y="183" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="180" width="340" height="66" rx="4" fill="#0d1e35" stroke="#c0392b" stroke-width="1.5"/><rect x="80" y="180" width="5" height="66" rx="2" fill="#c0392b"/><circle cx="108" cy="213" r="16" fill="#c0392b33"/><text x="108" y="214" text-anchor="middle" dominant-baseline="middle" font-size="15">✍️</text><text x="134" y="206" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Diretores Origem + Destino</text><text x="134" y="223" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Assinam o ofício — ambas obrigatórias</text><rect x="83" y="279" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="276" width="340" height="66" rx="4" fill="#0d1e35" stroke="#c0392b" stroke-width="1.5"/><rect x="80" y="276" width="5" height="66" rx="2" fill="#c0392b"/><circle cx="108" cy="309" r="16" fill="#c0392b33"/><text x="108" y="310" text-anchor="middle" dominant-baseline="middle" font-size="15">🏛️</text><text x="134" y="302" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Superintendente(s) Regional(is)</text><text x="134" y="319" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Anuência — SR origem (+ SR destino se houver)</text><rect x="83" y="375" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="372" width="340" height="66" rx="4" fill="#c0392bcc" stroke="#c0392b" stroke-width="1.5"/><rect x="80" y="372" width="5" height="66" rx="2" fill="#c0392b"/><circle cx="108" cy="405" r="16" fill="#c0392b33"/><text x="108" y="406" text-anchor="middle" dominant-baseline="middle" font-size="15">🗂️</text><text x="134" y="398" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">CRV — Central de Regulação de Vagas</text><text x="134" y="415" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#ffffffaa">Verifica vaga, perfil e delibera com celeridade</text><rect x="83" y="471" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="468" width="340" height="66" rx="4" fill="#0d1e35" stroke="#c0392b" stroke-width="1.5"/><rect x="80" y="468" width="5" height="66" rx="2" fill="#c0392b"/><circle cx="108" cy="501" r="16" fill="#c0392b33"/><text x="108" y="502" text-anchor="middle" dominant-baseline="middle" font-size="15">🚐</text><text x="134" y="494" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">SEJURI / Departamento de Polícia Penal</text><text x="134" y="511" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Executa a transferência e atualiza sistemas</text><rect x="83" y="567" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="564" width="340" height="66" rx="4" fill="#c0392bcc" stroke="#c0392b" stroke-width="1.5"/><rect x="80" y="564" width="5" height="66" rx="2" fill="#c0392b"/><circle cx="108" cy="597" r="16" fill="#c0392b33"/><text x="108" y="598" text-anchor="middle" dominant-baseline="middle" font-size="15">⚖️</text><text x="134" y="590" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Unidades Origem + Destino</text><text x="134" y="607" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#ffffffaa">Comunicação ao Juízo — prazo: 24 horas</text><rect x="140" y="660" width="220" height="34" rx="17" fill="#27ae60" /><text x="250" y="678" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="12" font-weight="800" letter-spacing="1.5" fill="#fff">✅  TRANSFERÊNCIA CONCLUÍDA</text>
+</svg></div>
+        <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin-top:12px; font-size:10.5px; color:var(--muted);">
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:50%;background:#27ae60;"></div> Início / Conclusão</div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:2px;background:#0d1e35;border:1px solid #c0392b;"></div> Etapa</div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:2px;background:#c0392bcc;"></div> Etapa crítica</div>
+        </div>
+      </div>
+    </div>
+    <div class="diag-item" style="border:1px solid var(--border); border-left:3px solid #c8900a; margin-bottom:10px; overflow:hidden;">
+      <div class="diag-item-header" onclick="toggleDiag('vol')" style="display:flex; align-items:center; justify-content:space-between; padding:14px 20px; cursor:pointer; background:rgba(10,22,40,0.6); user-select:none; transition:background 0.2s;" onmouseover="this.style.background='rgba(20,40,70,0.8)'" onmouseout="this.style.background='rgba(10,22,40,0.6)'">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-size:20px;">👤</span>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; color:#f0f4fa; letter-spacing:0.5px;">Hipótese II — Pedido Voluntário</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:2px;">Solicitação do preso, familiar ou advogado por mudança de domicílio ou outro motivo relevante.</div>
+          </div>
+        </div>
+        <span id="diag-arrow-vol" style="font-size:18px; color:#c8900a; transition:transform 0.3s; display:inline-block;">›</span>
+      </div>
+      <div id="diag-panel-vol" style="display:none; padding:20px 10px 10px; background:#070f1e;">
+        <div style="display:flex; justify-content:center; overflow-x:auto;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 924" width="500">
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0,7 2.5,0 5" fill="#e8b84b"/>
+    </marker>
+  </defs>
+  <line x1="250" y1="55" x2="250" y2="146" stroke="#e8b84b" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="149" x2="250" y2="242" stroke="#e8b84b" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="245" x2="250" y2="338" stroke="#e8b84b" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="341" x2="250" y2="434" stroke="#e8b84b" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="437" x2="250" y2="530" stroke="#e8b84b" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="533" x2="250" y2="626" stroke="#e8b84b" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="629" x2="250" y2="722" stroke="#e8b84b" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="725" x2="250" y2="818" stroke="#e8b84b" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="821" x2="250" y2="882" stroke="#e8b84b" stroke-width="1.8" marker-end="url(#arr)"/>
+  <rect x="140" y="20" width="220" height="34" rx="17" fill="#c8900a" /><text x="250" y="38" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="12" font-weight="800" letter-spacing="1.5" fill="#fff">👤  INÍCIO</text><polygon points="250,84 400,116 250,148 100,116" fill="#0d1e35" stroke="#c8900a" stroke-width="1.5"/><text x="250" y="109" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="12" font-weight="700" fill="#ffffff">⚖️ Via Judicial ou Administrativa?</text><rect x="83" y="181" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="178" width="340" height="66" rx="4" fill="#c8900acc" stroke="#c8900a" stroke-width="1.5"/><rect x="80" y="178" width="5" height="66" rx="2" fill="#c8900a"/><circle cx="108" cy="211" r="16" fill="#c8900a33"/><text x="108" y="212" text-anchor="middle" dominant-baseline="middle" font-size="15">📝</text><text x="134" y="204" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Preso / Familiar / Advogado</text><text x="134" y="221" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#ffffffaa">Adm: memorando interno / carta ou e-mail / petição física ou e-mail + procuração  |  Jud: memorando no processo / solicitação no processo / petição no processo</text><rect x="83" y="277" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="274" width="340" height="66" rx="4" fill="#0d1e35" stroke="#c8900a" stroke-width="1.5"/><rect x="80" y="274" width="5" height="66" rx="2" fill="#c8900a"/><circle cx="108" cy="307" r="16" fill="#c8900a33"/><text x="108" y="308" text-anchor="middle" dominant-baseline="middle" font-size="15">🏢</text><text x="134" y="300" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Unidade Prisional de Origem</text><text x="134" y="317" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Adm: instrui ofício + BPI + Rel. Saúde + doc. do pedido  |  Jud: ao ser intimada da Decisão Judicial, elabora ofício + BPI + Rel. Saúde + Decisão e segue o fluxo padrão</text><rect x="83" y="373" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="370" width="340" height="66" rx="4" fill="#0d1e35" stroke="#c8900a" stroke-width="1.5"/><rect x="80" y="370" width="5" height="66" rx="2" fill="#c8900a"/><circle cx="108" cy="403" r="16" fill="#c8900a33"/><text x="108" y="404" text-anchor="middle" dominant-baseline="middle" font-size="15">✍️</text><text x="134" y="396" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Diretores Origem + Destino</text><text x="134" y="413" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Assinam o ofício — ambas obrigatórias</text><rect x="83" y="469" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="466" width="340" height="66" rx="4" fill="#0d1e35" stroke="#c8900a" stroke-width="1.5"/><rect x="80" y="466" width="5" height="66" rx="2" fill="#c8900a"/><circle cx="108" cy="499" r="16" fill="#c8900a33"/><text x="108" y="500" text-anchor="middle" dominant-baseline="middle" font-size="15">🏛️</text><text x="134" y="492" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Superintendente(s) Regional(is)</text><text x="134" y="509" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Anuência — SR origem (+ SR destino se houver)</text><rect x="83" y="565" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="562" width="340" height="66" rx="4" fill="#c8900acc" stroke="#c8900a" stroke-width="1.5"/><rect x="80" y="562" width="5" height="66" rx="2" fill="#c8900a"/><circle cx="108" cy="595" r="16" fill="#c8900a33"/><text x="108" y="596" text-anchor="middle" dominant-baseline="middle" font-size="15">🗂️</text><text x="134" y="588" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">CRV — Central de Regulação de Vagas</text><text x="134" y="605" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#ffffffaa">Analisa, delibera — resposta ao Juízo em 30 dias (via judicial)</text><rect x="83" y="661" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="658" width="340" height="66" rx="4" fill="#0d1e35" stroke="#c8900a" stroke-width="1.5"/><rect x="80" y="658" width="5" height="66" rx="2" fill="#c8900a"/><circle cx="108" cy="691" r="16" fill="#c8900a33"/><text x="108" y="692" text-anchor="middle" dominant-baseline="middle" font-size="15">🚐</text><text x="134" y="684" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">SEJURI / Departamento de Polícia Penal</text><text x="134" y="701" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Executa — vedada punição ou discriminação</text><rect x="83" y="757" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="754" width="340" height="66" rx="4" fill="#c8900acc" stroke="#c8900a" stroke-width="1.5"/><rect x="80" y="754" width="5" height="66" rx="2" fill="#c8900a"/><circle cx="108" cy="787" r="16" fill="#c8900a33"/><text x="108" y="788" text-anchor="middle" dominant-baseline="middle" font-size="15">⚖️</text><text x="134" y="780" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Unidades Origem + Destino</text><text x="134" y="797" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#ffffffaa">Comunicação ao Juízo — prazo: 24 horas</text><rect x="140" y="850" width="220" height="34" rx="17" fill="#27ae60" /><text x="250" y="868" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="12" font-weight="800" letter-spacing="1.5" fill="#fff">✅  TRANSFERÊNCIA CONCLUÍDA</text>
+</svg></div>
+        <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin-top:12px; font-size:10.5px; color:var(--muted);">
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:50%;background:#27ae60;"></div> Início / Conclusão</div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:2px;background:#0d1e35;border:1px solid #c8900a;"></div> Etapa</div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:2px;background:#c8900acc;"></div> Etapa crítica</div>
+        </div>
+      </div>
+    </div>
+    <div class="diag-item" style="border:1px solid var(--border); border-left:3px solid #2d5a8e; margin-bottom:10px; overflow:hidden;">
+      <div class="diag-item-header" onclick="toggleDiag('equal')" style="display:flex; align-items:center; justify-content:space-between; padding:14px 20px; cursor:pointer; background:rgba(10,22,40,0.6); user-select:none; transition:background 0.2s;" onmouseover="this.style.background='rgba(20,40,70,0.8)'" onmouseout="this.style.background='rgba(10,22,40,0.6)'">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-size:20px;">⚖️</span>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; color:#f0f4fa; letter-spacing:0.5px;">Hipótese III — Equalização de Lotação</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:2px;">Transferência de ofício para reequilibrar a ocupação entre unidades prisionais do sistema.</div>
+          </div>
+        </div>
+        <span id="diag-arrow-equal" style="font-size:18px; color:#2d5a8e; transition:transform 0.3s; display:inline-block;">›</span>
+      </div>
+      <div id="diag-panel-equal" style="display:none; padding:20px 10px 10px; background:#070f1e;">
+        <div style="display:flex; justify-content:center; overflow-x:auto;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 830" width="500">
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0,7 2.5,0 5" fill="#5a8ec0"/>
+    </marker>
+  </defs>
+  <line x1="250" y1="55" x2="250" y2="148" stroke="#5a8ec0" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="151" x2="250" y2="244" stroke="#5a8ec0" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="247" x2="250" y2="340" stroke="#5a8ec0" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="343" x2="250" y2="436" stroke="#5a8ec0" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="439" x2="250" y2="532" stroke="#5a8ec0" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="535" x2="250" y2="628" stroke="#5a8ec0" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="631" x2="250" y2="724" stroke="#5a8ec0" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="727" x2="250" y2="788" stroke="#5a8ec0" stroke-width="1.8" marker-end="url(#arr)"/>
+  <rect x="140" y="20" width="220" height="34" rx="17" fill="#2d5a8e" /><text x="250" y="38" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="12" font-weight="800" letter-spacing="1.5" fill="#fff">⚖️  INÍCIO</text><rect x="83" y="87" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="84" width="340" height="66" rx="4" fill="#2d5a8ecc" stroke="#2d5a8e" stroke-width="1.5"/><rect x="80" y="84" width="5" height="66" rx="2" fill="#2d5a8e"/><circle cx="108" cy="117" r="16" fill="#2d5a8e33"/><text x="108" y="118" text-anchor="middle" dominant-baseline="middle" font-size="15">🗂️</text><text x="134" y="110" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Unidade Prisional / SR / CRV</text><text x="134" y="127" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#ffffffaa">Identifica desequilíbrio de lotação e determina a necessidade de equalização</text><rect x="83" y="183" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="180" width="340" height="66" rx="4" fill="#0d1e35" stroke="#2d5a8e" stroke-width="1.5"/><rect x="80" y="180" width="5" height="66" rx="2" fill="#2d5a8e"/><circle cx="108" cy="213" r="16" fill="#2d5a8e33"/><text x="108" y="214" text-anchor="middle" dominant-baseline="middle" font-size="15">🏢</text><text x="134" y="206" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Unidade Prisional de Origem</text><text x="134" y="223" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Elabora ofício + BPI + Rel. Saúde</text><rect x="83" y="279" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="276" width="340" height="66" rx="4" fill="#0d1e35" stroke="#2d5a8e" stroke-width="1.5"/><rect x="80" y="276" width="5" height="66" rx="2" fill="#2d5a8e"/><circle cx="108" cy="309" r="16" fill="#2d5a8e33"/><text x="108" y="310" text-anchor="middle" dominant-baseline="middle" font-size="15">✍️</text><text x="134" y="302" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Diretores Origem + Destino</text><text x="134" y="319" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Assinam o ofício — ambas obrigatórias</text><rect x="83" y="375" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="372" width="340" height="66" rx="4" fill="#0d1e35" stroke="#2d5a8e" stroke-width="1.5"/><rect x="80" y="372" width="5" height="66" rx="2" fill="#2d5a8e"/><circle cx="108" cy="405" r="16" fill="#2d5a8e33"/><text x="108" y="406" text-anchor="middle" dominant-baseline="middle" font-size="15">🏛️</text><text x="134" y="398" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Superintendente(s) Regional(is)</text><text x="134" y="415" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Anuência — verifica equidade de vagas</text><rect x="83" y="471" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="468" width="340" height="66" rx="4" fill="#2d5a8ecc" stroke="#2d5a8e" stroke-width="1.5"/><rect x="80" y="468" width="5" height="66" rx="2" fill="#2d5a8e"/><circle cx="108" cy="501" r="16" fill="#2d5a8e33"/><text x="108" y="502" text-anchor="middle" dominant-baseline="middle" font-size="15">🗂️</text><text x="134" y="494" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">CRV — Central de Regulação de Vagas</text><text x="134" y="511" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#ffffffaa">Confirma vaga e autoriza — sem prévia do Juízo</text><rect x="83" y="567" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="564" width="340" height="66" rx="4" fill="#0d1e35" stroke="#2d5a8e" stroke-width="1.5"/><rect x="80" y="564" width="5" height="66" rx="2" fill="#2d5a8e"/><circle cx="108" cy="597" r="16" fill="#2d5a8e33"/><text x="108" y="598" text-anchor="middle" dominant-baseline="middle" font-size="15">🚐</text><text x="134" y="590" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">SEJURI / Departamento de Polícia Penal</text><text x="134" y="607" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Executa a transferência e atualiza sistemas</text><rect x="83" y="663" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="660" width="340" height="66" rx="4" fill="#2d5a8ecc" stroke="#2d5a8e" stroke-width="1.5"/><rect x="80" y="660" width="5" height="66" rx="2" fill="#2d5a8e"/><circle cx="108" cy="693" r="16" fill="#2d5a8e33"/><text x="108" y="694" text-anchor="middle" dominant-baseline="middle" font-size="15">⚖️</text><text x="134" y="686" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Unidades Origem + Destino</text><text x="134" y="703" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#ffffffaa">Comunicação ao Juízo — prazo: 24 horas</text><rect x="140" y="756" width="220" height="34" rx="17" fill="#27ae60" /><text x="250" y="774" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="12" font-weight="800" letter-spacing="1.5" fill="#fff">✅  TRANSFERÊNCIA CONCLUÍDA</text>
+</svg></div>
+        <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin-top:12px; font-size:10.5px; color:var(--muted);">
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:50%;background:#27ae60;"></div> Início / Conclusão</div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:2px;background:#0d1e35;border:1px solid #2d5a8e;"></div> Etapa</div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:2px;background:#2d5a8ecc;"></div> Etapa crítica</div>
+        </div>
+      </div>
+    </div>
+    <div class="diag-item" style="border:1px solid var(--border); border-left:3px solid #5a82aa; margin-bottom:10px; overflow:hidden;">
+      <div class="diag-item-header" onclick="toggleDiag('mand')" style="display:flex; align-items:center; justify-content:space-between; padding:14px 20px; cursor:pointer; background:rgba(10,22,40,0.6); user-select:none; transition:background 0.2s;" onmouseover="this.style.background='rgba(20,40,70,0.8)'" onmouseout="this.style.background='rgba(10,22,40,0.6)'">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-size:20px;">📜</span>
+          <div>
+            <div style="font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; color:#f0f4fa; letter-spacing:0.5px;">Hipótese IV — Mandado de Comarca Diversa</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:2px;">Preso capturado em comarca diferente da que expediu o mandado — deve ser conduzido à unidade competente.</div>
+          </div>
+        </div>
+        <span id="diag-arrow-mand" style="font-size:18px; color:#5a82aa; transition:transform 0.3s; display:inline-block;">›</span>
+      </div>
+      <div id="diag-panel-mand" style="display:none; padding:20px 10px 10px; background:#070f1e;">
+        <div style="display:flex; justify-content:center; overflow-x:auto;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 734" width="500">
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0,7 2.5,0 5" fill="#7a9cc0"/>
+    </marker>
+  </defs>
+  <line x1="250" y1="55" x2="250" y2="148" stroke="#7a9cc0" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="151" x2="250" y2="244" stroke="#7a9cc0" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="247" x2="250" y2="340" stroke="#7a9cc0" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="343" x2="250" y2="436" stroke="#7a9cc0" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="439" x2="250" y2="532" stroke="#7a9cc0" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="535" x2="250" y2="628" stroke="#7a9cc0" stroke-width="1.8" marker-end="url(#arr)"/><line x1="250" y1="631" x2="250" y2="692" stroke="#7a9cc0" stroke-width="1.8" marker-end="url(#arr)"/>
+  <rect x="140" y="20" width="220" height="34" rx="17" fill="#5a82aa" /><text x="250" y="38" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="12" font-weight="800" letter-spacing="1.5" fill="#fff">📜  INÍCIO</text><rect x="83" y="87" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="84" width="340" height="66" rx="4" fill="#5a82aacc" stroke="#5a82aa" stroke-width="1.5"/><rect x="80" y="84" width="5" height="66" rx="2" fill="#5a82aa"/><circle cx="108" cy="117" r="16" fill="#5a82aa33"/><text x="108" y="118" text-anchor="middle" dominant-baseline="middle" font-size="15">🔍</text><text x="134" y="110" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Unidade Prisional de Origem</text><text x="134" y="127" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#ffffffaa">Identifica prisão em comarca diversa da expedidora do mandado · Elabora ofício + BPI + Rel. Saúde + cópia do Mandado de Prisão, indicando a unidade competente pela circunscrição do juízo expedidor</text><rect x="83" y="183" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="180" width="340" height="66" rx="4" fill="#0d1e35" stroke="#5a82aa" stroke-width="1.5"/><rect x="80" y="180" width="5" height="66" rx="2" fill="#5a82aa"/><circle cx="108" cy="213" r="16" fill="#5a82aa33"/><text x="108" y="214" text-anchor="middle" dominant-baseline="middle" font-size="15">✍️</text><text x="134" y="206" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Diretores Origem + Destino</text><text x="134" y="223" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Assinam o ofício — ambas obrigatórias</text><rect x="83" y="279" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="276" width="340" height="66" rx="4" fill="#0d1e35" stroke="#5a82aa" stroke-width="1.5"/><rect x="80" y="276" width="5" height="66" rx="2" fill="#5a82aa"/><circle cx="108" cy="309" r="16" fill="#5a82aa33"/><text x="108" y="310" text-anchor="middle" dominant-baseline="middle" font-size="15">🏛️</text><text x="134" y="302" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Superintendente(s) Regional(is)</text><text x="134" y="319" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Anuência — SR origem (+ SR destino se houver)</text><rect x="83" y="375" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="372" width="340" height="66" rx="4" fill="#5a82aacc" stroke="#5a82aa" stroke-width="1.5"/><rect x="80" y="372" width="5" height="66" rx="2" fill="#5a82aa"/><circle cx="108" cy="405" r="16" fill="#5a82aa33"/><text x="108" y="406" text-anchor="middle" dominant-baseline="middle" font-size="15">🗂️</text><text x="134" y="398" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">CRV — Central de Regulação de Vagas</text><text x="134" y="415" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#ffffffaa">Confirma unidade competente pela circunscrição do juízo expedidor e autoriza</text><rect x="83" y="471" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="468" width="340" height="66" rx="4" fill="#0d1e35" stroke="#5a82aa" stroke-width="1.5"/><rect x="80" y="468" width="5" height="66" rx="2" fill="#5a82aa"/><circle cx="108" cy="501" r="16" fill="#5a82aa33"/><text x="108" y="502" text-anchor="middle" dominant-baseline="middle" font-size="15">🚐</text><text x="134" y="494" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">SEJURI / Departamento de Polícia Penal</text><text x="134" y="511" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#7a9cc0">Executa para a comarca do juízo expedidor do mandado</text><rect x="83" y="567" width="340" height="66" rx="4" fill="#00000044"/><rect x="80" y="564" width="340" height="66" rx="4" fill="#5a82aacc" stroke="#5a82aa" stroke-width="1.5"/><rect x="80" y="564" width="5" height="66" rx="2" fill="#5a82aa"/><circle cx="108" cy="597" r="16" fill="#5a82aa33"/><text x="108" y="598" text-anchor="middle" dominant-baseline="middle" font-size="15">⚖️</text><text x="134" y="590" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="13" font-weight="700" fill="#ffffff">Unidades Origem + Destino</text><text x="134" y="607" dominant-baseline="middle" font-family="Barlow,sans-serif" font-size="9.5" fill="#ffffffaa">Comunicação ao Juízo expedidor — prazo: 24 horas</text><rect x="140" y="660" width="220" height="34" rx="17" fill="#27ae60" /><text x="250" y="678" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,sans-serif" font-size="12" font-weight="800" letter-spacing="1.5" fill="#fff">✅  TRANSFERÊNCIA CONCLUÍDA</text>
+</svg></div>
+        <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin-top:12px; font-size:10.5px; color:var(--muted);">
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:50%;background:#27ae60;"></div> Início / Conclusão</div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:2px;background:#0d1e35;border:1px solid #5a82aa;"></div> Etapa</div>
+          <div style="display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:2px;background:#5a82aacc;"></div> Etapa crítica</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="sec-anuencia" class="section-label">04 — Tabela de anuência por tipo de transferência</div>
   <div class="table-box">
     <table>
       <thead>
@@ -1559,7 +1851,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
   </div>
 
   <!-- DOCUMENTOS -->
-  <div class="section-label">04 — Documentos que instruem o pedido</div>
+  <div id="sec-documentos" class="section-label">05 — Documentos que instruem o pedido</div>
   <div class="docs-grid">
     <div class="doc-card">
       <div class="doc-icon">📋</div>
@@ -1620,7 +1912,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
   </div>
 
   <!-- PRAZOS -->
-  <div class="section-label">05 — Prazos críticos</div>
+  <div id="sec-prazos" class="section-label">06 — Prazos críticos</div>
   <div class="prazo-grid">
     <div class="prazo-card p1">
       <div class="prazo-num">24h</div>
@@ -1640,7 +1932,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
   </div>
 
   <!-- PROIBIÇÕES -->
-  <div class="section-label">06 — Vedações e restrições</div>
+  <div id="sec-vedacoes" class="section-label">07 — Vedações e restrições</div>
   <div class="proib-list">
     <div class="proib-item">
       <span class="proib-icon">🚫</span>
@@ -1664,6 +1956,114 @@ Ao(À) Meritíssimo(a) Senhor(a)
     </div>
   </div>
 
+
+
+
+  <!-- LEGISLAÇÃO -->
+  <div id="sec-legislacao" class="section-label">08 — Base legal e documentos de referência</div>
+  <div class="leg-grid">
+
+    <a class="leg-card" href="https://busca.tjsc.jus.br/buscatextual/integra.do?cdSistema=1&cdDocumento=188528&cdCategoria=261&q=&frase=&excluir=&qualquer=&prox1=&prox2=&proxc=" target="_blank" rel="noopener">
+      <div class="leg-icon">📜</div>
+      <div class="leg-body">
+        <div class="leg-title">Res. Conj. Interinst. n.º 1/2026</div>
+        <div class="leg-sub">Cria e regulamenta a Central de Regulação de Vagas do sistema prisional de SC.</div>
+        <span class="leg-badge ext">🔗 TJSC</span>
+      </div>
+    </a>
+
+    <a class="leg-card" href="https://www.sap.sc.gov.br/download/portaria-2189-2025-procedimentos-operacionais-dpp/" target="_blank" rel="noopener">
+      <div class="leg-icon">📋</div>
+      <div class="leg-body">
+        <div class="leg-title">Portaria n.º 2189/GABS/SEJURI/2025</div>
+        <div class="leg-sub">Instrução Normativa DPP/SC — procedimentos operacionais do Departamento de Polícia Penal.</div>
+        <span class="leg-badge ext">🔗 SAP/SC</span>
+      </div>
+    </a>
+
+    <a class="leg-card" href="https://leis.alesc.sc.gov.br/ato-normativo/17506" target="_blank" rel="noopener">
+      <div class="leg-icon">🏛️</div>
+      <div class="leg-body">
+        <div class="leg-title">Regimento Interno dos Estabelecimentos Penais/SC</div>
+        <div class="leg-sub">Decreto n.º 529/2011 — normas de funcionamento dos estabelecimentos penais de Santa Catarina.</div>
+        <span class="leg-badge ext">🔗 ALESC</span>
+      </div>
+    </a>
+
+    <a class="leg-card" href="https://www.planalto.gov.br/ccivil_03/leis/l7210.htm" target="_blank" rel="noopener">
+      <div class="leg-icon">⚖️</div>
+      <div class="leg-body">
+        <div class="leg-title">Lei de Execução Penal</div>
+        <div class="leg-sub">Lei n.º 7.210/1984 — regula a execução das penas e medidas de segurança.</div>
+        <span class="leg-badge ext">🔗 Planalto</span>
+      </div>
+    </a>
+
+    <a class="leg-card" href="https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/lei/l11671.htm" target="_blank" rel="noopener">
+      <div class="leg-icon">🔐</div>
+      <div class="leg-body">
+        <div class="leg-title">Transferência para Presídios Federais</div>
+        <div class="leg-sub">Lei n.º 11.671/2008 — transferência e inclusão de presos em estabelecimentos penais federais de segurança máxima.</div>
+        <span class="leg-badge ext">🔗 Planalto</span>
+      </div>
+    </a>
+
+    <a class="leg-card" href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm" target="_blank" rel="noopener">
+      <div class="leg-icon">📗</div>
+      <div class="leg-body">
+        <div class="leg-title">Código Penal</div>
+        <div class="leg-sub">Decreto-Lei n.º 2.848/1940 — tipos penais, penas e regime de cumprimento.</div>
+        <span class="leg-badge ext">🔗 Planalto</span>
+      </div>
+    </a>
+
+    <a class="leg-card" href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689.htm" target="_blank" rel="noopener">
+      <div class="leg-icon">📘</div>
+      <div class="leg-body">
+        <div class="leg-title">Código de Processo Penal</div>
+        <div class="leg-sub">Decreto-Lei n.º 3.689/1941 — regras do processo penal, prisão e execução.</div>
+        <span class="leg-badge ext">🔗 Planalto</span>
+      </div>
+    </a>
+
+    <a class="leg-card" href="https://www.planalto.gov.br/ccivil_03/leis/l8072.htm" target="_blank" rel="noopener">
+      <div class="leg-icon">🔒</div>
+      <div class="leg-body">
+        <div class="leg-title">Lei de Crimes Hediondos</div>
+        <div class="leg-sub">Lei n.º 8.072/1990 — crimes inafiançáveis, regime de cumprimento e restrições.</div>
+        <span class="leg-badge ext">🔗 Planalto</span>
+      </div>
+    </a>
+
+    <a class="leg-card" href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm" target="_blank" rel="noopener">
+      <div class="leg-icon">🛡️</div>
+      <div class="leg-body">
+        <div class="leg-title">Lei Maria da Penha</div>
+        <div class="leg-sub">Lei n.º 11.340/2006 — mecanismos de coibição e prevenção da violência doméstica e familiar.</div>
+        <span class="leg-badge ext">🔗 Planalto</span>
+      </div>
+    </a>
+
+    <a class="leg-card" href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12850.htm" target="_blank" rel="noopener">
+      <div class="leg-icon">🕵️</div>
+      <div class="leg-body">
+        <div class="leg-title">Lei das Organizações Criminosas</div>
+        <div class="leg-sub">Lei n.º 12.850/2013 — define organização criminosa e dispõe sobre investigação criminal.</div>
+        <span class="leg-badge ext">🔗 Planalto</span>
+      </div>
+    </a>
+
+    <a class="leg-card" href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11343.htm" target="_blank" rel="noopener">
+      <div class="leg-icon">💊</div>
+      <div class="leg-body">
+        <div class="leg-title">Lei do SISNAD</div>
+        <div class="leg-sub">Lei n.º 11.343/2006 — institui o Sistema Nacional de Políticas Públicas sobre Drogas.</div>
+        <span class="leg-badge ext">🔗 Planalto</span>
+      </div>
+    </a>
+
+  </div>
+
 </div><!-- /container -->
 
 <footer style="text-align:center; line-height:1.5;">
@@ -1672,10 +2072,10 @@ Ao(À) Meritíssimo(a) Senhor(a)
   <div style="font-family:'Barlow Condensed',sans-serif; font-weight:400; font-size:12px; color:var(--muted); letter-spacing:0.8px; text-transform:uppercase;">Departamento de Polícia Penal</div>
   <div style="font-family:'Barlow Condensed',sans-serif; font-weight:400; font-size:12px; color:var(--muted); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:4px;">Central de Regulação de Vagas</div>
   <div style="font-size:11px; color:var(--muted); letter-spacing:0.3px;">Rua Fúlvio Aducci, n.º 1214 – Bairro Estreito – CEP 88075-000 – Florianópolis/SC</div>
-  <div style="font-size:11px; color:var(--muted); letter-spacing:0.3px;">Fone: (48) 3665-7330 &nbsp;·&nbsp; e-mail: <a href="mailto:crv@pp.sc.gov.br" style="color:var(--muted); text-decoration:none;">crv@pp.sc.gov.br</a></div>
+  <div style="font-size:11px; color:var(--muted); letter-spacing:0.3px;">Fone: (48) 3665-7330 &nbsp;·&nbsp; e-mail: <a href="/cdn-cgi/l/email-protection#eb88999dab9b9bc59888c58c849dc58999" style="color:var(--muted); text-decoration:none;"><span class="__cf_email__" data-cfemail="e5869793a59595cb9686cb828a93cb8797">[email&#160;protected]</span></a></div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── MODAL SYSTEM ──
   const OFICIOS = {};
 
@@ -1790,6 +2190,13 @@ Ao(À) Meritíssimo(a) Senhor(a)
     if (arr) arr.classList.toggle('open', !isOpen);
   }
 
+  function toggleDiag(id) {
+    var panel = document.getElementById('diag-panel-' + id);
+    var arrow = document.getElementById('diag-arrow-' + id);
+    var isOpen = panel.style.display === 'block';
+    panel.style.display = isOpen ? 'none' : 'block';
+    if (arrow) arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+  }
 
   // Register all oficios
   registerOficio('oficio-emerg', '🚨 Segurança / Emergência', ['Modelo de Ofício'], ["Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise urgente dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], em raz\u00e3o de situa\u00e7\u00e3o de risco identificada pelas equipes desta unidade prisional.\n\nA solicita\u00e7\u00e3o fundamenta-se na exist\u00eancia de [DESCREVER BREVEMENTE A SITUA\u00c7\u00c3O: risco iminente \u00e0 integridade f\u00edsica, amea\u00e7a de morte, envolvimento em crise interna, motim, rebeli\u00e3o ou outro fator de seguran\u00e7a], que torna invi\u00e1vel a manuten\u00e7\u00e3o do reeducando nesta unidade sem preju\u00edzo \u00e0 sua integridade ou \u00e0 ordem e seguran\u00e7a do estabelecimento, nos termos do art. 21, inciso I, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nDiante da urg\u00eancia da situa\u00e7\u00e3o, solicita-se a transfer\u00eancia do referido reeducando para o(a) [UNIDADE PRISIONAL DE DESTINO], onde h\u00e1 condi\u00e7\u00f5es adequadas para sua cust\u00f3dia em seguran\u00e7a.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico. Encaminho ainda [OUTROS DOCUMENTOS: boletim de ocorr\u00eancia interno, relat\u00f3rio da equipe de seguran\u00e7a, etc.], que subsidiam a presente solicita\u00e7\u00e3o.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se an\u00e1lise e delibera\u00e7\u00e3o c\u00e9lere da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
@@ -1797,6 +2204,41 @@ Ao(À) Meritíssimo(a) Senhor(a)
   registerOficio('oficio-equal', '⚖️ Equalização de Lotação', ['Modelo de Ofício'], ["Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) Coordenador(a)\n\nConsiderando a necessidade de gest\u00e3o e equaliza\u00e7\u00e3o da ocupa\u00e7\u00e3o carcer\u00e1ria no \u00e2mbito do(a) [UNIDADE PRISIONAL DE ORIGEM], bem como a adequada distribui\u00e7\u00e3o das pessoas privadas de liberdade entre as unidades prisionais, encaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado nesta unidade prisional, para o(a) [UNIDADE PRISIONAL DE DESTINO].\n\nA solicita\u00e7\u00e3o fundamenta-se na necessidade de equaliza\u00e7\u00e3o da lota\u00e7\u00e3o entre as unidades do sistema prisional, em conformidade com as diretrizes estabelecidas para a gest\u00e3o de vagas e movimenta\u00e7\u00f5es prisionais previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
   registerOficio('oficio-mandado', '📜 Mandado de Comarca Diversa', ['Modelo de Ofício'], ["Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], em raz\u00e3o do cumprimento de Mandado de Pris\u00e3o expedido pelo [JU\u00cdZO EXPEDIDOR \u2014 ex: Ju\u00edzo da Vara de Execu\u00e7\u00f5es Penais da Comarca de Itapema].\n\nConsiderando que o referido custodiado foi preso em comarca diversa daquela que expediu a ordem de pris\u00e3o, bem como que o(a) [UNIDADE PRISIONAL DE DESTINO] \u00e9 a unidade respons\u00e1vel pela circunscri\u00e7\u00e3o da autoridade judici\u00e1ria expedidora, a transfer\u00eancia mostra-se adequada, em conformidade com as diretrizes estabelecidas para a gest\u00e3o de vagas e movimenta\u00e7\u00f5es prisionais previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e c\u00f3pia do Mandado de Pris\u00e3o.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
   registerOficio('oficio-comunicacao', '📬 Comunicação ao Judiciário', ['📤 Saída (Unidade de Origem)','📥 Entrada (Unidade de Destino)','📜 Mandado de Comarca Diversa'], ["Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) [JUIZ/JU\u00cdZA],\n\nCumpre-me comunicar a Vossa Excel\u00eancia que o reeducando [NOME COMPLETO], IPEN [N\u00ba], qualificado no Processo de Execu\u00e7\u00e3o Penal n. [N\u00daMERO DO PROCESSO], que tramita perante esse Douto Ju\u00edzo, foi transferido desta unidade prisional \u2014 [UNIDADE PRISIONAL DE ORIGEM] \u2014 para o(a) [UNIDADE PRISIONAL DE DESTINO], em [DATA DA TRANSFER\u00caNCIA].\n\nInformo que a transfer\u00eancia ocorreu em raz\u00e3o de [MOTIVO: equaliza\u00e7\u00e3o da lota\u00e7\u00e3o carcer\u00e1ria / situa\u00e7\u00e3o de risco \u00e0 integridade do reeducando / pedido volunt\u00e1rio formulado por requerimento do reeducando / familiar / advogado], estando em conformidade com as normas previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026. A movimenta\u00e7\u00e3o contou com a anu\u00eancia de todos os entes envolvidos, quais sejam, os Diretores das Unidades Prisionais de Origem e de Destino, o(s) Superintendente(s) Regional(is) competente(s), bem como com a an\u00e1lise e aprova\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas do Departamento de Pol\u00edcia Penal.\n\nEsta coordenadoria permanece \u00e0 disposi\u00e7\u00e3o de Vossa Excel\u00eancia para eventuais esclarecimentos que se fizerem necess\u00e1rios.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO COORDENADOR DE EXECU\u00c7\u00c3O PENAL]\nCoordenador de Execu\u00e7\u00e3o Penal\n[UNIDADE PRISIONAL DE ORIGEM]\n\n\n\nAo(\u00c0) Merit\u00edssimo(a) Senhor(a)\n[NOME DO JUIZ/JU\u00cdZA]\n[VARA / JU\u00cdZO COMPETENTE]\n[COMARCA]","Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) [JUIZ/JU\u00cdZA],\n\nCumpre-me comunicar a Vossa Excel\u00eancia que o reeducando [NOME COMPLETO], IPEN [N\u00ba], qualificado no Processo de Execu\u00e7\u00e3o Penal n. [N\u00daMERO DO PROCESSO], que tramita perante esse Douto Ju\u00edzo, foi recebido e regularmente custodiado nesta unidade prisional \u2014 [UNIDADE PRISIONAL DE DESTINO] \u2014 a partir de [DATA DE ENTRADA], proveniente do(a) [UNIDADE PRISIONAL DE ORIGEM].\n\nInformo que a transfer\u00eancia ocorreu em raz\u00e3o de [MOTIVO: equaliza\u00e7\u00e3o da lota\u00e7\u00e3o carcer\u00e1ria / situa\u00e7\u00e3o de risco \u00e0 integridade do reeducando / pedido volunt\u00e1rio formulado por requerimento do reeducando / familiar / advogado], estando em conformidade com as normas previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026. A movimenta\u00e7\u00e3o contou com a anu\u00eancia de todos os entes envolvidos, quais sejam, os Diretores das Unidades Prisionais de Origem e de Destino, o(s) Superintendente(s) Regional(is) competente(s), bem como com a an\u00e1lise e aprova\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas do Departamento de Pol\u00edcia Penal.\n\nO reeducando encontra-se devidamente registrado nos sistemas desta unidade, permanecendo \u00e0 inteira disposi\u00e7\u00e3o desse Douto Ju\u00edzo para os fins que Vossa Excel\u00eancia determinar.\n\nEsta coordenadoria permanece \u00e0 disposi\u00e7\u00e3o de Vossa Excel\u00eancia para eventuais esclarecimentos que se fizerem necess\u00e1rios.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO COORDENADOR DE EXECU\u00c7\u00c3O PENAL]\nCoordenador de Execu\u00e7\u00e3o Penal\n[UNIDADE PRISIONAL DE DESTINO]\n\n\n\nAo(\u00c0) Merit\u00edssimo(a) Senhor(a)\n[NOME DO JUIZ/JU\u00cdZA]\n[VARA / JU\u00cdZO COMPETENTE]\n[COMARCA]","Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) [JUIZ/JU\u00cdZA],\n\nCumpre-me comunicar a Vossa Excel\u00eancia que o reeducando [NOME COMPLETO], IPEN [N\u00ba], qualificado no Processo de Execu\u00e7\u00e3o Penal n. [N\u00daMERO DO PROCESSO], que tramita perante esse Douto Ju\u00edzo, foi transferido desta unidade prisional \u2014 [UNIDADE PRISIONAL DE ORIGEM] \u2014 para o(a) [UNIDADE PRISIONAL DE DESTINO], em [DATA DA TRANSFER\u00caNCIA], em raz\u00e3o do cumprimento de Mandado de Pris\u00e3o expedido por esse Douto Ju\u00edzo.\n\nInformo que a transfer\u00eancia ocorreu em raz\u00e3o de o referido custodiado ter sido preso em comarca diversa daquela que expediu a ordem de pris\u00e3o, sendo o(a) [UNIDADE PRISIONAL DE DESTINO] a unidade respons\u00e1vel pela circunscri\u00e7\u00e3o da autoridade judici\u00e1ria expedidora. A movimenta\u00e7\u00e3o est\u00e1 em conformidade com as normas previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, tendo contado com a anu\u00eancia de todos os entes envolvidos, quais sejam, os Diretores das Unidades Prisionais de Origem e de Destino, o(s) Superintendente(s) Regional(is) competente(s), bem como com a an\u00e1lise e aprova\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas do Departamento de Pol\u00edcia Penal.\n\nO reeducando encontra-se devidamente registrado nos sistemas da unidade de destino, permanecendo \u00e0 inteira disposi\u00e7\u00e3o desse Douto Ju\u00edzo para os fins que Vossa Excel\u00eancia determinar.\n\nEsta coordenadoria permanece \u00e0 disposi\u00e7\u00e3o de Vossa Excel\u00eancia para eventuais esclarecimentos que se fizerem necess\u00e1rios.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO COORDENADOR DE EXECU\u00c7\u00c3O PENAL]\nCoordenador de Execu\u00e7\u00e3o Penal\n[UNIDADE PRISIONAL DE ORIGEM]\n\n\n\nAo(\u00c0) Merit\u00edssimo(a) Senhor(a)\n[NOME DO JUIZ/JU\u00cdZA]\n[VARA / JU\u00cdZO COMPETENTE]\n[COMARCA]"]);
+
+
+
+  // Fix scroll offset dynamically
+  (function() {
+    function updateScrollMargin() {
+      var header = document.querySelector('header');
+      var nav = document.querySelector('.nav-menu');
+      if (!header || !nav) return;
+      var total = header.offsetHeight + nav.offsetHeight + 8;
+      document.querySelectorAll('[id^="sec-"]').forEach(function(el) {
+        el.style.scrollMarginTop = total + 'px';
+      });
+    }
+    window.addEventListener('load', updateScrollMargin);
+    window.addEventListener('resize', updateScrollMargin);
+  })();
+
+  // Active nav highlight on scroll
+  (function() {
+    var sections = ['sec-hipoteses','sec-fluxo','sec-fluxogramas','sec-anuencia','sec-documentos','sec-prazos','sec-vedacoes','sec-legislacao'];
+    var navItems = document.querySelectorAll('.nav-item');
+    function onScroll() {
+      var scrollY = window.scrollY + 120;
+      var current = '';
+      sections.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollY) current = id;
+      });
+      navItems.forEach(function(a) {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
 
   // Animate steps on load
   const steps = document.querySelectorAll('.flow-step');
@@ -1818,13 +2260,28 @@ Ao(À) Meritíssimo(a) Senhor(a)
     <div class="modal-tabs" id="modalTabs"></div>
     <div class="modal-body" id="modalBody"></div>
     <div class="modal-footer">
-      <span class="modal-hint">✏️ Clique no texto para editar diretamente</span>
-      <button class="oficio-copy-btn" id="modalCopyBtn" onclick="copiarModalAtivo()">📋 Copiar texto</button>
+     
+
+</div><!-- /container -->
+
+<footer style="text-align:center; line-height:1.5;">
+  <div style="font-family:'Barlow Condensed',sans-serif; font-weight:400; font-size:12px; color:var(--muted); letter-spacing:0.8px; text-transform:uppercase;">Estado de Santa Catarina</div>
+  <div style="font-family:'Barlow Condensed',sans-serif; font-weight:400; font-size:12px; color:var(--muted); letter-spacing:0.8px; text-transform:uppercase;">Secretaria de Estado de Justiça e Reintegração Social</div>
+  <div style="font-family:'Barlow Condensed',sans-serif; font-weight:400; font-size:12px; color:var(--muted); letter-spacing:0.8px; text-transform:uppercase;">Departamento de Polícia Penal</div>
+  <div style="font-family:'Barlow Condensed',sans-serif; font-weight:400; font-size:12px; color:var(--muted); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:4px;">Central de Regulação de Vagas</div>
+  <div style="font-size:11px; color:var(--muted); letter-spacing:0.3px;">Rua Fúlvio Aducci, n.º 1214 – Bairro Estreito – CEP 88075-000 – Florianópolis/SC</div>
+  <div style="font-size:11px; color:var(--muted); letter-spacing:0.3px;">Fone: (48) 3665-7330 &nbsp;·&nbsp; e-mail: <a href="/cdn-cgi/l/email-protection#eb88999dab9b9bc59888c58c849dc58999" style="color:var(--muted); text-decoration:none;"><span class="__cf_email__" data-cfemail="e5869793a59595cb9686cb828a93cb8797">[email&#160;protected]</span></a></div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
+<!-- MODAL DE OFÍCIOS -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Modelo de Ofício</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
-  </div>
-</div>
-
-
-
-</body>
-</html>
+    <div class="modal-tabs" id="modalTabs"></div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer">
