@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRV – Manual Operacional de Transferências</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy2: #0f2040;
+    --blue: #1a3a6b;
+    --accent: #e8b84b;
+    --accent2: #f5d080;
+    --steel: #2d5a8e;
+    --light: #d4e4f7;
+    --muted: #7a9cc0;
+    --white: #f0f4fa;
+    --danger: #c0392b;
+    --success: #1e7e4a;
+    --warn: #c07a1e;
+    --text: #c8d8ec;
+    --border: rgba(45,90,142,0.4);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #060e1e 0%, #0a1e3d 50%, #0d2448 100%);
+    border-bottom: 3px solid var(--accent);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.6);
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .header-badge {
+    background: var(--accent);
+    color: var(--navy);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding: 6px 12px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+  .header-sub {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .header-ref {
+    margin-left: auto;
+    text-align: right;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .header-ref strong {
+    color: var(--accent);
+    display: block;
+    font-size: 12px;
+  }
+
+  /* ── CONTAINER ── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 32px;
+  }
+
+  /* ── INTRO ── */
+  .intro-box {
+    background: linear-gradient(135deg, var(--navy2), #0d2040);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+  .intro-item h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .intro-item p {
+    font-size: 14px;
+    color: var(--light);
+    line-height: 1.5;
+  }
+
+  /* ── SECTION TITLE ── */
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── HIPOTESES GRID ── */
+  .hip-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .hip-card {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .hip-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    transition: width 0.2s;
+  }
+  .hip-card.danger::before { background: var(--danger); }
+  .hip-card.warn::before   { background: var(--warn); }
+  .hip-card.success::before { background: var(--steel); }
+
+  .hip-card:hover { background: #122038; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  .hip-card.active { background: #0e1f35; }
+  .hip-card.danger.active { border-color: var(--danger); }
+  .hip-card.warn.active   { border-color: var(--warn); }
+  .hip-card.success.active { border-color: var(--steel); }
+
+  .hip-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 36px;
+    font-weight: 900;
+    opacity: 0.15;
+    position: absolute;
+    top: 10px; right: 16px;
+    line-height: 1;
+  }
+  .hip-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .hip-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .hip-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .hip-tag {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+  }
+  .danger .hip-tag { background: rgba(192,57,43,0.2); color: #e87060; }
+  .warn .hip-tag   { background: rgba(192,122,30,0.2); color: #e8a050; }
+  .success .hip-tag { background: rgba(45,90,142,0.2); color: var(--light); }
+
+  /* ── FLUXO STEPS ── */
+  .flow-wrapper {
+    margin-bottom: 40px;
+  }
+  .flow-step {
+    display: flex;
+    gap: 0;
+    margin-bottom: 0;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.4s, transform 0.4s;
+    position: relative;
+  }
+  .flow-step.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* connector line */
+  .flow-step:not(:last-child) .step-line {
+    position: absolute;
+    left: 28px;
+    top: 60px;
+    width: 2px;
+    height: calc(100% - 10px);
+    background: linear-gradient(to bottom, var(--steel), transparent);
+    z-index: 0;
+  }
+
+  .step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 58px;
+    padding-top: 4px;
+    position: relative;
+    z-index: 1;
+  }
+  .step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--blue);
+    border: 2px solid var(--steel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--accent);
+    flex-shrink: 0;
+    transition: all 0.3s;
+  }
+  .flow-step:hover .step-circle {
+    background: var(--steel);
+    border-color: var(--accent);
+    box-shadow: 0 0 16px rgba(232,184,75,0.3);
+  }
+
+  .step-body {
+    flex: 1;
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    border-left: none;
+    padding: 18px 22px;
+    margin-bottom: 12px;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+  .flow-step:hover .step-body {
+    background: #0e1f38;
+  }
+  .step-actor {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .step-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .step-desc {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .step-details {
+    display: none;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .step-details.open { display: block; }
+  .step-details ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .step-details ul li {
+    font-size: 13px;
+    color: var(--light);
+    padding-left: 16px;
+    position: relative;
+  }
+  .step-details ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .step-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(192,57,43,0.1);
+    border: 1px solid rgba(192,57,43,0.3);
+    padding: 10px 14px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #e87060;
+    line-height: 1.5;
+  }
+  .step-alert.warn {
+    background: rgba(192,122,30,0.1);
+    border-color: rgba(192,122,30,0.3);
+    color: #e8a050;
+  }
+  .step-alert.info {
+    background: rgba(45,90,142,0.15);
+    border-color: rgba(45,90,142,0.4);
+    color: var(--light);
+  }
+  .step-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    cursor: pointer;
+    margin-top: 2px;
+    user-select: none;
+  }
+  .toggle-arrow { transition: transform 0.25s; display: inline-block; }
+  .toggle-arrow.open { transform: rotate(90deg); }
+
+  /* ── TABELA ANUÊNCIA ── */
+  .table-box {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .table-box table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .table-box th {
+    background: var(--blue);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 12px 18px;
+    text-align: left;
+  }
+  .table-box td {
+    padding: 12px 18px;
+    font-size: 13px;
+    color: var(--text);
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .table-box tr:hover td { background: rgba(45,90,142,0.1); }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+  }
+  .badge.same { background: rgba(30,126,74,0.2); color: #6dd49a; }
+  .badge.diff { background: rgba(192,57,43,0.2); color: #e87060; }
+
+  /* ── DOCUMENTOS ── */
+  .docs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .doc-card {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: all 0.2s;
+  }
+  .doc-card:hover { background: #0e1f38; border-color: var(--steel); }
+  .doc-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .doc-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .doc-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .doc-required {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+  }
+  .doc-required.obrig { background: rgba(192,57,43,0.2); color: #e87060; }
+  .doc-required.cond  { background: rgba(192,122,30,0.15); color: #e8a050; }
+
+  /* ── PRAZOS ── */
+  .prazo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .prazo-card {
+    background: var(--navy2);
+    border: 1px solid var(--border);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .prazo-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .prazo-card.p1::after { background: var(--accent); }
+  .prazo-card.p2::after { background: var(--danger); }
+  .prazo-card.p3::after { background: var(--steel); }
+  .prazo-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .prazo-card.p1 .prazo-num { color: var(--accent); }
+  .prazo-card.p2 .prazo-num { color: #e87060; }
+  .prazo-card.p3 .prazo-num { color: var(--light); }
+  .prazo-unit {
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .prazo-label {
+    font-size: 13px;
+    color: var(--text);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* ── PROIBIÇÕES ── */
+  .proib-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+  .proib-item {
+    background: rgba(192,57,43,0.07);
+    border: 1px solid rgba(192,57,43,0.25);
+    border-left: 3px solid var(--danger);
+    padding: 14px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+    color: #ddb0aa;
+    line-height: 1.6;
+  }
+  .proib-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+  footer strong { color: var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hip-grid { grid-template-columns: 1fr; }
+    .docs-grid { grid-template-columns: 1fr; }
+    .prazo-grid { grid-template-columns: 1fr; }
+    .intro-box { grid-template-columns: 1fr; }
+    .header-inner { flex-wrap: wrap; }
+    .header-ref { margin-left: 0; }
+    .container { padding: 24px 16px; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  .fade-in { animation: fadeIn 0.5s ease forwards; }
+
+  /* ── OFÍCIO ── */
+  .oficio-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: var(--accent);
+    padding: 5px 12px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+  }
+  .oficio-btn:hover { background: var(--accent2); }
+  .oficio-wrapper { display: none; margin-top: 14px; }
+  .oficio-wrapper.open { display: block; }
+  .oficio-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+    flex-wrap: wrap;
+  }
+  .oficio-tab {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    cursor: pointer;
+    color: var(--muted);
+    border: 1px solid transparent;
+    border-bottom: none;
+    background: transparent;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .oficio-tab:hover { color: var(--white); background: rgba(45,90,142,0.2); }
+  .oficio-tab.active { color: var(--accent); background: var(--navy2); border-color: var(--border); border-bottom-color: var(--navy2); margin-bottom: -1px; }
+  .oficio-panel { display: none; }
+  .oficio-panel.active { display: block; }
+  .oficio-box {
+    background: #060e1c;
+    border: 1px solid var(--border);
+    border-top: none;
+    padding: 20px 22px;
+    font-family: 'Courier New', monospace;
+    font-size: 11.5px;
+    line-height: 1.85;
+    color: #c8d8ec;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 420px;
+    overflow-y: auto;
+    outline: none;
+  }
+  .oficio-box [data-field] {
+    background: rgba(232,184,75,0.18);
+    color: var(--accent);
+    border-radius: 2px;
+    padding: 0 2px;
+    cursor: text;
+  }
+  .oficio-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .oficio-copy-btn {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    cursor: pointer;
+    border: none;
+    background: var(--steel);
+    color: var(--white);
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .oficio-copy-btn:hover { background: #3a72b0; }
+  .oficio-copy-btn.copied { background: var(--success); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-badge">CRV / SC</div>
+    <div>
+      <div class="header-title">Manual Operacional — Transferências</div>
+      <div class="header-sub">Central de Regulação de Vagas · Departamento de Polícia Penal</div>
+    </div>
+    <div class="header-ref">
+      <a href="https://busca.tjsc.jus.br/buscatextual/integra.do?cdSistema=1&cdDocumento=188528&cdCategoria=261&q=&frase=&excluir=&qualquer=&prox1=&prox2=&proxc=" target="_blank" style="text-decoration:none; color:inherit;">
+        <strong style="color:var(--accent); display:block; font-size:12px;">Res. Conj. Interinst. nº 1/2026</strong>
+        Publicada em 04/02/2026 · DJ nº 4661
+        <span style="display:block; margin-top:4px; font-size:10px; color:var(--accent); opacity:0.8; letter-spacing:0.5px;">🔗 Clique para ler o documento na íntegra</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="intro-box fade-in">
+    <div class="intro-item">
+      <h4>Base legal</h4>
+      <p>Resolução Conjunta Interinstitucional nº 1, de 20 de janeiro de 2026 (TJSC + Governo do Estado + SEJURI)</p>
+    </div>
+    <div class="intro-item">
+      <h4>Quem operacionaliza</h4>
+      <p>A <strong style="color:var(--accent)">Polícia Penal</strong>, por meio do Departamento de Polícia Penal / SEJURI, detém o controle operacional exclusivo das vagas e execução das transferências.</p>
+    </div>
+    <div class="intro-item">
+      <h4>Princípio geral</h4>
+      <p>A transferência é medida <strong style="color:var(--accent)">excepcional e fundamentada</strong>. Deve ser comunicada ao juiz em até 24h. Transferências sucessivas no mesmo mês exigem fundamentação da SEJURI.</p>
+    </div>
+  </div>
+
+  <!-- HIPÓTESES -->
+  <div class="section-label">01 — Hipóteses de transferência</div>
+  <div class="hip-grid">
+    <div class="hip-card danger" onclick="toggleHip(this)">
+      <span class="hip-num">I</span>
+      <div class="hip-icon">🚨</div>
+      <div class="hip-title">Segurança / Emergência</div>
+      <div class="hip-desc">Situações que coloquem em risco a integridade ou a vida da pessoa privada de liberdade, ou a ordem da unidade.</div>
+      <span class="hip-tag">Urgente</span>
+      <div class="hip-extra" style="display:none; margin-top:14px; padding-top:14px; border-top:1px solid rgba(192,57,43,0.3);">
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:6px;">
+          <li style="font-size:12px; color:#ddb0aa; padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:#e87060;">›</span>Risco iminente de morte ou agressão à pessoa presa</li>
+          <li style="font-size:12px; color:#ddb0aa; padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:#e87060;">›</span>Motins, rebeliões ou crises internas na unidade</li>
+          <li style="font-size:12px; color:#ddb0aa; padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:#e87060;">›</span>Ameaça identificada pelas equipes da unidade</li>
+          <li style="font-size:12px; color:#ddb0aa; padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:#e87060;">›</span>Comunicação imediata à autoridade judiciária</li>
+        </ul>
+        <button class="oficio-btn" onclick="event.stopPropagation(); toggleOficio('oficio-emerg')">📄 Modelo de Ofício</button>
+        <div class="oficio-wrapper" id="oficio-emerg">
+          <div class="oficio-box" id="oficio-emerg-text" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
+
+
+
+Senhor(a) Coordenador(a)
+
+Encaminho para análise urgente dessa Central pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], em razão de situação de risco identificada pelas equipes desta unidade prisional.
+
+A solicitação fundamenta-se na existência de [DESCREVER BREVEMENTE A SITUAÇÃO: risco iminente à integridade física, ameaça de morte, envolvimento em crise interna, motim, rebelião ou outro fator de segurança], que torna inviável a manutenção do reeducando nesta unidade sem prejuízo à sua integridade ou à ordem e segurança do estabelecimento, nos termos do art. 21, inciso I, da Resolução Conjunta Interinstitucional n. 01/2026.
+
+Diante da urgência da situação, solicita-se a transferência do referido reeducando para o(a) [UNIDADE PRISIONAL DE DESTINO], onde há condições adequadas para sua custódia em segurança.
+
+Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal desta Instituição, bem como Relatório de Saúde, assinado pelo responsável técnico. Encaminho ainda [OUTROS DOCUMENTOS: boletim de ocorrência interno, relatório da equipe de segurança, etc.], que subsidiam a presente solicitação.
+
+Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.
+
+Informo, por fim, que foram realizados contatos prévios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.
+
+Diante do exposto, solicita-se análise e deliberação célere da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa do referido reeducando.
+
+
+
+Atenciosamente,
+
+
+
+(documento assinado digitalmente)
+[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]
+Diretor do(a) [UNIDADE DE ORIGEM]
+
+(documento assinado digitalmente)
+[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]
+Diretor do(a) [UNIDADE DE DESTINO]
+
+(documento assinado digitalmente)
+[NOME DO SUPERINTENDENTE REGIONAL – ORIGEM]
+Superintendente do(a) [SR DE ORIGEM]
+
+(documento assinado digitalmente)
+[NOME DO SUPERINTENDENTE REGIONAL – DESTINO – SE FOR O CASO]
+Superintendente do(a) [SR DE DESTINO]
+
+
+
+À Senhora
+JESSICA KARLA VEIGA
+Coordenadora de Controle de Vagas
+Departamento de Polícia Penal – DPP
+Secretaria de Estado de Justiça e Reintegração Social
+Florianópolis/SC</div>
+          <div class="oficio-actions">
+            <button class="oficio-copy-btn" onclick="copiarOficio('oficio-emerg-text', this)">📋 Copiar texto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hip-card warn" onclick="toggleHip(this)">
+      <span class="hip-num">II</span>
+      <div class="hip-icon">👤</div>
+      <div class="hip-title">Pedido do Preso ou Família</div>
+      <div class="hip-desc">Solicitação voluntária motivada por mudança de domicílio, proximidade familiar ou outro motivo relevante.</div>
+      <span class="hip-tag">Administrativo ou judicial</span>
+      <div class="hip-extra" style="display:none; margin-top:14px; padding-top:14px; border-top:1px solid rgba(192,122,30,0.3);">
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:6px;">
+          <li style="font-size:12px; color:#e8d0a0; padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:#e8a050;">›</span><strong style="color:#e8c070;">Via administrativa:</strong> requerimento escrito do reeducando, de familiar ou de advogado, encaminhado diretamente ao Diretor da Unidade, que instrui o pedido e o encaminha à CRV pelo fluxo padrão</li>
+          <li style="font-size:12px; color:#e8d0a0; padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:#e8a050;">›</span><strong style="color:#e8c070;">Via judicial:</strong> petição formulada ao juízo competente; o juízo encaminha à SEJURI para análise, ouvidos MP e defesa</li>
+          <li style="font-size:12px; color:#e8d0a0; padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:#e8a050;">›</span>Na via judicial, a SEJURI tem até 30 dias para responder ao juízo</li>
+          <li style="font-size:12px; color:#e8d0a0; padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:#e8a050;">›</span>Em ambos os casos, deve-se considerar a proximidade familiar como critério prioritário</li>
+        </ul>
+        <button class="oficio-btn" onclick="event.stopPropagation(); toggleOficio('oficio-vol')">📄 Modelos de Ofício</button>
+        <div class="oficio-wrapper" id="oficio-vol">
+          <div class="oficio-tabs">
+            <div class="oficio-tab active" onclick="switchTab('oficio-vol', 0)">Memorando do Preso</div>
+            <div class="oficio-tab" onclick="switchTab('oficio-vol', 1)">Pedido de Familiar</div>
+            <div class="oficio-tab" onclick="switchTab('oficio-vol', 2)">Petição de Advogado</div>
+          </div>
+          <div class="oficio-panel active">
+            <div class="oficio-box" id="oficio-vol-0" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
+
+
+
+Senhor(a) Coordenador(a)
+
+Encaminho para análise dessa Central pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo próprio reeducando por meio de memorando datado de [DATA DO MEMORANDO].
+
+A solicitação tem por fundamento [MOTIVO ALEGADO PELO REEDUCANDO: mudança de domicílio familiar, necessidade de aproximação da família, outro motivo relevante], nos termos do art. 21, inciso II, da Resolução Conjunta Interinstitucional n. 01/2026.
+
+Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal desta Instituição, bem como Relatório de Saúde, assinado pelo responsável técnico, e memorando original do reeducando.
+
+Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.
+
+Informo, por fim, que foram realizados contatos prévios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.
+
+Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa do referido reeducando.
+
+
+
+Atenciosamente,
+
+
+
+(documento assinado digitalmente)
+[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]
+Diretor do(a) [UNIDADE DE ORIGEM]
+
+(documento assinado digitalmente)
+[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]
+Diretor do(a) [UNIDADE DE DESTINO]
+
+(documento assinado digitalmente)
+[NOME DO SUPERINTENDENTE REGIONAL – ORIGEM]
+Superintendente do(a) [SR DE ORIGEM]
+
+(documento assinado digitalmente)
+[NOME DO SUPERINTENDENTE REGIONAL – DESTINO – SE FOR O CASO]
+Superintendente do(a) [SR DE DESTINO]
+
+
+
+À Senhora
+JESSICA KARLA VEIGA
+Coordenadora de Controle de Vagas
+Departamento de Polícia Penal – DPP
+Secretaria de Estado de Justiça e Reintegração Social
+Florianópolis/SC</div>
+            <div class="oficio-actions">
+              <button class="oficio-copy-btn" onclick="copiarOficio('oficio-vol-0', this)">📋 Copiar texto</button>
+            </div>
+          </div>
+          <div class="oficio-panel">
+            <div class="oficio-box" id="oficio-vol-1" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
+
+
+
+Senhor(a) Coordenador(a)
+
+Encaminho para análise dessa Central pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado por seu(ua) familiar [NOME DO FAMILIAR], [GRAU DE PARENTESCO], por meio de [carta / e-mail / petição física] datado(a) de [DATA].
+
+A solicitação tem por fundamento [MOTIVO ALEGADO PELO FAMILIAR: mudança de domicílio, necessidade de aproximação do núcleo familiar, dificuldade de deslocamento para visitas, outro motivo relevante], nos termos do art. 21, inciso II, da Resolução Conjunta Interinstitucional n. 01/2026.
+
+Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal desta Instituição, bem como Relatório de Saúde, assinado pelo responsável técnico, e [carta / e-mail / petição física] original do familiar.
+
+Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.
+
+Informo, por fim, que foram realizados contatos prévios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.
+
+Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa do referido reeducando.
+
+
+
+Atenciosamente,
+
+
+
+(documento assinado digitalmente)
+[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]
+Diretor do(a) [UNIDADE DE ORIGEM]
+
+(documento assinado digitalmente)
+[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]
+Diretor do(a) [UNIDADE DE DESTINO]
+
+(documento assinado digitalmente)
+[NOME DO SUPERINTENDENTE REGIONAL – ORIGEM]
+Superintendente do(a) [SR DE ORIGEM]
+
+(documento assinado digitalmente)
+[NOME DO SUPERINTENDENTE REGIONAL – DESTINO – SE FOR O CASO]
+Superintendente do(a) [SR DE DESTINO]
+
+
+
+À Senhora
+JESSICA KARLA VEIGA
+Coordenadora de Controle de Vagas
+Departamento de Polícia Penal – DPP
+Secretaria de Estado de Justiça e Reintegração Social
+Florianópolis/SC</div>
+            <div class="oficio-actions">
+              <button class="oficio-copy-btn" onclick="copiarOficio('oficio-vol-1', this)">📋 Copiar texto</button>
+            </div>
+          </div>
+          <div class="oficio-panel">
+            <div class="oficio-box" id="oficio-vol-2" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
+
+
+
+Senhor(a) Coordenador(a)
+
+Encaminho para análise dessa Central pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo advogado constituído [NOME DO ADVOGADO], OAB/SC n.º [NÚMERO], por meio de petição datada de [DATA].
+
+A solicitação tem por fundamento [MOTIVO ALEGADO PELO ADVOGADO: mudança de domicílio, aproximação familiar, outro motivo relevante devidamente fundamentado], nos termos do art. 21, inciso II, da Resolução Conjunta Interinstitucional n. 01/2026.
+
+Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal desta Instituição, bem como Relatório de Saúde, assinado pelo responsável técnico, e petição original do advogado, com comprovação de mandato.
+
+Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.
+
+Informo, por fim, que foram realizados contatos prévios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.
+
+Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa do referido reeducando.
+
+
+
+Atenciosamente,
+
+
+
+(documento assinado digitalmente)
+[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]
+Diretor do(a) [UNIDADE DE ORIGEM]
+
+(documento assinado digitalmente)
+[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]
+Diretor do(a) [UNIDADE DE DESTINO]
+
+(documento assinado digitalmente)
+[NOME DO SUPERINTENDENTE REGIONAL – ORIGEM]
+Superintendente do(a) [SR DE ORIGEM]
+
+(documento assinado digitalmente)
+[NOME DO SUPERINTENDENTE REGIONAL – DESTINO – SE FOR O CASO]
+Superintendente do(a) [SR DE DESTINO]
+
+
+
+À Senhora
+JESSICA KARLA VEIGA
+Coordenadora de Controle de Vagas
+Departamento de Polícia Penal – DPP
+Secretaria de Estado de Justiça e Reintegração Social
+Florianópolis/SC</div>
+            <div class="oficio-actions">
+              <button class="oficio-copy-btn" onclick="copiarOficio('oficio-vol-2', this)">📋 Copiar texto</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hip-card success" onclick="toggleHip(this)">
+      <span class="hip-num">III</span>
+      <div class="hip-icon">⚖️</div>
+      <div class="hip-title">Equalização de Lotação</div>
+      <div class="hip-desc">Redistribuição administrativa para adequar a capacidade de ocupação das unidades prisionais.</div>
+      <span class="hip-tag">Administrativo</span>
+      <div class="hip-extra" style="display:none; margin-top:14px; padding-top:14px; border-top:1px solid rgba(45,90,142,0.4);">
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:6px;">
+          <li style="font-size:12px; color:var(--light); padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:var(--accent);">›</span>Iniciativa da própria SEJURI/CRV de ofício</li>
+          <li style="font-size:12px; color:var(--light); padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:var(--accent);">›</span>Considera capacidade e perfil de cada unidade</li>
+          <li style="font-size:12px; color:var(--light); padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:var(--accent);">›</span>Não exige autorização prévia do juiz</li>
+          <li style="font-size:12px; color:var(--light); padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:var(--accent);">›</span>Obrigatório comunicar ao juiz em até 24h</li>
+          <li style="font-size:12px; color:var(--light); padding-left:14px; position:relative;"><span style="position:absolute;left:0;color:var(--accent);">›</span>Respeita o zoneamento penitenciário regional</li>
+        </ul>
+        <button class="oficio-btn" onclick="event.stopPropagation(); toggleOficio('oficio-equal')">📄 Modelo de Ofício</button>
+        <div class="oficio-wrapper" id="oficio-equal">
+          <div class="oficio-box" id="oficio-equal-text" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
+
+
+
+Senhor(a) Coordenador(a)
+
+Considerando a necessidade de gestão e equalização da ocupação carcerária no âmbito do(a) [UNIDADE PRISIONAL DE ORIGEM], bem como a adequada distribuição das pessoas privadas de liberdade entre as unidades prisionais, encaminho para análise dessa Central pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado nesta unidade prisional, para o(a) [UNIDADE PRISIONAL DE DESTINO].
+
+A solicitação fundamenta-se na necessidade de equalização da lotação entre as unidades do sistema prisional, em conformidade com as diretrizes estabelecidas para a gestão de vagas e movimentações prisionais previstas na Resolução Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.
+
+Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal desta Instituição, bem como Relatório de Saúde, assinado pelo responsável técnico.
+
+Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.
+
+Informo, por fim, que foram realizados contatos prévios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.
+
+Diante do exposto, solicita-se a análise e deliberação da Central de Regulação de Vagas quanto à viabilidade da transferência administrativa do referido reeducando.
+
+
+
+Atenciosamente,
+
+
+
+(documento assinado digitalmente)
+[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]
+Diretor do(a) [UNIDADE DE ORIGEM]
+
+(documento assinado digitalmente)
+[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]
+Diretor do(a) [UNIDADE DE DESTINO]
+
+(documento assinado digitalmente)
+[NOME DO SUPERINTENDENTE REGIONAL – ORIGEM]
+Superintendente do(a) [SR DE ORIGEM]
+
+(documento assinado digitalmente)
+[NOME DO SUPERINTENDENTE REGIONAL – DESTINO – SE FOR O CASO]
+Superintendente do(a) [SR DE DESTINO]
+
+
+
+À Senhora
+JESSICA KARLA VEIGA
+Coordenadora de Controle de Vagas
+Departamento de Polícia Penal – DPP
+Secretaria de Estado de Justiça e Reintegração Social
+Florianópolis/SC</div>
+          <div class="oficio-actions">
+            <button class="oficio-copy-btn" onclick="copiarOficio('oficio-equal-text', this)">📋 Copiar texto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLUXO -->
+  <div class="section-label">02 — Fluxo operacional passo a passo</div>
+  <div class="flow-wrapper" id="flowWrapper">
+
+    <div class="flow-step" id="step1">
+      <div class="step-line"></div>
+      <div class="step-left">
+        <div class="step-circle">1</div>
+      </div>
+      <div class="step-body" onclick="toggleStep('det1')">
+        <div class="step-actor">Unidade Prisional de Origem · Diretor</div>
+        <div class="step-title">Identificação da necessidade e elaboração do pedido</div>
+        <div class="step-desc">O Diretor da Unidade de Origem identifica a hipótese que justifica a transferência e elabora o pedido formal endereçado à CRV, com justificativa e documentação.</div>
+        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det1')">
+          <span class="toggle-arrow" id="arr1">›</span> Ver detalhes
+        </span>
+        <div class="step-details" id="det1">
+          <ul>
+            <li>Identificar claramente a hipótese: transferência emergencial, pedido voluntário apresentado pelo reeducando, familiar ou advogado, ou necessidade de equalização/regulação de vagas</li>
+            <li>Elaborar ofício com justificativa detalhada</li>
+            <li>Anexar Boletim Penal Informativo e Formulário de Saúde, ambos atualizados</li>
+            <li>Nos casos de pedidos apresentados pelos Reeducandos, Familiares e/ou Advogados, anexar o documento/memorando correspondente</li>
+          </ul>
+          <div class="step-alert info">
+            ℹ️ &nbsp;A análise do perfil do preso é determinante para garantir que a transferência seja segura, justa e adequada à unidade de destino.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" id="step2">
+      <div class="step-line"></div>
+      <div class="step-left">
+        <div class="step-circle">2</div>
+      </div>
+      <div class="step-body" onclick="toggleStep('det2')">
+        <div class="step-actor">Unidade de Origem + Unidade de Destino · Diretores</div>
+        <div class="step-title">Assinaturas dos Diretores</div>
+        <div class="step-desc">O pedido deve ser assinado pelo Diretor da Unidade de Origem e pelo Diretor da Unidade de Destino, confirmando ciência e aceite da movimentação.</div>
+        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det2')">
+          <span class="toggle-arrow" id="arr2">›</span> Ver detalhes
+        </span>
+        <div class="step-details" id="det2">
+          <ul>
+            <li>Assinatura do Diretor da Unidade de Origem: obrigatória em todos os casos</li>
+            <li>Assinatura do Diretor da Unidade de Destino: obrigatória em todos os casos</li>
+            <li>Ambas as assinaturas devem constar no mesmo documento antes do encaminhamento à SR</li>
+          </ul>
+          <div class="step-alert warn">
+            ⚠️ &nbsp;Pedido sem as duas assinaturas não deve ser encaminhado à Superintendência Regional.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" id="step3">
+      <div class="step-line"></div>
+      <div class="step-left">
+        <div class="step-circle">3</div>
+      </div>
+      <div class="step-body" onclick="toggleStep('det3')">
+        <div class="step-actor">Superintendência(s) Regional(is)</div>
+        <div class="step-title">Anuência do(s) Superintendente(s) Regional(is)</div>
+        <div class="step-desc">O Superintendente Regional da origem é sempre obrigatório. Se a transferência envolver outra Superintendência, o Superintendente de destino também deve anuir.</div>
+        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det3')">
+          <span class="toggle-arrow" id="arr3">›</span> Ver detalhes
+        </span>
+        <div class="step-details" id="det3">
+          <ul>
+            <li>Transferência <strong>dentro da mesma SR</strong>: anuência apenas do Superintendente da SR de origem</li>
+            <li>Transferência <strong>entre SRs diferentes</strong>: anuência do Superintendente da SR de origem <em>e</em> do Superintendente da SR de destino</li>
+            <li>O Superintendente deve verificar se a equalização dentro da sua SR já foi esgotada antes de envolver outra regional</li>
+            <li>Todas as partes envolvidas devem apenas <strong style="color:var(--accent)">assinar o ofício de solicitação</strong> formulado pelo Diretor da Unidade Prisional de Origem, ressaltando que este deverá <strong style="color:var(--accent)">consignar o nome de todos os subscritores no corpo do ofício</strong></li>
+          </ul>
+          <div class="step-alert info">
+            ℹ️ &nbsp;A equalização interna da SR tem prioridade. A CRV só é acionada quando a questão não pode ser resolvida dentro da própria Superintendência Regional.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" id="step4">
+      <div class="step-line"></div>
+      <div class="step-left">
+        <div class="step-circle">4</div>
+      </div>
+      <div class="step-body" onclick="toggleStep('det4')">
+        <div class="step-actor">CRV — Central de Regulação de Vagas</div>
+        <div class="step-title">Recebimento e análise pela CRV</div>
+        <div class="step-desc">Com o pedido instruído, assinado e anuído, é encaminhado à CRV, que analisa a viabilidade, verifica a lotação do sistema e decide a destinação final.</div>
+        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det4')">
+          <span class="toggle-arrow" id="arr4">›</span> Ver detalhes
+        </span>
+        <div class="step-details" id="det4">
+          <ul>
+            <li>Verificar disponibilidade real de vaga na unidade de destino (taxa ≤ 100%)</li>
+            <li>Confirmar compatibilidade do perfil do preso com a unidade de destino</li>
+            <li>Checar se há restrições de segurança ou judiciais que impeçam a movimentação</li>
+            <li>Registrar a movimentação no Sistema Central de Regulação de Vagas</li>
+            <li>Emitir decisão fundamentada da Coordenação de Vagas</li>
+          </ul>
+          <div class="step-alert info">
+            ℹ️ &nbsp;Se não houver vaga em unidade próxima, a definição da unidade de destino deve seguir a ordem: (1) proximidade familiar; (2) unidade com menor taxa de lotação na regional; (3) unidade com menor taxa no Estado.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" id="step5">
+      <div class="step-line"></div>
+      <div class="step-left">
+        <div class="step-circle">5</div>
+      </div>
+      <div class="step-body" onclick="toggleStep('det5')">
+        <div class="step-actor">SEJURI / Departamento de Polícia Penal</div>
+        <div class="step-title">Execução da transferência</div>
+        <div class="step-desc">Autorizada pela CRV, a SEJURI executa a movimentação. A unidade de destino recebe o preso e confirma o ingresso no sistema.</div>
+        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det5')">
+          <span class="toggle-arrow" id="arr5">›</span> Ver detalhes
+        </span>
+        <div class="step-details" id="det5">
+          <ul>
+            <li>A execução é feita conforme decisão da CRV, com fundamento na Res. nº 1/2026 e na Lei nº 7.210/84</li>
+            <li>A unidade de destino confirma recepção e atualiza o sistema de banco de dados</li>
+            <li>Vaga na unidade de origem é liberada e registrada como disponível no sistema</li>
+            <li>Transferências não podem ser usadas como punição, represália ou discriminação</li>
+            <li>Não é permitida transferência em condições que causem sofrimento físico ou mental</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" id="step6">
+      <div class="step-left">
+        <div class="step-circle" style="background:var(--accent);color:var(--navy);border-color:var(--accent);">✓</div>
+      </div>
+      <div class="step-body" onclick="toggleStep('det6')">
+        <div class="step-actor">Unidade de Destino · CRV · Judiciário</div>
+        <div class="step-title">Comunicação ao Judiciário em até 24 horas</div>
+        <div class="step-desc">Após a transferência, a movimentação deve ser notificada nos autos do processo respectivo no prazo máximo de 24 horas, com justificativa.</div>
+        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det6')">
+          <span class="toggle-arrow" id="arr6">›</span> Ver detalhes
+        </span>
+        <div class="step-details" id="det6">
+          <ul>
+            <li>Prazo: 24 horas corridas a partir da conclusão da transferência</li>
+            <li>Em finais de semana ou feriados: comunicação no primeiro dia útil seguinte</li>
+            <li>O juízo que receber o preso pode comunicar à CRV se identificar violação de regra constitucional ou legal</li>
+            <li>Transferência não comunicada no prazo presume-se irregular e sujeita ao procedimento de apuração</li>
+            <li>O juízo de origem encaminha o processo de execução criminal ao juízo competente da nova localidade</li>
+          </ul>
+          <div class="step-alert">
+            🔴 &nbsp;Transferência não comunicada ao juiz em 24h presume-se irregular. O GMF poderá determinar o retorno do preso à unidade de origem.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ANUÊNCIA -->
+  <div class="section-label">03 — Tabela de anuência por tipo de transferência</div>
+  <div class="table-box">
+    <table>
+      <thead>
+        <tr>
+          <th>Situação</th>
+          <th>Anuência necessária</th>
+          <th>Observação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--white)">Dentro da mesma SR</strong><br><span style="font-size:11px;color:var(--muted)">Ex: transferência entre duas unidades da SR01</span></td>
+          <td><span class="badge same">✔ SR de origem</span></td>
+          <td>Superintendente da SR de origem anuindo é suficiente. CRV é acionada para registro e análise de vaga.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white)">Entre SRs diferentes</strong><br><span style="font-size:11px;color:var(--muted)">Ex: SR01 → SR05</span></td>
+          <td><span class="badge diff">✔ SR origem &nbsp;+&nbsp; SR destino</span></td>
+          <td>Ambos os Superintendentes Regionais devem anuir. O Superintendente Regional deve observar e verificar a disponibilidade e a equidade de vagas.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white)">Interestadual ou internacional</strong><br><span style="font-size:11px;color:var(--muted)">Para outro estado ou país</span></td>
+          <td><span class="badge diff">✔ Determinação judicial</span></td>
+          <td>Exige determinação judicial expressa. A CRV operacionaliza o processo de solicitação de vaga.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white)">Transferência a pedido do Reeducando, Familiar e/ou Advogado, por via judicial</strong></td>
+          <td><span class="badge diff">✔ Decisão judicial</span></td>
+          <td>Aguardar pela intimação da Decisão Judicial.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white)">Transferência a pedido do Reeducando, Familiar e/ou Advogado, por via administrativa</strong></td>
+          <td><span class="badge same">✔ SR de origem</span><br><span style="font-size:11px; color:var(--muted);">+</span><br><span class="badge diff" style="margin-top:4px;">✔ SR destino (quando envolver outra SR)</span></td>
+          <td>Pedido encaminhado diretamente ao Diretor da Unidade, que instrui o ofício e o encaminha à CRV pelo fluxo padrão, com anuência do(s) Superintendente(s) Regional(is) envolvido(s).</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white)">Emergência / Segurança</strong></td>
+          <td><span class="badge same">✔ SR de origem</span><br><span style="font-size:11px; color:var(--muted);">+</span><br><span class="badge diff" style="margin-top:4px;">✔ SR destino (quando envolver outra SR)</span></td>
+          <td>Pode ser executada de imediato. Comunicação à autoridade judiciária deve ser feita com a maior brevidade possível.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DOCUMENTOS -->
+  <div class="section-label">04 — Documentos que instruem o pedido</div>
+  <div class="docs-grid">
+    <div class="doc-card">
+      <div class="doc-icon">📋</div>
+      <div>
+        <div class="doc-title">Boletim Penal Informativo (BPI)</div>
+        <div class="doc-desc">Documento atualizado com os dados completos do preso: regime, pena, crimes, situação processual e disciplinar.</div>
+        <span class="doc-required obrig">Obrigatório</span>
+      </div>
+    </div>
+    <div class="doc-card">
+      <div class="doc-icon">🏥</div>
+      <div>
+        <div class="doc-title">Formulário do Setor de Saúde</div>
+        <div class="doc-desc">Avaliação de saúde atual da pessoa presa pela equipe de saúde da unidade de origem.</div>
+        <span class="doc-required obrig">Obrigatório</span>
+      </div>
+    </div>
+    <div class="doc-card">
+      <div class="doc-icon">✍️</div>
+      <div>
+        <div class="doc-title">Memorando / Ofício do Diretor</div>
+        <div class="doc-desc">Pedido formal com justificativa clara da transferência, elaborado e assinado pelo Diretor da Unidade de Origem.</div>
+        <span class="doc-required obrig">Obrigatório</span>
+      </div>
+    </div>
+    <div class="doc-card">
+      <div class="doc-icon">⚖️</div>
+      <div>
+        <div class="doc-title">Decisão judicial / Mandado</div>
+        <div class="doc-desc">Quando a transferência for motivada por decisão judicial, mandado de outra comarca ou determina a movimentação.</div>
+        <span class="doc-required cond">Quando aplicável</span>
+      </div>
+    </div>
+    <div class="doc-card">
+      <div class="doc-icon">📝</div>
+      <div>
+        <div class="doc-title">Requerimento do preso ou petição da defesa</div>
+        <div class="doc-desc">Nos casos de transferência voluntária, o requerimento escrito do preso ou petição do advogado/defensor público.</div>
+        <span class="doc-required cond">Quando aplicável</span>
+      </div>
+    </div>
+    <div class="doc-card">
+      <div class="doc-icon">🔒</div>
+      <div>
+        <div class="doc-title">Documentos de segurança</div>
+        <div class="doc-desc">Relatórios de incidentes, ameaças, envolvimento com crime organizado ou outros documentos que fundamentem questões de segurança.</div>
+        <span class="doc-required cond">Quando aplicável</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRAZOS -->
+  <div class="section-label">05 — Prazos críticos</div>
+  <div class="prazo-grid">
+    <div class="prazo-card p1">
+      <div class="prazo-num">24h</div>
+      <div class="prazo-unit">horas corridas</div>
+      <div class="prazo-label">Prazo para comunicar a transferência ao Judiciário, contado a partir da efetivação da movimentação.</div>
+    </div>
+    <div class="prazo-card p2">
+      <div class="prazo-num">10</div>
+      <div class="prazo-unit">dias corridos</div>
+      <div class="prazo-label">Prazo para SEJURI responder ao GMF quando uma movimentação for questionada como possivelmente irregular.</div>
+    </div>
+    <div class="prazo-card p3">
+      <div class="prazo-num">30</div>
+      <div class="prazo-unit">dias</div>
+      <div class="prazo-label">Prazo para SEJURI responder ao juízo sobre pedido de transferência voluntária formulado na via judicial.</div>
+    </div>
+  </div>
+
+  <!-- PROIBIÇÕES -->
+  <div class="section-label">06 — Vedações e restrições</div>
+  <div class="proib-list">
+    <div class="proib-item">
+      <span class="proib-icon">🚫</span>
+      <span>A transferência <strong>não pode</strong> ser utilizada como forma de punição, represália ou discriminação da pessoa presa, de seus familiares ou representantes legais.</span>
+    </div>
+    <div class="proib-item">
+      <span class="proib-icon">🚫</span>
+      <span>É <strong>vedada a transferência sucessiva</strong> no mesmo mês sem prévia fundamentação da SEJURI. Casos excepcionais são discutidos em reunião da CRV — exceto quando a justificativa for exclusivamente a segurança da pessoa presa.</span>
+    </div>
+    <div class="proib-item">
+      <span class="proib-icon">🚫</span>
+      <span>Os juízos das comarcas <strong>não podem impedir</strong> a entrada de novas pessoas privadas de liberdade nas unidades prisionais de sua jurisdição, respeitadas as atribuições legais da SEJURI e da CRV.</span>
+    </div>
+    <div class="proib-item">
+      <span class="proib-icon">🚫</span>
+      <span>A transferência não pode ser realizada em condições que <strong>causem sofrimento físico ou mental</strong> desnecessário, em desacordo com as normas de direitos humanos aplicáveis.</span>
+    </div>
+    <div class="proib-item">
+      <span class="proib-icon">🚫</span>
+      <span>Se a SEJURI não cumprir a ordem de retorno do preso determinada pelo GMF/Corregedoria, <strong>fica impedida de realizar qualquer nova transferência</strong> no Estado até a regularização da situação.</span>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <div>CRV · Central de Regulação de Vagas · Departamento de Polícia Penal / SEJURI · <strong>Santa Catarina</strong></div>
+  <div>Base: <a href="https://busca.tjsc.jus.br/buscatextual/integra.do?cdSistema=1&cdDocumento=188528&cdCategoria=261&q=&frase=&excluir=&qualquer=&prox1=&prox2=&proxc=" target="_blank" style="color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(232,184,75,0.4); transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='rgba(232,184,75,0.4)'"><strong>Res. Conj. Interinst. nº 1/2026</strong></a> · Uso interno · Manual Operacional &nbsp;<span style="color:var(--accent); opacity:0.8;">🔗 Clique no nome da resolução para ler o documento na íntegra</span></div>
+</footer>
+
+<script>
+  // Toggle hipóteses
+  function toggleHip(el) {
+    const extra = el.querySelector('.hip-extra');
+    const isOpen = extra.style.display === 'block';
+    document.querySelectorAll('.hip-extra').forEach(e => e.style.display = 'none');
+    document.querySelectorAll('.hip-card').forEach(e => e.classList.remove('active'));
+    if (!isOpen) {
+      extra.style.display = 'block';
+      el.classList.add('active');
+    }
+  }
+
+  // Toggle oficio wrapper
+  function toggleOficio(id) {
+    const wrapper = document.getElementById(id);
+    wrapper.classList.toggle('open');
+  }
+
+  // Switch tabs inside card II
+  function switchTab(wrapId, idx) {
+    const wrapper = document.getElementById(wrapId);
+    const tabs = wrapper.querySelectorAll('.oficio-tab');
+    const panels = wrapper.querySelectorAll('.oficio-panel');
+    tabs.forEach((t,i) => t.classList.toggle('active', i === idx));
+    panels.forEach((p,i) => p.classList.toggle('active', i === idx));
+  }
+
+  // Copy oficio text
+  function copiarOficio(id, btn) {
+    const el = document.getElementById(id);
+    const text = el.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✔ Copiado!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerHTML = '📋 Copiar texto'; btn.classList.remove('copied'); }, 2000);
+    }).catch(() => {
+      const sel = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      sel.removeAllRanges();
+      sel.addRange(range);
+      document.execCommand('copy');
+      sel.removeAllRanges();
+      btn.textContent = '✔ Copiado!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerHTML = '📋 Copiar texto'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  // Toggle step details
+  function toggleStep(id) {
+    const det = document.getElementById(id);
+    const num = id.replace('det','');
+    const arr = document.getElementById('arr' + num);
+    const isOpen = det.classList.contains('open');
+    det.classList.toggle('open', !isOpen);
+    if (arr) arr.classList.toggle('open', !isOpen);
+  }
+
+  // Animate steps on load
+  const steps = document.querySelectorAll('.flow-step');
+  steps.forEach((step, i) => {
+    setTimeout(() => {
+      step.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      step.classList.add('visible');
+    }, 300 + i * 120);
+  });
+</script>
+</body>
+</html>
