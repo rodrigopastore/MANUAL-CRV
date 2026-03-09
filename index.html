@@ -670,8 +670,56 @@
   }
 
 
-  /* ── LEGISLAÇÃO ── */
-  .leg-grid {
+  /* ── UNIDADES PRISIONAIS / SRs ── */
+  .sr-wrap { margin-bottom: 10px; border-radius: 3px; overflow: hidden; border: 1px solid rgba(45,90,142,0.3); }
+  .sr-toggle {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px; background: var(--navy2); cursor: pointer;
+    transition: background 0.2s; user-select: none; gap: 12px;
+  }
+  .sr-toggle:hover { background: rgba(45,90,142,0.22); }
+  .sr-toggle.is-open { background: rgba(45,90,142,0.28); border-bottom: 1px solid rgba(45,90,142,0.4); }
+  .sr-left { display: flex; align-items: center; gap: 12px; }
+  .sr-pill {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 11px; letter-spacing: 1.8px; text-transform: uppercase;
+    background: var(--steel); color: #fff; padding: 3px 10px; border-radius: 3px; white-space: nowrap;
+  }
+  .sr-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 15px; color: var(--light); }
+  .sr-meta { font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .sr-chevron { color: var(--muted); font-size: 12px; transition: transform 0.25s; flex-shrink:0; }
+  .sr-chevron.open { transform: rotate(90deg); }
+  .sr-panel { display: none; background: #07101d; }
+  .sr-panel.open { display: block; }
+  /* SR info bar */
+  .sr-info-bar {
+    display: flex; flex-wrap: wrap; gap: 6px 24px;
+    padding: 10px 18px; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 11.5px; color: var(--muted);
+  }
+  .sr-info-bar span { display: flex; align-items: center; gap: 5px; }
+  .sr-info-bar strong { color: var(--accent); font-weight: 600; }
+  /* Unidade accordion inside SR */
+  .up-wrap { border-top: 1px solid rgba(255,255,255,0.05); }
+  .up-toggle {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px 10px 28px; cursor: pointer;
+    transition: background 0.15s; user-select: none;
+  }
+  .up-toggle:hover { background: rgba(45,90,142,0.1); }
+  .up-toggle.is-open { background: rgba(45,90,142,0.15); }
+  .up-name { font-size: 13px; color: var(--light); font-weight: 500; }
+  .up-director { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+  .up-chevron { color: var(--muted); font-size: 11px; transition: transform 0.2s; flex-shrink:0; }
+  .up-chevron.open { transform: rotate(90deg); }
+  .up-panel { display: none; padding: 10px 20px 14px 48px; background: #050d19; }
+  .up-panel.open { display: block; }
+  .up-detail { display: flex; flex-wrap: wrap; gap: 6px 28px; font-size: 12px; }
+  .up-detail span { display: flex; align-items: center; gap: 6px; color: #7a9cc0; }
+  .up-detail span strong { color: #a8c4e0; font-weight: 500; }
+  .up-detail .up-icon { font-size: 13px; }
+
+  /* ── LEGISLAÇÃO ── */.leg-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 14px;
@@ -815,15 +863,23 @@
   .modal-panel { display: none; }
   .modal-panel.active { display: block; }
   .modal-oficio {
-    font-family: 'Courier New', monospace;
-    font-size: 12.5px;
-    line-height: 2;
+    font-family: Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.15;
     color: #c8d8ec;
-    white-space: pre-wrap;
     word-break: break-word;
-    padding: 24px 28px;
+    padding: 24px 32px;
     outline: none;
     min-height: 300px;
+    user-select: text;
+  }
+  .modal-oficio p {
+    margin: 0 0 1.15em 0;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+  .modal-oficio p.oficio-noindent {
+    text-align: left;
   }
   .modal-footer {
     display: flex;
@@ -893,23 +949,90 @@
     background: #060e1c;
     border: 1px solid var(--border);
     border-top: none;
-    padding: 20px 22px;
-    font-family: 'Courier New', monospace;
-    font-size: 11.5px;
-    line-height: 1.85;
+    padding: 20px 28px;
+    font-family: Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.15;
     color: #c8d8ec;
-    white-space: pre-wrap;
     word-break: break-word;
     max-height: 420px;
     overflow-y: auto;
     outline: none;
   }
-  .oficio-box [data-field] {
-    background: rgba(232,184,75,0.18);
-    color: var(--accent);
+  .oficio-box p {
+    margin: 0 0 1.15em 0;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+  .oficio-box p.oficio-noindent {
+    text-align: left;
+  }
+  .oficio-field {
+    background: #ffe066;
+    color: #1a1a00;
     border-radius: 2px;
-    padding: 0 2px;
+    padding: 0 3px;
     cursor: text;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: #c8900a;
+    font-style: normal;
+    display: inline;
+    min-width: 30px;
+    outline: none;
+    transition: background 0.15s;
+    font-family: Arial, sans-serif;
+    font-size: 11pt;
+  }
+  .oficio-field:focus {
+    background: #fff176;
+    outline: 2px solid #c8900a;
+    outline-offset: 1px;
+  }
+  .oficio-auto {
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    font-size: 11pt;
+  }
+  .oficio-field:hover:not(:focus) {
+    background: #ffd740;
+  }
+  .oficio-dropdown-panel {
+    background: #0a1628;
+    border-bottom: 1px solid rgba(45,90,142,0.4);
+    padding: 14px 20px 12px;
+  }
+  .oficio-dropdown-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .oficio-dropdown-col { flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: 6px; }
+  .oficio-dropdown-label { font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); }
+  .oficio-select {
+    background: #060e1c; border: 1px solid rgba(45,90,142,0.5); color: var(--light);
+    padding: 7px 10px; font-size: 12px; font-family: 'Barlow', sans-serif;
+    border-radius: 3px; cursor: pointer; outline: none; width: 100%;
+  }
+  .oficio-select:focus { border-color: var(--accent); }
+  .oficio-select option, .oficio-select optgroup { background: #060e1c; color: var(--light); }
+  .oficio-badge { font-size: 11px; min-height: 16px; line-height: 1.4; }
+
+  .oficio-legend {
+    font-size: 10px;
+    color: #8a9ab8;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .oficio-legend span {
+    display: inline-block;
+    background: #ffe066;
+    color: #1a1a00;
+    padding: 0 4px;
+    border-radius: 2px;
+    font-size: 9px;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: #c8900a;
   }
   .oficio-actions {
     display: flex;
@@ -966,6 +1089,7 @@
     <a class="nav-item" href="#sec-prazos">Prazos</a>
     <a class="nav-item" href="#sec-vedacoes">Vedações</a>
     <a class="nav-item" href="#sec-legislacao">Legislação</a>
+    <a class="nav-item" href="#sec-srs">🏛️ Unidades Prisionais</a>
     <a class="nav-item" href="#sec-oficios" style="color:var(--accent); border-bottom:2px solid var(--accent);">📄 Modelos de Ofícios</a>
   </div>
     </div>
@@ -1019,11 +1143,7 @@
         </ul>
         <button class="oficio-btn" onclick="event.stopPropagation(); openModal('oficio-emerg')">📄 Modelo de Ofício</button>
         <div class="oficio-wrapper" id="oficio-emerg">
-          <div class="oficio-box" id="oficio-emerg-text" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
-
-
-
-Senhor(a) Coordenador(a)
+          <div class="oficio-box" id="oficio-emerg-text" contenteditable="true">Senhor(a) Coordenador(a)
 
 Encaminho para análise urgente dessa Central pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], em razão de situação de risco identificada pelas equipes desta unidade prisional.
 
@@ -1097,11 +1217,7 @@ Florianópolis/SC</div>
             <div class="oficio-tab" onclick="switchTab('oficio-vol', 2)">Petição de Advogado</div>
           </div>
           <div class="oficio-panel active">
-            <div class="oficio-box" id="oficio-vol-0" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
-
-
-
-Senhor(a) Coordenador(a)
+            <div class="oficio-box" id="oficio-vol-0" contenteditable="true">Senhor(a) Coordenador(a)
 
 Encaminho para análise dessa Central pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo próprio reeducando por meio de memorando datado de [DATA DO MEMORANDO].
 
@@ -1150,11 +1266,7 @@ Florianópolis/SC</div>
             </div>
           </div>
           <div class="oficio-panel">
-            <div class="oficio-box" id="oficio-vol-1" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
-
-
-
-Senhor(a) Coordenador(a)
+            <div class="oficio-box" id="oficio-vol-1" contenteditable="true">Senhor(a) Coordenador(a)
 
 Encaminho para análise dessa Central pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado por seu(ua) familiar [NOME DO FAMILIAR], [GRAU DE PARENTESCO], por meio de [carta / e-mail / petição física] datado(a) de [DATA].
 
@@ -1203,11 +1315,7 @@ Florianópolis/SC</div>
             </div>
           </div>
           <div class="oficio-panel">
-            <div class="oficio-box" id="oficio-vol-2" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
-
-
-
-Senhor(a) Coordenador(a)
+            <div class="oficio-box" id="oficio-vol-2" contenteditable="true">Senhor(a) Coordenador(a)
 
 Encaminho para análise dessa Central pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo advogado constituído [NOME DO ADVOGADO], OAB/SC n.º [NÚMERO], por meio de petição datada de [DATA].
 
@@ -1275,11 +1383,7 @@ Florianópolis/SC</div>
         </ul>
         <button class="oficio-btn" onclick="event.stopPropagation(); openModal('oficio-equal')">📄 Modelo de Ofício</button>
         <div class="oficio-wrapper" id="oficio-equal">
-          <div class="oficio-box" id="oficio-equal-text" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
-
-
-
-Senhor(a) Coordenador(a)
+          <div class="oficio-box" id="oficio-equal-text" contenteditable="true">Senhor(a) Coordenador(a)
 
 Considerando a necessidade de gestão e equalização da ocupação carcerária no âmbito do(a) [UNIDADE PRISIONAL DE ORIGEM], bem como a adequada distribuição das pessoas privadas de liberdade entre as unidades prisionais, encaminho para análise dessa Central pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado nesta unidade prisional, para o(a) [UNIDADE PRISIONAL DE DESTINO].
 
@@ -1346,11 +1450,7 @@ Florianópolis/SC</div>
         </ul>
         <button class="oficio-btn" onclick="event.stopPropagation(); openModal('oficio-mandado')" style="background:var(--steel); color:var(--white);">📄 Modelo de Ofício</button>
         <div class="oficio-wrapper" id="oficio-mandado">
-          <div class="oficio-box" id="oficio-mandado-text" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
-
-
-
-Senhor(a) Coordenador(a)
+          <div class="oficio-box" id="oficio-mandado-text" contenteditable="true">Senhor(a) Coordenador(a)
 
 Encaminho para análise pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], em razão do cumprimento de Mandado de Prisão expedido pelo [JUÍZO EXPEDIDOR — ex: Juízo da Vara de Execuções Penais da Comarca de Itapema].
 
@@ -1652,11 +1752,7 @@ Florianópolis/SC</div>
               <div class="oficio-tab" onclick="switchTab('oficio-comunicacao', 2)">📜 Mandado de Comarca Diversa</div>
             </div>
             <div class="oficio-panel active">
-              <div class="oficio-box" id="oficio-saida" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
-
-
-
-Senhor(a) [JUIZ/JUÍZA],
+              <div class="oficio-box" id="oficio-saida" contenteditable="true">Senhor(a) [JUIZ/JUÍZA],
 
 Cumpre-me comunicar a Vossa Excelência que o reeducando [NOME COMPLETO], IPEN [Nº], qualificado no Processo de Execução Penal n. [NÚMERO DO PROCESSO], que tramita perante esse Douto Juízo, foi transferido desta unidade prisional — [UNIDADE PRISIONAL DE ORIGEM] — para o(a) [UNIDADE PRISIONAL DE DESTINO], em [DATA DA TRANSFERÊNCIA].
 
@@ -1686,11 +1782,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
               </div>
             </div>
             <div class="oficio-panel">
-              <div class="oficio-box" id="oficio-entrada" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
-
-
-
-Senhor(a) [JUIZ/JUÍZA],
+              <div class="oficio-box" id="oficio-entrada" contenteditable="true">Senhor(a) [JUIZ/JUÍZA],
 
 Cumpre-me comunicar a Vossa Excelência que o reeducando [NOME COMPLETO], IPEN [Nº], qualificado no Processo de Execução Penal n. [NÚMERO DO PROCESSO], que tramita perante esse Douto Juízo, foi recebido e regularmente custodiado nesta unidade prisional — [UNIDADE PRISIONAL DE DESTINO] — a partir de [DATA DE ENTRADA], proveniente do(a) [UNIDADE PRISIONAL DE ORIGEM].
 
@@ -1722,11 +1814,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
               </div>
             </div>
             <div class="oficio-panel">
-              <div class="oficio-box" id="oficio-mandado-com" contenteditable="true">Ofício n.º [NÚMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].
-
-
-
-Senhor(a) [JUIZ/JUÍZA],
+              <div class="oficio-box" id="oficio-mandado-com" contenteditable="true">Senhor(a) [JUIZ/JUÍZA],
 
 Cumpre-me comunicar a Vossa Excelência que o reeducando [NOME COMPLETO], IPEN [Nº], qualificado no Processo de Execução Penal n. [NÚMERO DO PROCESSO], que tramita perante esse Douto Juízo, foi transferido desta unidade prisional — [UNIDADE PRISIONAL DE ORIGEM] — para o(a) [UNIDADE PRISIONAL DE DESTINO], em [DATA DA TRANSFERÊNCIA], em razão do cumprimento de Mandado de Prisão expedido por esse Douto Juízo.
 
@@ -2091,8 +2179,197 @@ Ao(À) Meritíssimo(a) Senhor(a)
     </div>
   </div>
 
+  <!-- UNIDADES PRISIONAIS -->
+  <div id="sec-srs" class="section-label">10 — Unidades Prisionais</div>
+  <div style="margin-bottom:32px;">
+    <p style="color:var(--muted);font-size:13px;margin-bottom:18px;line-height:1.6;">Clique em uma Superintendência Regional para expandir. Clique em uma unidade prisional para ver seus dados completos.</p>
+
+    <!-- ══ SR01 ══ -->
+    <div class="sr-wrap">
+      <div class="sr-toggle" onclick="toggleEl(this)">
+        <div class="sr-left"><span class="sr-pill">SR01</span><span class="sr-name">Superintendência Regional da Grande Florianópolis</span></div>
+        <div style="display:flex;align-items:center;gap:14px;"><span class="sr-meta">9 unidades</span><span class="sr-chevron">▶</span></div>
+      </div>
+      <div class="sr-panel">
+        <div class="sr-info-bar">
+          <span>👤 Superintendente: <strong>Kelvyn Diehl</strong></span>
+          <span>📞 <strong>(48) 3665‑9131</strong></span>
+          <span>📧 <strong>sr01@pp.sc.gov.br</strong></span>
+          <span>📧 sr01sr@pp.sc.gov.br</span>
+        </div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Penitenciária de Florianópolis</div><div class="up-director">Diretor: Max Cleber Orth</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Delminda da Silveira, 960 – Agronômica – Florianópolis/SC – CEP 88025‑500</strong></span><span>📞 <strong>(48) 3665‑9123</strong></span><span>📧 <strong>pe01@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Complexo Penitenciário do Estado</div><div class="up-director">Diretor: Flávio Brasil Ganciné</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Adriano Enning, s/n – Bairro Santa Tereza – São Pedro de Alcântara/SC – CEP 88125‑000</strong></span><span>📞 <strong>(48) 3664‑2750 / (48) 3664‑2732</strong></span><span>📧 <strong>pe02@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Tijucas</div><div class="up-director">Diretora: Nathasha Daberkow Vieira</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Alberto Tomazi, s/n – Bairro Itinga – Tijucas/SC – CEP 88200‑000</strong></span><span>📞 <strong>(48) 3665‑9280</strong></span><span>📧 <strong>pr03@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Hospital de Custódia e Tratamento Psiquiátrico – HCTP</div><div class="up-director">Diretor: Fábio Medeiros Wiese</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Delminda da Silveira, s/n – Agronômica – Florianópolis/SC – CEP 88025‑500</strong></span><span>📞 <strong>(48) 3665‑9191 / (48) 3665‑9188 / (48) 3665‑9208</strong></span><span>📧 <strong>hctp@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Biguaçu</div><div class="up-director">Diretor: Fabiano Oliveira Suares</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Hermógenes Prazeres, 49 – Centro – Biguaçu/SC – CEP 88160‑152</strong></span><span>📞 <strong>(48) 3664‑2700</strong></span><span>📧 <strong>pr04@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Masculino Regional de Florianópolis</div><div class="up-director">Diretora: Joana Mahfuz Vicini</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Delminda da Silveira, 900 – Agronômica – Florianópolis/SC – CEP 88025‑500</strong></span><span>📞 <strong>(48) 3665‑9256</strong></span><span>📧 <strong>pr01@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Feminino Regional de Florianópolis</div><div class="up-director">Diretora: Marina Pamplona Coelho</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Lauro Linhares, s/n – Bairro Trindade – Florianópolis/SC – CEP 88036‑001</strong></span><span>📞 <strong>(48) 3665‑9107</strong></span><span>📧 <strong>pr02@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Unidade de Monitoramento Eletrônico</div><div class="up-director">Diretor: Gustavo Costa Vieira</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Fúlvio Aducci, 1214 – Estreito – Florianópolis/SC</strong></span><span>📞 <strong>(48) 3665‑7327</strong></span><span>📧 <strong>ume@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Colônia Agroindustrial de Palhoça</div><div class="up-director">Diretora: Renata de Souza de Oliveira</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua José João Barcelos, s/n – Bairro Bela Vista – Palhoça/SC – CEP 88132‑770</strong></span><span>📞 <strong>(48) 3664‑5580</strong></span><span>📧 <strong>cogri@pp.sc.gov.br</strong></span></div></div></div>
+      </div>
+    </div>
+
+    <!-- ══ SR02 ══ -->
+    <div class="sr-wrap">
+      <div class="sr-toggle" onclick="toggleEl(this)">
+        <div class="sr-left"><span class="sr-pill">SR02</span><span class="sr-name">Superintendência Regional Sul</span></div>
+        <div style="display:flex;align-items:center;gap:14px;"><span class="sr-meta">8 unidades</span><span class="sr-chevron">▶</span></div>
+      </div>
+      <div class="sr-panel">
+        <div class="sr-info-bar">
+          <span>👤 Superintendente: <strong>Hélio Damian Filho</strong></span>
+          <span>📞 <strong>(48) 3403‑1501</strong></span>
+          <span>📧 <strong>sr02@pp.sc.gov.br</strong></span>
+          <span>📧 sr02sr@pp.sc.gov.br</span>
+        </div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Penitenciária Feminina de Criciúma</div><div class="up-director">Diretora: Virginia Gabriela Gonzales</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua José Marinho Teixeira, s/n – São Domingos/Vila Maria – Criciúma/SC – CEP 88812‑680</strong></span><span>📞 <strong>(48) 3403‑1737 / (48) 3403‑1731</strong></span><span>📧 <strong>pe04@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Penitenciária Masculina de Tubarão</div><div class="up-director">Diretor: Deiveison Querino Batista</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Maria Menegaz, nº 735 – São João – Tubarão/SC – CEP 88708‑570</strong></span><span>📞 <strong>(48) 3631‑9777</strong></span><span>📧 <strong>pe05@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Penitenciária Sul</div><div class="up-director">Diretor: Alexandre Ferreira</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua José Marinho Teixeira, nº 5005 – São Domingos/Vila Maria – Criciúma/SC – CEP 88812‑680</strong></span><span>📞 <strong>(48) 3403‑1485 / (48) 3403‑1506</strong></span><span>📧 <strong>pe03@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Araranguá</div><div class="up-director">Diretor: Daniel Possamai Vieira</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Renato Carbonera, 500 – Bairro Polícia Rodoviária – Araranguá/SC – CEP 88900‑000</strong></span><span>📞 <strong>(48) 3529‑0441</strong></span><span>📧 <strong>pr08@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Criciúma</div><div class="up-director">Diretor: Júnior Rodrigo Fagundes</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Odonel Bianchi, 330 – Santa Augusta – Criciúma/SC – CEP 88805‑265</strong></span><span>📞 <strong>(48) 3403‑1516</strong></span><span>📧 <strong>pr05@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Imbituba</div><div class="up-director">Diretor: Filipe Gonzaga Lopes</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua 13 de Setembro, s/n – Vila Nova Alvorada – Imbituba/SC – CEP 88780‑000</strong></span><span>📞 <strong>(48) 3647‑7409</strong></span><span>📧 <strong>pr09@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Laguna</div><div class="up-director">Diretor: Rafael Nunes de Oliveira</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Idelfonso Batista, s/n – Progresso – Laguna/SC – CEP 88790‑000</strong></span><span>📞 <strong>(48) 3647‑7425</strong></span><span>📧 <strong>pr10@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Tubarão</div><div class="up-director">Diretor: Gladson Antônio da Silva</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Maria Menegaz, 635 – São João – Tubarão/SC – CEP 88708‑570</strong></span><span>📞 <strong>(48) 3631‑9780</strong></span><span>📧 <strong>pr06@pp.sc.gov.br</strong></span></div></div></div>
+      </div>
+    </div>
+
+    <!-- ══ SR03 ══ -->
+    <div class="sr-wrap">
+      <div class="sr-toggle" onclick="toggleEl(this)">
+        <div class="sr-left"><span class="sr-pill">SR03</span><span class="sr-name">Superintendência Regional do Norte Catarinense</span></div>
+        <div style="display:flex;align-items:center;gap:14px;"><span class="sr-meta">5 unidades</span><span class="sr-chevron">▶</span></div>
+      </div>
+      <div class="sr-panel">
+        <div class="sr-info-bar">
+          <span>👤 Superintendente: <strong>Efraym Ben José Falcão</strong></span>
+          <span>📞 <strong>(47) 3481‑3993</strong></span>
+          <span>📧 <strong>sr03@pp.sc.gov.br</strong></span>
+          <span>📧 sr03sr@pp.sc.gov.br</span>
+        </div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Penitenciária Industrial de Joinville</div><div class="up-director">Diretor: Márcio Simbalista</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Servidão Antônio Deglmann Júnior, nº 245 – Parque Guarani – Joinville/SC – CEP 89209‑240</strong></span><span>📞 <strong>(47) 3481‑3948</strong></span><span>📧 <strong>pe06@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Feminino Regional de Joinville</div><div class="up-director">Diretora: Eliana Eloi</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Servidão Antônio Deglmann Júnior, nº 245 – Parque Guarani – Joinville/SC – CEP 89209‑240</strong></span><span>📞 <strong>(47) 3481‑2369</strong></span><span>📧 <strong>pr12@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Joinville</div><div class="up-director">Diretor: André Felippe Dias</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Servidão Antônio Deglmann Júnior, nº 245 – Parque Guarani – Joinville/SC – CEP 89209‑240</strong></span><span>📞 <strong>(47) 3481‑3900</strong></span><span>📧 <strong>pr11@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Barra Velha</div><div class="up-director">Diretora: Léia Cristina Steffen Fuck</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua João Anselmo Breniensen, s/nº – Vila Nova – Barra Velha/SC – CEP 88390‑000</strong></span><span>📞 <strong>(47) 3481‑2885</strong></span><span>📧 <strong>pr14@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de São Francisco do Sul</div><div class="up-director">Diretor: Lamartine Ximenes Fernandes</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Estrada Geral da Pedreira – Bairro Miranda – São Francisco do Sul/SC – CEP 89240‑000</strong></span><span>📞 <strong>(47) 3481‑3932</strong></span><span>📧 <strong>pr13@pp.sc.gov.br</strong></span></div></div></div>
+      </div>
+    </div>
+
+    <!-- ══ SR04 ══ -->
+    <div class="sr-wrap">
+      <div class="sr-toggle" onclick="toggleEl(this)">
+        <div class="sr-left"><span class="sr-pill">SR04</span><span class="sr-name">Superintendência Regional do Vale do Itajaí</span></div>
+        <div style="display:flex;align-items:center;gap:14px;"><span class="sr-meta">5 unidades</span><span class="sr-chevron">▶</span></div>
+      </div>
+      <div class="sr-panel">
+        <div class="sr-info-bar">
+          <span>👤 Superintendente: <strong>Anderson Luiz Teodoro</strong></span>
+          <span>📞 <strong>(47) 3398‑6704</strong></span>
+          <span>📧 <strong>sr04@pp.sc.gov.br</strong></span>
+          <span>📧 sr04sr@pp.sc.gov.br</span>
+        </div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Penitenciária Masculina do Vale do Itajaí</div><div class="up-director">Diretor: Genivaldo Nazareno de Oliveira</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Estrada Geral João Tomaz Pinto, s/n – Canhanduba – Itajaí/SC – CEP 88307‑770</strong></span><span>📞 <strong>(47) 3398‑6700</strong></span><span>📧 <strong>pe07@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Feminino Regional de Itajaí</div><div class="up-director">Diretora: Michele Rebello de Mesquita</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Estrada Geral João Tomaz Pinto, s/n – Canhanduba – Itajaí/SC – CEP 88307‑770</strong></span><span>📞 <strong>(47) 3398‑6185 / (47) 3398‑6182</strong></span><span>📧 <strong>pr16@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Brusque</div><div class="up-director">Diretor: Giovani Manfredini Queiroz</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rod. SC‑408, km 02 – Bairro Santa Luzia – Brusque/SC – CEP 88357‑340</strong></span><span>📞 <strong>(47) 3251‑8280 / (47) 3251‑8279</strong></span><span>📧 <strong>pr17@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Itajaí</div><div class="up-director">Diretor: Rogério José Bizatto</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Estrada Geral João Tomaz Pinto, s/n – Canhanduba – Itajaí/SC – CEP 88307‑770</strong></span><span>📞 <strong>(47) 3398‑6750</strong></span><span>📧 <strong>pr15@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Itapema</div><div class="up-director">Diretor: Eduardo Weber Xavier</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua 440, s/n – Bairro Morretes – Itapema/SC – CEP 88220‑000</strong></span><span>📞 <strong>(47) 3398‑6684</strong></span><span>📧 <strong>pr18@pp.sc.gov.br</strong></span></div></div></div>
+      </div>
+    </div>
+
+    <!-- ══ SR05 ══ -->
+    <div class="sr-wrap">
+      <div class="sr-toggle" onclick="toggleEl(this)">
+        <div class="sr-left"><span class="sr-pill">SR05</span><span class="sr-name">Superintendência Regional Serrana</span></div>
+        <div style="display:flex;align-items:center;gap:14px;"><span class="sr-meta">8 unidades</span><span class="sr-chevron">▶</span></div>
+      </div>
+      <div class="sr-panel">
+        <div class="sr-info-bar">
+          <span>👤 Superintendente: <strong>André Isidoro de Oliveira Martarello</strong></span>
+          <span>📞 <strong>(49) 3412‑3300</strong></span>
+          <span>📧 <strong>sr05@pp.sc.gov.br</strong></span>
+          <span>📧 sr05sr@pp.sc.gov.br</span>
+        </div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Penitenciária Industrial de São Cristóvão do Sul</div><div class="up-director">Diretora: Giselle Cordeiro Demeneck Remor</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Estrada Geral Paredão, s/n – São Cristóvão do Sul/SC – CEP 89533‑000</strong></span><span>📞 <strong>(49) 3412‑3190 / 3412‑3174 / 3412‑3172</strong></span><span>📧 <strong>pe09@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Penitenciária Regional de Curitibanos</div><div class="up-director">Diretor: Fabio Marcelo Palhano</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Juventino França de Moraes, s/n – São Cristóvão do Sul/SC – CEP 89533‑000</strong></span><span>📞 <strong>(49) 3412‑3300</strong></span><span>📧 <strong>pe08@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Masculino de Lages</div><div class="up-director">Diretor: Rodrigo Barroso</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Ricardo Marin, s/n – Bairro Santa Clara – Lages/SC – CEP 88513‑210</strong></span><span>📞 <strong>(49) 3289‑8467</strong></span><span>📧 <strong>pr19@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Lages</div><div class="up-director">Diretor: Ricardo Fernando Moreira Floriani</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Mato Grosso, 247 – Bairro São Cristóvão – Lages/SC – CEP 88509‑220</strong></span><span>📞 <strong>(49) 3289‑8403 / (49) 3289‑8404</strong></span><span>📧 <strong>pr20@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Caçador</div><div class="up-director">Diretor: André Luiz Pierdoná</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Av. Albino Felipe Potrick, nº 50 – Bom Sucesso – Caçador/SC – CEP 89501‑335</strong></span><span>📞 <strong>(49) 3561‑6945</strong></span><span>📧 <strong>pr21@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Campos Novos</div><div class="up-director">Diretor: Evalcir Morais dos Santos</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Estrada Geral Usina Velha, s/n – Interior – Campos Novos/SC – CEP 89620‑000</strong></span><span>📞 <strong>(49) 3541‑3588 / 3541‑3589 / 3541‑3590</strong></span><span>📧 <strong>pr22@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Videira</div><div class="up-director">Diretor: Marcus Vinicius Lorenzetti</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rodovia SC‑303, Linha Scussiato, Interior – Videira/SC – CEP 89560‑000</strong></span><span>📞 <strong>(49) 3533‑5915 / (49) 3533‑5918</strong></span><span>📧 <strong>pr23@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Unidade de Segurança Máxima de São Cristóvão do Sul</div><div class="up-director">Diretor: Daniel de Sena</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Juventino França de Moraes, s/n – São Cristóvão do Sul/SC – CEP 89533‑000</strong></span><span>📞 <strong>(49) 3412‑3241</strong></span><span>📧 <strong>umax@pp.sc.gov.br</strong></span></div></div></div>
+      </div>
+    </div>
+
+    <!-- ══ SR06 ══ -->
+    <div class="sr-wrap">
+      <div class="sr-toggle" onclick="toggleEl(this)">
+        <div class="sr-left"><span class="sr-pill">SR06</span><span class="sr-name">Superintendência Regional Oeste</span></div>
+        <div style="display:flex;align-items:center;gap:14px;"><span class="sr-meta">10 unidades</span><span class="sr-chevron">▶</span></div>
+      </div>
+      <div class="sr-panel">
+        <div class="sr-info-bar">
+          <span>👤 Superintendente: <strong>Guimorvan Boita</strong></span>
+          <span>📞 <strong>(49) 2049‑9768</strong></span>
+          <span>📧 <strong>sr06@pp.sc.gov.br</strong></span>
+        </div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Penitenciária Agrícola de Chapecó</div><div class="up-director">Diretor: Itacir Ricieri Cella</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Cunha Porã, 1600‑E – Bairro Efapi – Chapecó/SC – CEP 89809‑500</strong></span><span>📞 <strong>(49) 2049‑9760 / (49) 2049‑9770</strong></span><span>📧 <strong>pe10@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Penitenciária Industrial de Chapecó</div><div class="up-director">Diretor: Iuri Elias Berwanger</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Cunha Porã, 1600‑E – Bairro Efapi – Chapecó/SC – CEP 89809‑500</strong></span><span>📞 <strong>(49) 2049‑9713</strong></span><span>📧 <strong>pe11@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Feminino Regional de Chapecó</div><div class="up-director">Diretora: Agda Remus</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Cunha Porã, 1600‑E – Bairro Efapi – Chapecó/SC – CEP 89809‑500</strong></span><span>📞 <strong>(49) 2049‑9813</strong></span><span>📧 <strong>pr25@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Chapecó</div><div class="up-director">Diretor: José Lauri Pelizzari</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Cunha Porã, 1600‑E – Bairro Efapi – Chapecó/SC – CEP 89809‑500</strong></span><span>📞 <strong>(49) 2049‑9602 / 2049‑9603 / 2049‑9604 / 2049‑9605</strong></span><span>📧 <strong>pr24@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Concórdia</div><div class="up-director">Diretor: Rafael Schlegel Rodrigues Salgado</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Adílio Hilário Mutzemberg, s/n – Guilherme Reich – Concórdia/SC – CEP 89709‑132</strong></span><span>📞 <strong>(49) 3482‑6222</strong></span><span>📧 <strong>pr26@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Joaçaba</div><div class="up-director">Diretora: Liliam Wiest</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>BR‑282, km 391 – Vila Remor – Joaçaba/SC – CEP 89600‑000</strong></span><span>📞 <strong>(49) 3527‑9829</strong></span><span>📧 <strong>pr27@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Maravilha</div><div class="up-director">Diretor: Marcelo Rodrigo Langaro</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Av. Sul Brasil, nº 1607 – Centro – Maravilha/SC – CEP 89874‑000</strong></span><span>📞 <strong>(49) 3664‑6672</strong></span><span>📧 <strong>pr29@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de São José do Cedro</div><div class="up-director">Diretora: Rejane Birci Schrader de Mattos</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Amambuy esq. Dom Pedro, nº 673 – Jardim – São José do Cedro/SC – CEP 89930‑000</strong></span><span>📞 <strong>(49) 3644‑3436</strong></span><span>📧 <strong>pr30@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de São Miguel do Oeste</div><div class="up-director">Diretor: Eduardo Francisco Bregola Junior</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Oiapoc, nº 1795 – Centro – São Miguel do Oeste/SC – CEP 89900‑000</strong></span><span>📞 <strong>(49) 3631‑3754</strong></span><span>📧 <strong>pr31@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Xanxerê</div><div class="up-director">Diretor: Vitor Matte</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Maranhão, nº 1780 – Castelo Branco – Xanxerê/SC – CEP 89820‑000</strong></span><span>📞 <strong>(49) 3382‑2269</strong></span><span>📧 <strong>pr28@pp.sc.gov.br</strong></span></div></div></div>
+      </div>
+    </div>
+
+    <!-- ══ SR07 ══ -->
+    <div class="sr-wrap">
+      <div class="sr-toggle" onclick="toggleEl(this)">
+        <div class="sr-left"><span class="sr-pill">SR07</span><span class="sr-name">Superintendência Regional do Médio Vale do Itajaí</span></div>
+        <div style="display:flex;align-items:center;gap:14px;"><span class="sr-meta">5 unidades</span><span class="sr-chevron">▶</span></div>
+      </div>
+      <div class="sr-panel">
+        <div class="sr-info-bar">
+          <span>👤 Superintendente: <strong>Ricardo da Silva Morlo</strong></span>
+          <span>📞 <strong>(47) 3378‑8594</strong></span>
+          <span>📧 <strong>sr07@pp.sc.gov.br</strong></span>
+          <span>📧 sr07sr@pp.sc.gov.br</span>
+        </div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Penitenciária Industrial de Blumenau</div><div class="up-director">Diretor: Luciano Cardoso</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Silvano Candido da Silva, nº 4601 – Ponta Aguda – Blumenau/SC – CEP 89050‑287</strong></span><span>📞 <strong>(47) 3378‑8600</strong></span><span>📧 <strong>pe12@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Blumenau</div><div class="up-director">Diretor: Augusto Gregory Hilgenberg Ijaille</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua General Osório, 4585 – Passo Manso – Blumenau/SC – CEP 89032‑239</strong></span><span>📞 <strong>(47) 3378‑8716</strong></span><span>📧 <strong>pr32@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Indaial</div><div class="up-director">Diretor: Ivã Carlos Fuck</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Otto Stange, 127 – Bairro Estados – Indaial/SC – CEP 89086‑045</strong></span><span>📞 <strong>(47) 3399‑3193</strong></span><span>📧 <strong>pr34@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Ituporanga</div><div class="up-director">Diretor: Marisoni dos Santos</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Governador Jorge Lacerda, 72 – Centro – Ituporanga/SC – CEP 88400‑000</strong></span><span>📞 <strong>(47) 3533‑8797</strong></span><span>📧 <strong>pr35@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Rio do Sul</div><div class="up-director">Diretor: Victor Hugo Vanelli</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Estrada Geral Serra Canoas, s/n – Fundo Canoas – Rio do Sul/SC</strong></span><span>📞 <strong>(47) 3526‑3308 / (47) 3526‑3309</strong></span><span>📧 <strong>pr33@pp.sc.gov.br</strong></span></div></div></div>
+      </div>
+    </div>
+
+    <!-- ══ SR08 ══ -->
+    <div class="sr-wrap">
+      <div class="sr-toggle" onclick="toggleEl(this)">
+        <div class="sr-left"><span class="sr-pill">SR08</span><span class="sr-name">Superintendência Regional do Planalto Norte</span></div>
+        <div style="display:flex;align-items:center;gap:14px;"><span class="sr-meta">5 unidades</span><span class="sr-chevron">▶</span></div>
+      </div>
+      <div class="sr-panel">
+        <div class="sr-info-bar">
+          <span>👤 Superintendente: <strong>Edenilson Schelbauer</strong></span>
+          <span>📞 <strong>(47) 3647‑0229</strong></span>
+          <span>📧 <strong>sr08@pp.sc.gov.br</strong></span>
+          <span>📧 sr08sr@pp.sc.gov.br</span>
+        </div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Penitenciária Industrial de São Bento do Sul</div><div class="up-director">Diretor: Leó Da Silva Feliciano</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Miguel Hubl, nº 400 – Lençol – São Bento do Sul/SC – CEP 89289‑580</strong></span><span>📞 <strong>(47) 3647‑0240</strong></span><span>📧 <strong>pe13@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Canoinhas</div><div class="up-director">Diretor: Alexander Marcelo Costa</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Catarina de Souza Hubner, nº 1035 – Bairro Piedade – Canoinhas/SC – CEP 89460‑613</strong></span><span>📞 <strong>(47) 3627‑4352 / (47) 3627‑4358</strong></span><span>📧 <strong>pr38@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Jaraguá do Sul</div><div class="up-director">Diretor: Carlos de Almeida Rossato</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Alvino Flor da Silva, nº 901 – Jaraguá do Sul/SC – CEP 89260‑875</strong></span><span>📞 <strong>(47) 3276‑9409</strong></span><span>📧 <strong>pr36@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Mafra</div><div class="up-director">Diretor: Gabriel Henning</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Getúlio Vargas, nº 604 – Centro – Mafra/SC – CEP 89300‑210</strong></span><span>📞 <strong>(47) 3647‑0222</strong></span><span>📧 <strong>pr37@pp.sc.gov.br</strong></span></div></div></div>
+        <div class="up-wrap"><div class="up-toggle" onclick="toggleEl(this)"><div><div class="up-name">Presídio Regional de Porto União</div><div class="up-director">Diretor: Josmar Mattos e Santos</div></div><span class="up-chevron">▶</span></div><div class="up-panel"><div class="up-detail"><span><span class="up-icon">📍</span><strong>Rua Matos Costa, nº 772 – Centro – Porto União/SC – CEP 89400‑000</strong></span><span>📞 <strong>(47) 3627‑4340</strong></span><span>📧 <strong>pr39@pp.sc.gov.br</strong></span></div></div></div>
+      </div>
+    </div>
+
+  </div><!-- /sec-srs -->
+
   <!-- LEGISLAÇÃO -->
-  <div id="sec-legislacao" class="section-label">10 — Base legal e documentos de referência</div>
+  <div id="sec-legislacao" class="section-label">11 — Base legal e documentos de referência</div>
   <div class="leg-grid">
 
     <a class="leg-card" href="https://busca.tjsc.jus.br/buscatextual/integra.do?cdSistema=1&cdDocumento=188528&cdCategoria=261&q=&frase=&excluir=&qualquer=&prox1=&prox2=&proxc=" target="_blank" rel="noopener">
@@ -2220,19 +2497,344 @@ Ao(À) Meritíssimo(a) Senhor(a)
   // ── MODAL SYSTEM ──
   const OFICIOS = {};
 
+  // ══════════════════════════════════════════════════
+  // BANCO DE DADOS — UNIDADES PRISIONAIS
+  // ══════════════════════════════════════════════════
+  const UNIDADES = [
+    // SR01
+    { nome: 'Penitenciária de Florianópolis', diretor: 'Max Cleber Orth', sr: 'SR01', srNome: 'Superintendência Regional da Grande Florianópolis', superintendente: 'Kelvyn Diehl' },
+    { nome: 'Complexo Penitenciário do Estado', diretor: 'Flávio Brasil Ganciné', sr: 'SR01', srNome: 'Superintendência Regional da Grande Florianópolis', superintendente: 'Kelvyn Diehl' },
+    { nome: 'Presídio Regional de Tijucas', diretor: 'Nathasha Daberkow Vieira', sr: 'SR01', srNome: 'Superintendência Regional da Grande Florianópolis', superintendente: 'Kelvyn Diehl' },
+    { nome: 'Hospital de Custódia e Tratamento Psiquiátrico – HCTP', diretor: 'Fábio Medeiros Wiese', sr: 'SR01', srNome: 'Superintendência Regional da Grande Florianópolis', superintendente: 'Kelvyn Diehl' },
+    { nome: 'Presídio Regional de Biguaçu', diretor: 'Fabiano Oliveira Suares', sr: 'SR01', srNome: 'Superintendência Regional da Grande Florianópolis', superintendente: 'Kelvyn Diehl' },
+    { nome: 'Presídio Masculino Regional de Florianópolis', diretor: 'Joana Mahfuz Vicini', sr: 'SR01', srNome: 'Superintendência Regional da Grande Florianópolis', superintendente: 'Kelvyn Diehl' },
+    { nome: 'Presídio Feminino Regional de Florianópolis', diretor: 'Marina Pamplona Coelho', sr: 'SR01', srNome: 'Superintendência Regional da Grande Florianópolis', superintendente: 'Kelvyn Diehl' },
+    { nome: 'Unidade de Monitoramento Eletrônico', diretor: 'Gustavo Costa Vieira', sr: 'SR01', srNome: 'Superintendência Regional da Grande Florianópolis', superintendente: 'Kelvyn Diehl' },
+    { nome: 'Colônia Agroindustrial de Palhoça', diretor: 'Renata de Souza de Oliveira', sr: 'SR01', srNome: 'Superintendência Regional da Grande Florianópolis', superintendente: 'Kelvyn Diehl' },
+    // SR02
+    { nome: 'Penitenciária Feminina de Criciúma', diretor: 'Virginia Gabriela Gonzales', sr: 'SR02', srNome: 'Superintendência Regional Sul', superintendente: 'Hélio Damian Filho' },
+    { nome: 'Penitenciária Masculina de Tubarão', diretor: 'Deiveison Querino Batista', sr: 'SR02', srNome: 'Superintendência Regional Sul', superintendente: 'Hélio Damian Filho' },
+    { nome: 'Penitenciária Sul', diretor: 'Alexandre Ferreira', sr: 'SR02', srNome: 'Superintendência Regional Sul', superintendente: 'Hélio Damian Filho' },
+    { nome: 'Presídio Regional de Araranguá', diretor: 'Daniel Possamai Vieira', sr: 'SR02', srNome: 'Superintendência Regional Sul', superintendente: 'Hélio Damian Filho' },
+    { nome: 'Presídio Regional de Criciúma', diretor: 'Júnior Rodrigo Fagundes', sr: 'SR02', srNome: 'Superintendência Regional Sul', superintendente: 'Hélio Damian Filho' },
+    { nome: 'Presídio Regional de Imbituba', diretor: 'Filipe Gonzaga Lopes', sr: 'SR02', srNome: 'Superintendência Regional Sul', superintendente: 'Hélio Damian Filho' },
+    { nome: 'Presídio Regional de Laguna', diretor: 'Rafael Nunes de Oliveira', sr: 'SR02', srNome: 'Superintendência Regional Sul', superintendente: 'Hélio Damian Filho' },
+    { nome: 'Presídio Regional de Tubarão', diretor: 'Gladson Antônio da Silva', sr: 'SR02', srNome: 'Superintendência Regional Sul', superintendente: 'Hélio Damian Filho' },
+    // SR03
+    { nome: 'Penitenciária Industrial de Joinville', diretor: 'Márcio Simbalista', sr: 'SR03', srNome: 'Superintendência Regional do Norte Catarinense', superintendente: 'Efraym Ben José Falcão' },
+    { nome: 'Presídio Feminino Regional de Joinville', diretor: 'Eliana Eloi', sr: 'SR03', srNome: 'Superintendência Regional do Norte Catarinense', superintendente: 'Efraym Ben José Falcão' },
+    { nome: 'Presídio Regional de Joinville', diretor: 'André Felippe Dias', sr: 'SR03', srNome: 'Superintendência Regional do Norte Catarinense', superintendente: 'Efraym Ben José Falcão' },
+    { nome: 'Presídio Regional de Barra Velha', diretor: 'Léia Cristina Steffen Fuck', sr: 'SR03', srNome: 'Superintendência Regional do Norte Catarinense', superintendente: 'Efraym Ben José Falcão' },
+    { nome: 'Presídio Regional de São Francisco do Sul', diretor: 'Lamartine Ximenes Fernandes', sr: 'SR03', srNome: 'Superintendência Regional do Norte Catarinense', superintendente: 'Efraym Ben José Falcão' },
+    // SR04
+    { nome: 'Penitenciária Masculina do Vale do Itajaí', diretor: 'Genivaldo Nazareno de Oliveira', sr: 'SR04', srNome: 'Superintendência Regional do Vale do Itajaí', superintendente: 'Anderson Luiz Teodoro' },
+    { nome: 'Presídio Feminino Regional de Itajaí', diretor: 'Michele Rebello de Mesquita', sr: 'SR04', srNome: 'Superintendência Regional do Vale do Itajaí', superintendente: 'Anderson Luiz Teodoro' },
+    { nome: 'Presídio Regional de Brusque', diretor: 'Giovani Manfredini Queiroz', sr: 'SR04', srNome: 'Superintendência Regional do Vale do Itajaí', superintendente: 'Anderson Luiz Teodoro' },
+    { nome: 'Presídio Regional de Itajaí', diretor: 'Rogério José Bizatto', sr: 'SR04', srNome: 'Superintendência Regional do Vale do Itajaí', superintendente: 'Anderson Luiz Teodoro' },
+    { nome: 'Presídio Regional de Itapema', diretor: 'Eduardo Weber Xavier', sr: 'SR04', srNome: 'Superintendência Regional do Vale do Itajaí', superintendente: 'Anderson Luiz Teodoro' },
+    // SR05
+    { nome: 'Penitenciária Industrial de São Cristóvão do Sul', diretor: 'Giselle Cordeiro Demeneck Remor', sr: 'SR05', srNome: 'Superintendência Regional Serrana', superintendente: 'André Isidoro de Oliveira Martarello' },
+    { nome: 'Penitenciária Regional de Curitibanos', diretor: 'Fabio Marcelo Palhano', sr: 'SR05', srNome: 'Superintendência Regional Serrana', superintendente: 'André Isidoro de Oliveira Martarello' },
+    { nome: 'Presídio Masculino de Lages', diretor: 'Rodrigo Barroso', sr: 'SR05', srNome: 'Superintendência Regional Serrana', superintendente: 'André Isidoro de Oliveira Martarello' },
+    { nome: 'Presídio Regional de Lages', diretor: 'Ricardo Fernando Moreira Floriani', sr: 'SR05', srNome: 'Superintendência Regional Serrana', superintendente: 'André Isidoro de Oliveira Martarello' },
+    { nome: 'Presídio Regional de Caçador', diretor: 'André Luiz Pierdoná', sr: 'SR05', srNome: 'Superintendência Regional Serrana', superintendente: 'André Isidoro de Oliveira Martarello' },
+    { nome: 'Presídio Regional de Campos Novos', diretor: 'Evalcir Morais dos Santos', sr: 'SR05', srNome: 'Superintendência Regional Serrana', superintendente: 'André Isidoro de Oliveira Martarello' },
+    { nome: 'Presídio Regional de Videira', diretor: 'Marcus Vinicius Lorenzetti', sr: 'SR05', srNome: 'Superintendência Regional Serrana', superintendente: 'André Isidoro de Oliveira Martarello' },
+    { nome: 'Unidade de Segurança Máxima de São Cristóvão do Sul', diretor: 'Daniel de Sena', sr: 'SR05', srNome: 'Superintendência Regional Serrana', superintendente: 'André Isidoro de Oliveira Martarello' },
+    // SR06
+    { nome: 'Penitenciária Agrícola de Chapecó', diretor: 'Itacir Ricieri Cella', sr: 'SR06', srNome: 'Superintendência Regional Oeste', superintendente: 'Guimorvan Boita' },
+    { nome: 'Penitenciária Industrial de Chapecó', diretor: 'Iuri Elias Berwanger', sr: 'SR06', srNome: 'Superintendência Regional Oeste', superintendente: 'Guimorvan Boita' },
+    { nome: 'Presídio Feminino Regional de Chapecó', diretor: 'Agda Remus', sr: 'SR06', srNome: 'Superintendência Regional Oeste', superintendente: 'Guimorvan Boita' },
+    { nome: 'Presídio Regional de Chapecó', diretor: 'José Lauri Pelizzari', sr: 'SR06', srNome: 'Superintendência Regional Oeste', superintendente: 'Guimorvan Boita' },
+    { nome: 'Presídio Regional de Concórdia', diretor: 'Rafael Schlegel Rodrigues Salgado', sr: 'SR06', srNome: 'Superintendência Regional Oeste', superintendente: 'Guimorvan Boita' },
+    { nome: 'Presídio Regional de Joaçaba', diretor: 'Liliam Wiest', sr: 'SR06', srNome: 'Superintendência Regional Oeste', superintendente: 'Guimorvan Boita' },
+    { nome: 'Presídio Regional de Maravilha', diretor: 'Marcelo Rodrigo Langaro', sr: 'SR06', srNome: 'Superintendência Regional Oeste', superintendente: 'Guimorvan Boita' },
+    { nome: 'Presídio Regional de São José do Cedro', diretor: 'Rejane Birci Schrader de Mattos', sr: 'SR06', srNome: 'Superintendência Regional Oeste', superintendente: 'Guimorvan Boita' },
+    { nome: 'Presídio Regional de São Miguel do Oeste', diretor: 'Eduardo Francisco Bregola Junior', sr: 'SR06', srNome: 'Superintendência Regional Oeste', superintendente: 'Guimorvan Boita' },
+    { nome: 'Presídio Regional de Xanxerê', diretor: 'Vitor Matte', sr: 'SR06', srNome: 'Superintendência Regional Oeste', superintendente: 'Guimorvan Boita' },
+    // SR07
+    { nome: 'Penitenciária Industrial de Blumenau', diretor: 'Luciano Cardoso', sr: 'SR07', srNome: 'Superintendência Regional do Médio Vale do Itajaí', superintendente: 'Ricardo da Silva Morlo' },
+    { nome: 'Presídio Regional de Blumenau', diretor: 'Augusto Gregory Hilgenberg Ijaille', sr: 'SR07', srNome: 'Superintendência Regional do Médio Vale do Itajaí', superintendente: 'Ricardo da Silva Morlo' },
+    { nome: 'Presídio Regional de Indaial', diretor: 'Ivã Carlos Fuck', sr: 'SR07', srNome: 'Superintendência Regional do Médio Vale do Itajaí', superintendente: 'Ricardo da Silva Morlo' },
+    { nome: 'Presídio Regional de Ituporanga', diretor: 'Marisoni dos Santos', sr: 'SR07', srNome: 'Superintendência Regional do Médio Vale do Itajaí', superintendente: 'Ricardo da Silva Morlo' },
+    { nome: 'Presídio Regional de Rio do Sul', diretor: 'Victor Hugo Vanelli', sr: 'SR07', srNome: 'Superintendência Regional do Médio Vale do Itajaí', superintendente: 'Ricardo da Silva Morlo' },
+    // SR08
+    { nome: 'Penitenciária Industrial de São Bento do Sul', diretor: 'Leó Da Silva Feliciano', sr: 'SR08', srNome: 'Superintendência Regional do Planalto Norte', superintendente: 'Edenilson Schelbauer' },
+    { nome: 'Presídio Regional de Canoinhas', diretor: 'Alexander Marcelo Costa', sr: 'SR08', srNome: 'Superintendência Regional do Planalto Norte', superintendente: 'Edenilson Schelbauer' },
+    { nome: 'Presídio Regional de Jaraguá do Sul', diretor: 'Carlos de Almeida Rossato', sr: 'SR08', srNome: 'Superintendência Regional do Planalto Norte', superintendente: 'Edenilson Schelbauer' },
+    { nome: 'Presídio Regional de Mafra', diretor: 'Gabriel Henning', sr: 'SR08', srNome: 'Superintendência Regional do Planalto Norte', superintendente: 'Edenilson Schelbauer' },
+    { nome: 'Presídio Regional de Porto União', diretor: 'Josmar Mattos e Santos', sr: 'SR08', srNome: 'Superintendência Regional do Planalto Norte', superintendente: 'Edenilson Schelbauer' },
+  ];
+
+  // IDs que usam dropdown de unidades (todos exceto comunicacao)
+  const OFICIOS_COM_DROPDOWN = ['oficio-emerg','oficio-vol','oficio-equal','oficio-mandado','oficio-comunicacao'];
+
+  // Estado atual das seleções por modal
+  let _selOrigem = null, _selDestino = null, _modalId = null;
+
+  function getUnidade(nome) {
+    return UNIDADES.find(u => u.nome === nome) || null;
+  }
+
+  function buildDropdownOptions(selected) {
+    let html = '<option value="">— Selecione a unidade —</option>';
+    const srs = [...new Set(UNIDADES.map(u => u.sr))];
+    srs.forEach(sr => {
+      const srNome = UNIDADES.find(u => u.sr === sr).srNome;
+      html += `<optgroup label="${sr} – ${srNome}">`;
+      UNIDADES.filter(u => u.sr === sr).forEach(u => {
+        const sel = selected === u.nome ? ' selected' : '';
+        html += `<option value="${u.nome}"${sel}>${u.nome}</option>`;
+      });
+      html += '</optgroup>';
+    });
+    return html;
+  }
+
+  // Gera string de data por extenso
+  function dataAtual() {
+    const meses = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+    const d = new Date();
+    return `${d.getDate()} de ${meses[d.getMonth()]} de ${d.getFullYear()}`;
+  }
+
+  // Substitui um campo no texto marcando-o como automático (negrito) ou editável amarelo
+  function autoReplace(text, pattern, value, boldIt) {
+    if (boldIt) {
+      return text.replace(pattern, `\x00AUTO\x00${value}\x00ENDAUTO\x00`);
+    }
+    return text.replace(pattern, value);
+  }
+
+  // Após substituições, converte marcadores AUTO em spans bold (não editáveis)
+  function renderComAuto(text) {
+    // Primeiro aplica renderOficioHTML que trata [CAMPO] e parágrafos
+    // Depois converte marcadores AUTO
+    let html = renderOficioHTML(text);
+    html = html.replace(/\x00AUTO\x00([\s\S]*?)\x00ENDAUTO\x00/g,
+      (_, val) => `<span class="oficio-auto">${val}</span>`);
+    return html;
+  }
+
+  // Reconstrói o texto do ofício com os dados das unidades selecionadas
+  function atualizarOficio(panelIdx) {
+    const box = document.getElementById('modal-oficio-' + panelIdx);
+    if (!box) return;
+    const data = box._originalContent;
+    if (!data) return;
+
+    let text = data;
+    const orig = _selOrigem;
+    const dest = _selDestino;
+
+    // Data automática — sem negrito
+    const isComunicacaoEntrada = (_modalId === 'oficio-comunicacao' && panelIdx === 1);
+    const nomeRemetente = isComunicacaoEntrada
+      ? (dest ? dest.nome : '[UNIDADE PRISIONAL DE DESTINO]')
+      : (orig ? orig.nome : '[UNIDADE PRISIONAL DE ORIGEM]');
+    text = text.replace(/\[DATA_AUTO\]/g, `${nomeRemetente}, ${dataAtual()}.`);
+
+    // Campos de ORIGEM — negrito
+    if (orig) {
+      text = text.replace(/\[UNIDADE PRISIONAL DE ORIGEM\]/g,     `\x00AUTO\x00${orig.nome}\x00ENDAUTO\x00`);
+      text = text.replace(/\[UNIDADE DE ORIGEM\]/g,               `\x00AUTO\x00${orig.nome}\x00ENDAUTO\x00`);
+      text = text.replace(/\[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM\]/g, `\x00AUTO\x00${orig.diretor}\x00ENDAUTO\x00`);
+      text = text.replace(/\[NOME DO SUPERINTENDENTE REGIONAL – ORIGEM\]/g,      `\x00AUTO\x00${orig.superintendente}\x00ENDAUTO\x00`);
+      text = text.replace(/\[SR DE ORIGEM\]/g,                    `\x00AUTO\x00${orig.sr} – ${orig.srNome}\x00ENDAUTO\x00`);
+    }
+    // Campos de DESTINO — negrito
+    if (dest) {
+      text = text.replace(/\[UNIDADE PRISIONAL DE DESTINO\]/g,    `\x00AUTO\x00${dest.nome}\x00ENDAUTO\x00`);
+      text = text.replace(/\[UNIDADE DE DESTINO\]/g,              `\x00AUTO\x00${dest.nome}\x00ENDAUTO\x00`);
+      text = text.replace(/\[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO\]/g, `\x00AUTO\x00${dest.diretor}\x00ENDAUTO\x00`);
+      const supDestLabel = (orig && orig.sr === dest.sr) ? '(mesma SR – assinatura acima)' : dest.superintendente;
+      text = text.replace(/\[NOME DO SUPERINTENDENTE REGIONAL – DESTINO – SE FOR O CASO\]/g, `\x00AUTO\x00${supDestLabel}\x00ENDAUTO\x00`);
+      text = text.replace(/\[SR DE DESTINO\]/g,                   `\x00AUTO\x00${dest.sr} – ${dest.srNome}\x00ENDAUTO\x00`);
+    }
+
+    box.innerHTML = renderComAuto(text);
+  }
+
+  function onSelectOrigem(val, panelIdx) {
+    _selOrigem = val ? getUnidade(val) : null;
+    // Atualiza badge de info
+    const badge = document.getElementById('badge-origem-' + panelIdx);
+    if (badge) badge.innerHTML = _selOrigem
+      ? `<span style="color:var(--accent)">👤 ${_selOrigem.diretor}</span> &nbsp;·&nbsp; <span style="color:var(--muted)">${_selOrigem.sr} – ${_selOrigem.superintendente}</span>`
+      : '';
+    atualizarOficio(panelIdx);
+  }
+
+  function onSelectDestino(val, panelIdx) {
+    _selDestino = val ? getUnidade(val) : null;
+    const badge = document.getElementById('badge-destino-' + panelIdx);
+    if (badge) badge.innerHTML = _selDestino
+      ? `<span style="color:var(--accent)">👤 ${_selDestino.diretor}</span> &nbsp;·&nbsp; <span style="color:var(--muted)">${_selDestino.sr} – ${_selDestino.superintendente}</span>`
+      : '';
+    atualizarOficio(panelIdx);
+  }
+
+  function buildDropdownPanel(panelIdx, modalId) {
+    // Comunicação ao Judiciário:
+    // aba 0 (Saída) → só origem; aba 1 (Entrada) → só destino; aba 2 (Mandado) → origem e destino
+    if (modalId === 'oficio-comunicacao') {
+      if (panelIdx === 0) { // Saída — quem envia é a unidade de origem
+        return `<div class="oficio-dropdown-panel" id="dropdown-panel-${panelIdx}">
+          <div class="oficio-dropdown-row">
+            <div class="oficio-dropdown-col">
+              <label class="oficio-dropdown-label">🏛️ Unidade de Origem (remetente)</label>
+              <select class="oficio-select" onchange="onSelectOrigem(this.value, ${panelIdx})">
+                ${buildDropdownOptions(_selOrigem ? _selOrigem.nome : '')}
+              </select>
+              <div class="oficio-badge" id="badge-origem-${panelIdx}"></div>
+            </div>
+            <div class="oficio-dropdown-col">
+              <label class="oficio-dropdown-label">🏛️ Unidade de Destino</label>
+              <select class="oficio-select" onchange="onSelectDestino(this.value, ${panelIdx})">
+                ${buildDropdownOptions(_selDestino ? _selDestino.nome : '')}
+              </select>
+              <div class="oficio-badge" id="badge-destino-${panelIdx}"></div>
+            </div>
+          </div>
+        </div>`;
+      } else if (panelIdx === 1) { // Entrada — quem envia é a unidade de destino
+        return `<div class="oficio-dropdown-panel" id="dropdown-panel-${panelIdx}">
+          <div class="oficio-dropdown-row">
+            <div class="oficio-dropdown-col">
+              <label class="oficio-dropdown-label">🏛️ Unidade de Origem (de onde veio)</label>
+              <select class="oficio-select" onchange="onSelectOrigem(this.value, ${panelIdx})">
+                ${buildDropdownOptions(_selOrigem ? _selOrigem.nome : '')}
+              </select>
+              <div class="oficio-badge" id="badge-origem-${panelIdx}"></div>
+            </div>
+            <div class="oficio-dropdown-col">
+              <label class="oficio-dropdown-label">🏛️ Unidade de Destino (remetente)</label>
+              <select class="oficio-select" onchange="onSelectDestino(this.value, ${panelIdx})">
+                ${buildDropdownOptions(_selDestino ? _selDestino.nome : '')}
+              </select>
+              <div class="oficio-badge" id="badge-destino-${panelIdx}"></div>
+            </div>
+          </div>
+        </div>`;
+      } else { // aba 2 Mandado — origem e destino
+        return `<div class="oficio-dropdown-panel" id="dropdown-panel-${panelIdx}">
+          <div class="oficio-dropdown-row">
+            <div class="oficio-dropdown-col">
+              <label class="oficio-dropdown-label">🏛️ Unidade de Origem</label>
+              <select class="oficio-select" onchange="onSelectOrigem(this.value, ${panelIdx})">
+                ${buildDropdownOptions(_selOrigem ? _selOrigem.nome : '')}
+              </select>
+              <div class="oficio-badge" id="badge-origem-${panelIdx}"></div>
+            </div>
+            <div class="oficio-dropdown-col">
+              <label class="oficio-dropdown-label">🏛️ Unidade de Destino</label>
+              <select class="oficio-select" onchange="onSelectDestino(this.value, ${panelIdx})">
+                ${buildDropdownOptions(_selDestino ? _selDestino.nome : '')}
+              </select>
+              <div class="oficio-badge" id="badge-destino-${panelIdx}"></div>
+            </div>
+          </div>
+        </div>`;
+      }
+    }
+    // Modelos de transferência: sempre origem + destino
+    return `<div class="oficio-dropdown-panel" id="dropdown-panel-${panelIdx}">
+      <div class="oficio-dropdown-row">
+        <div class="oficio-dropdown-col">
+          <label class="oficio-dropdown-label">🏛️ Unidade de Origem</label>
+          <select class="oficio-select" onchange="onSelectOrigem(this.value, ${panelIdx})">
+            ${buildDropdownOptions(_selOrigem ? _selOrigem.nome : '')}
+          </select>
+          <div class="oficio-badge" id="badge-origem-${panelIdx}"></div>
+        </div>
+        <div class="oficio-dropdown-col">
+          <label class="oficio-dropdown-label">🏛️ Unidade de Destino</label>
+          <select class="oficio-select" onchange="onSelectDestino(this.value, ${panelIdx})">
+            ${buildDropdownOptions(_selDestino ? _selDestino.nome : '')}
+          </select>
+          <div class="oficio-badge" id="badge-destino-${panelIdx}"></div>
+        </div>
+      </div>
+    </div>`;
+  }
+
   function registerOficio(id, title, tabs, contents) {
     OFICIOS[id] = { title, tabs, contents };
+  }
+
+  // Converte texto com [CAMPO] em HTML com spans editáveis amarelos
+  function renderOficioHTML(text) {
+    function escHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // Divide em parágrafos (separa por linhas em branco ou \n\n)
+    // Mantém blocos de assinatura/endereçamento como parágrafo separado
+    const paragraphs = text.split(/\n\n+/);
+
+    let html = '';
+    paragraphs.forEach(para => {
+      if (!para.trim()) return;
+
+      // Verifica se é bloco de assinatura/endereçamento (sem justificação)
+      const noIndent = /^(Atenciosamente|Respeitosamente|À Senhora|Ao\(À\)|Senhor\(a\) Coordenador|Senhor\(a\) \[JUIZ|\(documento assinado)/.test(para.trim());
+
+      // Processa campos [CAMPO] dentro do parágrafo
+      const parts = para.split(/(\[[^\]]+\])/g);
+      let inner = '';
+      parts.forEach(part => {
+        if (/^\[[^\]]+\]$/.test(part)) {
+          const label = part.slice(1,-1);
+          inner += `<span class="oficio-field" contenteditable="true" data-placeholder="${escHtml(label)}">${escHtml(label)}</span>`;
+        } else {
+          // Preserva quebras simples de linha dentro do bloco como <br>
+          inner += escHtml(part).replace(/\n/g, '<br>');
+        }
+      });
+
+      const cls = noIndent ? ' class="oficio-noindent"' : '';
+      html += `<p${cls}>${inner}</p>`;
+    });
+
+    return html;
+  }
+
+  // Extrai texto limpo do ofício (campos editados + texto fixo + auto)
+  function extractOficioText(boxEl) {
+    let result = '';
+    boxEl.querySelectorAll('p').forEach((p, i) => {
+      if (i > 0) result += '\n\n';
+      p.childNodes.forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          result += node.textContent;
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          if (node.tagName === 'BR') {
+            result += '\n';
+          } else {
+            result += node.textContent;
+          }
+        }
+      });
+    });
+    return result;
   }
 
   function openModal(id) {
     const data = OFICIOS[id];
     if (!data) return;
-    document.getElementById('modalTitle').textContent = data.title;
 
+    // Reset seleções ao abrir novo modal
+    _selOrigem = null;
+    _selDestino = null;
+    _modalId = id;
+
+    document.getElementById('modalTitle').textContent = data.title;
     const tabsEl = document.getElementById('modalTabs');
     const bodyEl = document.getElementById('modalBody');
     tabsEl.innerHTML = '';
     bodyEl.innerHTML = '';
+
+    const useDropdown = OFICIOS_COM_DROPDOWN.includes(id);
 
     if (data.tabs.length > 1) {
       data.tabs.forEach((tab, i) => {
@@ -2244,15 +2846,35 @@ Ao(À) Meritíssimo(a) Senhor(a)
       });
     }
 
+    // Legenda
+    const legend = document.createElement('div');
+    legend.className = 'oficio-legend';
+    if (useDropdown) {
+      legend.innerHTML = '🏛️ Selecione as unidades nos campos abaixo &nbsp;·&nbsp; ✏️ Campos em <span>DESTAQUE AMARELO</span> são editáveis manualmente.';
+    } else {
+      legend.innerHTML = '✏️ Campos em <span>DESTAQUE AMARELO</span> são editáveis — clique para preencher, depois copie o texto completo.';
+    }
+    bodyEl.appendChild(legend);
+
     data.contents.forEach((content, i) => {
       const panel = document.createElement('div');
       panel.className = 'modal-panel' + (i === 0 ? ' active' : '');
       panel.id = 'modal-panel-' + i;
+
+      // Painel de dropdowns (só para modelos de transferência)
+      if (useDropdown) {
+        panel.insertAdjacentHTML('beforeend', buildDropdownPanel(i, id));
+      }
+
       const box = document.createElement('div');
-      box.className = 'modal-oficio';
-      box.contentEditable = 'true';
+      box.className = 'modal-oficio oficio-box';
       box.id = 'modal-oficio-' + i;
-      box.textContent = content;
+      box._originalContent = content;
+      // Render inicial: DATA_AUTO com placeholder + data de hoje
+      const isComunicacaoEntrada = (id === 'oficio-comunicacao' && i === 1);
+      const placeholderRemetente = isComunicacaoEntrada ? '[UNIDADE PRISIONAL DE DESTINO]' : '[UNIDADE PRISIONAL DE ORIGEM]';
+      let initialText = content.replace(/\[DATA_AUTO\]/g, `${placeholderRemetente}, ${dataAtual()}.`);
+      box.innerHTML = renderComAuto(initialText);
       panel.appendChild(box);
       bodyEl.appendChild(panel);
     });
@@ -2279,7 +2901,8 @@ Ao(À) Meritíssimo(a) Senhor(a)
     const activePanel = document.querySelector('.modal-panel.active .modal-oficio');
     if (!activePanel) return;
     const btn = document.getElementById('modalCopyBtn');
-    navigator.clipboard.writeText(activePanel.innerText).then(() => {
+    const text = extractOficioText(activePanel);
+    navigator.clipboard.writeText(text).then(() => {
       btn.textContent = '✔ Copiado!';
       btn.classList.add('copied');
       setTimeout(() => { btn.innerHTML = '📋 Copiar texto'; btn.classList.remove('copied'); }, 2000);
@@ -2307,6 +2930,15 @@ Ao(À) Meritíssimo(a) Senhor(a)
       btn.textContent = '✔ Copiado!'; btn.classList.add('copied');
       setTimeout(() => { btn.innerHTML = '📋 Copiar texto'; btn.classList.remove('copied'); }, 2000);
     });
+  }
+
+  function toggleEl(trigger) {
+    const panel = trigger.nextElementSibling;
+    const chevron = trigger.querySelector('.sr-chevron, .up-chevron');
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    trigger.classList.toggle('is-open', !isOpen);
+    if (chevron) chevron.classList.toggle('open', !isOpen);
   }
 
   // Toggle hipóteses
@@ -2339,11 +2971,11 @@ Ao(À) Meritíssimo(a) Senhor(a)
     if (arrow) arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
   }
   // Register all oficios
-  registerOficio('oficio-emerg', '🚨 Segurança / Emergência', ['Modelo de Ofício'], ["Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise urgente dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], em raz\u00e3o de situa\u00e7\u00e3o de risco identificada pelas equipes desta unidade prisional.\n\nA solicita\u00e7\u00e3o fundamenta-se na exist\u00eancia de [DESCREVER BREVEMENTE A SITUA\u00c7\u00c3O: risco iminente \u00e0 integridade f\u00edsica, amea\u00e7a de morte, envolvimento em crise interna, motim, rebeli\u00e3o ou outro fator de seguran\u00e7a], que torna invi\u00e1vel a manuten\u00e7\u00e3o do reeducando nesta unidade sem preju\u00edzo \u00e0 sua integridade ou \u00e0 ordem e seguran\u00e7a do estabelecimento, nos termos do art. 21, inciso I, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nDiante da urg\u00eancia da situa\u00e7\u00e3o, solicita-se a transfer\u00eancia do referido reeducando para o(a) [UNIDADE PRISIONAL DE DESTINO], onde h\u00e1 condi\u00e7\u00f5es adequadas para sua cust\u00f3dia em seguran\u00e7a.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico. Encaminho ainda [OUTROS DOCUMENTOS: boletim de ocorr\u00eancia interno, relat\u00f3rio da equipe de seguran\u00e7a, etc.], que subsidiam a presente solicita\u00e7\u00e3o.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se an\u00e1lise e delibera\u00e7\u00e3o c\u00e9lere da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
-  registerOficio('oficio-vol', '👤 Pedido Voluntário', ['📝 Memorando do Preso','👨‍👩‍👦 Pedido de Familiar','⚖️ Petição de Advogado'], ["Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo pr\u00f3prio reeducando por meio de memorando datado de [DATA DO MEMORANDO].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO REEDUCANDO: mudan\u00e7a de domic\u00edlio familiar, necessidade de aproxima\u00e7\u00e3o da fam\u00edlia, outro motivo relevante], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e memorando original do reeducando.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC","Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado por seu(ua) familiar [NOME DO FAMILIAR], [GRAU DE PARENTESCO], por meio de [carta / e-mail / peti\u00e7\u00e3o f\u00edsica] datado(a) de [DATA].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO FAMILIAR: mudan\u00e7a de domic\u00edlio, necessidade de aproxima\u00e7\u00e3o do n\u00facleo familiar, dificuldade de deslocamento para visitas, outro motivo relevante], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e [carta / e-mail / peti\u00e7\u00e3o f\u00edsica] original do familiar.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC","Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo advogado constitu\u00eddo [NOME DO ADVOGADO], OAB/SC n.\u00ba [N\u00daMERO], por meio de peti\u00e7\u00e3o datada de [DATA].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO ADVOGADO: mudan\u00e7a de domic\u00edlio, aproxima\u00e7\u00e3o familiar, outro motivo relevante devidamente fundamentado], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e peti\u00e7\u00e3o original do advogado, com comprova\u00e7\u00e3o de mandato.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
-  registerOficio('oficio-equal', '⚖️ Equalização de Lotação', ['Modelo de Ofício'], ["Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) Coordenador(a)\n\nConsiderando a necessidade de gest\u00e3o e equaliza\u00e7\u00e3o da ocupa\u00e7\u00e3o carcer\u00e1ria no \u00e2mbito do(a) [UNIDADE PRISIONAL DE ORIGEM], bem como a adequada distribui\u00e7\u00e3o das pessoas privadas de liberdade entre as unidades prisionais, encaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado nesta unidade prisional, para o(a) [UNIDADE PRISIONAL DE DESTINO].\n\nA solicita\u00e7\u00e3o fundamenta-se na necessidade de equaliza\u00e7\u00e3o da lota\u00e7\u00e3o entre as unidades do sistema prisional, em conformidade com as diretrizes estabelecidas para a gest\u00e3o de vagas e movimenta\u00e7\u00f5es prisionais previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
-  registerOficio('oficio-mandado', '📜 Mandado de Comarca Diversa', ['Modelo de Ofício'], ["Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], em raz\u00e3o do cumprimento de Mandado de Pris\u00e3o expedido pelo [JU\u00cdZO EXPEDIDOR \u2014 ex: Ju\u00edzo da Vara de Execu\u00e7\u00f5es Penais da Comarca de Itapema].\n\nConsiderando que o referido custodiado foi preso em comarca diversa daquela que expediu a ordem de pris\u00e3o, bem como que o(a) [UNIDADE PRISIONAL DE DESTINO] \u00e9 a unidade respons\u00e1vel pela circunscri\u00e7\u00e3o da autoridade judici\u00e1ria expedidora, a transfer\u00eancia mostra-se adequada, em conformidade com as diretrizes estabelecidas para a gest\u00e3o de vagas e movimenta\u00e7\u00f5es prisionais previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e c\u00f3pia do Mandado de Pris\u00e3o.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
-  registerOficio('oficio-comunicacao', '📬 Comunicação ao Judiciário', ['📤 Saída (Unidade de Origem)','📥 Entrada (Unidade de Destino)','📜 Mandado de Comarca Diversa'], ["Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) [JUIZ/JU\u00cdZA],\n\nCumpre-me comunicar a Vossa Excel\u00eancia que o reeducando [NOME COMPLETO], IPEN [N\u00ba], qualificado no Processo de Execu\u00e7\u00e3o Penal n. [N\u00daMERO DO PROCESSO], que tramita perante esse Douto Ju\u00edzo, foi transferido desta unidade prisional \u2014 [UNIDADE PRISIONAL DE ORIGEM] \u2014 para o(a) [UNIDADE PRISIONAL DE DESTINO], em [DATA DA TRANSFER\u00caNCIA].\n\nInformo que a transfer\u00eancia ocorreu em raz\u00e3o de [MOTIVO: equaliza\u00e7\u00e3o da lota\u00e7\u00e3o carcer\u00e1ria / situa\u00e7\u00e3o de risco \u00e0 integridade do reeducando / pedido volunt\u00e1rio formulado por requerimento do reeducando / familiar / advogado], estando em conformidade com as normas previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026. A movimenta\u00e7\u00e3o contou com a anu\u00eancia de todos os entes envolvidos, quais sejam, os Diretores das Unidades Prisionais de Origem e de Destino, o(s) Superintendente(s) Regional(is) competente(s), bem como com a an\u00e1lise e aprova\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas do Departamento de Pol\u00edcia Penal.\n\nEsta coordenadoria permanece \u00e0 disposi\u00e7\u00e3o de Vossa Excel\u00eancia para eventuais esclarecimentos que se fizerem necess\u00e1rios.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO COORDENADOR DE EXECU\u00c7\u00c3O PENAL]\nCoordenador de Execu\u00e7\u00e3o Penal\n[UNIDADE PRISIONAL DE ORIGEM]\n\n\n\nAo(\u00c0) Merit\u00edssimo(a) Senhor(a)\n[NOME DO JUIZ/JU\u00cdZA]\n[VARA / JU\u00cdZO COMPETENTE]\n[COMARCA]","Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) [JUIZ/JU\u00cdZA],\n\nCumpre-me comunicar a Vossa Excel\u00eancia que o reeducando [NOME COMPLETO], IPEN [N\u00ba], qualificado no Processo de Execu\u00e7\u00e3o Penal n. [N\u00daMERO DO PROCESSO], que tramita perante esse Douto Ju\u00edzo, foi recebido e regularmente custodiado nesta unidade prisional \u2014 [UNIDADE PRISIONAL DE DESTINO] \u2014 a partir de [DATA DE ENTRADA], proveniente do(a) [UNIDADE PRISIONAL DE ORIGEM].\n\nInformo que a transfer\u00eancia ocorreu em raz\u00e3o de [MOTIVO: equaliza\u00e7\u00e3o da lota\u00e7\u00e3o carcer\u00e1ria / situa\u00e7\u00e3o de risco \u00e0 integridade do reeducando / pedido volunt\u00e1rio formulado por requerimento do reeducando / familiar / advogado], estando em conformidade com as normas previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026. A movimenta\u00e7\u00e3o contou com a anu\u00eancia de todos os entes envolvidos, quais sejam, os Diretores das Unidades Prisionais de Origem e de Destino, o(s) Superintendente(s) Regional(is) competente(s), bem como com a an\u00e1lise e aprova\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas do Departamento de Pol\u00edcia Penal.\n\nO reeducando encontra-se devidamente registrado nos sistemas desta unidade, permanecendo \u00e0 inteira disposi\u00e7\u00e3o desse Douto Ju\u00edzo para os fins que Vossa Excel\u00eancia determinar.\n\nEsta coordenadoria permanece \u00e0 disposi\u00e7\u00e3o de Vossa Excel\u00eancia para eventuais esclarecimentos que se fizerem necess\u00e1rios.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO COORDENADOR DE EXECU\u00c7\u00c3O PENAL]\nCoordenador de Execu\u00e7\u00e3o Penal\n[UNIDADE PRISIONAL DE DESTINO]\n\n\n\nAo(\u00c0) Merit\u00edssimo(a) Senhor(a)\n[NOME DO JUIZ/JU\u00cdZA]\n[VARA / JU\u00cdZO COMPETENTE]\n[COMARCA]","Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) [JUIZ/JU\u00cdZA],\n\nCumpre-me comunicar a Vossa Excel\u00eancia que o reeducando [NOME COMPLETO], IPEN [N\u00ba], qualificado no Processo de Execu\u00e7\u00e3o Penal n. [N\u00daMERO DO PROCESSO], que tramita perante esse Douto Ju\u00edzo, foi transferido desta unidade prisional \u2014 [UNIDADE PRISIONAL DE ORIGEM] \u2014 para o(a) [UNIDADE PRISIONAL DE DESTINO], em [DATA DA TRANSFER\u00caNCIA], em raz\u00e3o do cumprimento de Mandado de Pris\u00e3o expedido por esse Douto Ju\u00edzo.\n\nInformo que a transfer\u00eancia ocorreu em raz\u00e3o de o referido custodiado ter sido preso em comarca diversa daquela que expediu a ordem de pris\u00e3o, sendo o(a) [UNIDADE PRISIONAL DE DESTINO] a unidade respons\u00e1vel pela circunscri\u00e7\u00e3o da autoridade judici\u00e1ria expedidora. A movimenta\u00e7\u00e3o est\u00e1 em conformidade com as normas previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, tendo contado com a anu\u00eancia de todos os entes envolvidos, quais sejam, os Diretores das Unidades Prisionais de Origem e de Destino, o(s) Superintendente(s) Regional(is) competente(s), bem como com a an\u00e1lise e aprova\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas do Departamento de Pol\u00edcia Penal.\n\nO reeducando encontra-se devidamente registrado nos sistemas da unidade de destino, permanecendo \u00e0 inteira disposi\u00e7\u00e3o desse Douto Ju\u00edzo para os fins que Vossa Excel\u00eancia determinar.\n\nEsta coordenadoria permanece \u00e0 disposi\u00e7\u00e3o de Vossa Excel\u00eancia para eventuais esclarecimentos que se fizerem necess\u00e1rios.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO COORDENADOR DE EXECU\u00c7\u00c3O PENAL]\nCoordenador de Execu\u00e7\u00e3o Penal\n[UNIDADE PRISIONAL DE ORIGEM]\n\n\n\nAo(\u00c0) Merit\u00edssimo(a) Senhor(a)\n[NOME DO JUIZ/JU\u00cdZA]\n[VARA / JU\u00cdZO COMPETENTE]\n[COMARCA]"]);
+  registerOficio('oficio-emerg', '🚨 Segurança / Emergência', ['Modelo de Ofício'], ["[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise urgente dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], em raz\u00e3o de situa\u00e7\u00e3o de risco identificada pelas equipes desta unidade prisional.\n\nA solicita\u00e7\u00e3o fundamenta-se na exist\u00eancia de [DESCREVER BREVEMENTE A SITUA\u00c7\u00c3O: risco iminente \u00e0 integridade f\u00edsica, amea\u00e7a de morte, envolvimento em crise interna, motim, rebeli\u00e3o ou outro fator de seguran\u00e7a], que torna invi\u00e1vel a manuten\u00e7\u00e3o do reeducando nesta unidade sem preju\u00edzo \u00e0 sua integridade ou \u00e0 ordem e seguran\u00e7a do estabelecimento, nos termos do art. 21, inciso I, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nDiante da urg\u00eancia da situa\u00e7\u00e3o, solicita-se a transfer\u00eancia do referido reeducando para o(a) [UNIDADE PRISIONAL DE DESTINO], onde h\u00e1 condi\u00e7\u00f5es adequadas para sua cust\u00f3dia em seguran\u00e7a.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico. Encaminho ainda [OUTROS DOCUMENTOS: boletim de ocorr\u00eancia interno, relat\u00f3rio da equipe de seguran\u00e7a, etc.], que subsidiam a presente solicita\u00e7\u00e3o.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se an\u00e1lise e delibera\u00e7\u00e3o c\u00e9lere da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
+  registerOficio('oficio-vol', '👤 Pedido Voluntário', ['📝 Memorando do Preso','👨‍👩‍👦 Pedido de Familiar','⚖️ Petição de Advogado'], ["[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo pr\u00f3prio reeducando por meio de memorando datado de [DATA DO MEMORANDO].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO REEDUCANDO: mudan\u00e7a de domic\u00edlio familiar, necessidade de aproxima\u00e7\u00e3o da fam\u00edlia, outro motivo relevante], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e memorando original do reeducando.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC","[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado por seu(ua) familiar [NOME DO FAMILIAR], [GRAU DE PARENTESCO], por meio de [carta / e-mail / peti\u00e7\u00e3o f\u00edsica] datado(a) de [DATA].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO FAMILIAR: mudan\u00e7a de domic\u00edlio, necessidade de aproxima\u00e7\u00e3o do n\u00facleo familiar, dificuldade de deslocamento para visitas, outro motivo relevante], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e [carta / e-mail / peti\u00e7\u00e3o f\u00edsica] original do familiar.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC","[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo advogado constitu\u00eddo [NOME DO ADVOGADO], OAB/SC n.\u00ba [N\u00daMERO], por meio de peti\u00e7\u00e3o datada de [DATA].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO ADVOGADO: mudan\u00e7a de domic\u00edlio, aproxima\u00e7\u00e3o familiar, outro motivo relevante devidamente fundamentado], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e peti\u00e7\u00e3o original do advogado, com comprova\u00e7\u00e3o de mandato.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
+  registerOficio('oficio-equal', '⚖️ Equalização de Lotação', ['Modelo de Ofício'], ["[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nConsiderando a necessidade de gest\u00e3o e equaliza\u00e7\u00e3o da ocupa\u00e7\u00e3o carcer\u00e1ria no \u00e2mbito do(a) [UNIDADE PRISIONAL DE ORIGEM], bem como a adequada distribui\u00e7\u00e3o das pessoas privadas de liberdade entre as unidades prisionais, encaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado nesta unidade prisional, para o(a) [UNIDADE PRISIONAL DE DESTINO].\n\nA solicita\u00e7\u00e3o fundamenta-se na necessidade de equaliza\u00e7\u00e3o da lota\u00e7\u00e3o entre as unidades do sistema prisional, em conformidade com as diretrizes estabelecidas para a gest\u00e3o de vagas e movimenta\u00e7\u00f5es prisionais previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
+  registerOficio('oficio-mandado', '📜 Mandado de Comarca Diversa', ['Modelo de Ofício'], ["[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], em raz\u00e3o do cumprimento de Mandado de Pris\u00e3o expedido pelo [JU\u00cdZO EXPEDIDOR \u2014 ex: Ju\u00edzo da Vara de Execu\u00e7\u00f5es Penais da Comarca de Itapema].\n\nConsiderando que o referido custodiado foi preso em comarca diversa daquela que expediu a ordem de pris\u00e3o, bem como que o(a) [UNIDADE PRISIONAL DE DESTINO] \u00e9 a unidade respons\u00e1vel pela circunscri\u00e7\u00e3o da autoridade judici\u00e1ria expedidora, a transfer\u00eancia mostra-se adequada, em conformidade com as diretrizes estabelecidas para a gest\u00e3o de vagas e movimenta\u00e7\u00f5es prisionais previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e c\u00f3pia do Mandado de Pris\u00e3o.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
+  registerOficio('oficio-comunicacao', '📬 Comunicação ao Judiciário', ['📤 Saída (Unidade de Origem)','📥 Entrada (Unidade de Destino)','📜 Mandado de Comarca Diversa'], ["[DATA_AUTO]\n\n\n\nSenhor(a) [JUIZ/JU\u00cdZA],\n\nCumpre-me comunicar a Vossa Excel\u00eancia que o reeducando [NOME COMPLETO], IPEN [N\u00ba], qualificado no Processo de Execu\u00e7\u00e3o Penal n. [N\u00daMERO DO PROCESSO], que tramita perante esse Douto Ju\u00edzo, foi transferido desta unidade prisional \u2014 [UNIDADE PRISIONAL DE ORIGEM] \u2014 para o(a) [UNIDADE PRISIONAL DE DESTINO], em [DATA DA TRANSFER\u00caNCIA].\n\nInformo que a transfer\u00eancia ocorreu em raz\u00e3o de [MOTIVO: equaliza\u00e7\u00e3o da lota\u00e7\u00e3o carcer\u00e1ria / situa\u00e7\u00e3o de risco \u00e0 integridade do reeducando / pedido volunt\u00e1rio formulado por requerimento do reeducando / familiar / advogado], estando em conformidade com as normas previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026. A movimenta\u00e7\u00e3o contou com a anu\u00eancia de todos os entes envolvidos, quais sejam, os Diretores das Unidades Prisionais de Origem e de Destino, o(s) Superintendente(s) Regional(is) competente(s), bem como com a an\u00e1lise e aprova\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas do Departamento de Pol\u00edcia Penal.\n\nEsta coordenadoria permanece \u00e0 disposi\u00e7\u00e3o de Vossa Excel\u00eancia para eventuais esclarecimentos que se fizerem necess\u00e1rios.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO COORDENADOR DE EXECU\u00c7\u00c3O PENAL]\nCoordenador de Execu\u00e7\u00e3o Penal\n[UNIDADE PRISIONAL DE ORIGEM]\n\n\n\nAo(\u00c0) Merit\u00edssimo(a) Senhor(a)\n[NOME DO JUIZ/JU\u00cdZA]\n[VARA / JU\u00cdZO COMPETENTE]\n[COMARCA]","[DATA_AUTO]\n\n\n\nSenhor(a) [JUIZ/JU\u00cdZA],\n\nCumpre-me comunicar a Vossa Excel\u00eancia que o reeducando [NOME COMPLETO], IPEN [N\u00ba], qualificado no Processo de Execu\u00e7\u00e3o Penal n. [N\u00daMERO DO PROCESSO], que tramita perante esse Douto Ju\u00edzo, foi recebido e regularmente custodiado nesta unidade prisional \u2014 [UNIDADE PRISIONAL DE DESTINO] \u2014 a partir de [DATA DE ENTRADA], proveniente do(a) [UNIDADE PRISIONAL DE ORIGEM].\n\nInformo que a transfer\u00eancia ocorreu em raz\u00e3o de [MOTIVO: equaliza\u00e7\u00e3o da lota\u00e7\u00e3o carcer\u00e1ria / situa\u00e7\u00e3o de risco \u00e0 integridade do reeducando / pedido volunt\u00e1rio formulado por requerimento do reeducando / familiar / advogado], estando em conformidade com as normas previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026. A movimenta\u00e7\u00e3o contou com a anu\u00eancia de todos os entes envolvidos, quais sejam, os Diretores das Unidades Prisionais de Origem e de Destino, o(s) Superintendente(s) Regional(is) competente(s), bem como com a an\u00e1lise e aprova\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas do Departamento de Pol\u00edcia Penal.\n\nO reeducando encontra-se devidamente registrado nos sistemas desta unidade, permanecendo \u00e0 inteira disposi\u00e7\u00e3o desse Douto Ju\u00edzo para os fins que Vossa Excel\u00eancia determinar.\n\nEsta coordenadoria permanece \u00e0 disposi\u00e7\u00e3o de Vossa Excel\u00eancia para eventuais esclarecimentos que se fizerem necess\u00e1rios.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO COORDENADOR DE EXECU\u00c7\u00c3O PENAL]\nCoordenador de Execu\u00e7\u00e3o Penal\n[UNIDADE PRISIONAL DE DESTINO]\n\n\n\nAo(\u00c0) Merit\u00edssimo(a) Senhor(a)\n[NOME DO JUIZ/JU\u00cdZA]\n[VARA / JU\u00cdZO COMPETENTE]\n[COMARCA]","[DATA_AUTO]\n\n\n\nSenhor(a) [JUIZ/JU\u00cdZA],\n\nCumpre-me comunicar a Vossa Excel\u00eancia que o reeducando [NOME COMPLETO], IPEN [N\u00ba], qualificado no Processo de Execu\u00e7\u00e3o Penal n. [N\u00daMERO DO PROCESSO], que tramita perante esse Douto Ju\u00edzo, foi transferido desta unidade prisional \u2014 [UNIDADE PRISIONAL DE ORIGEM] \u2014 para o(a) [UNIDADE PRISIONAL DE DESTINO], em [DATA DA TRANSFER\u00caNCIA], em raz\u00e3o do cumprimento de Mandado de Pris\u00e3o expedido por esse Douto Ju\u00edzo.\n\nInformo que a transfer\u00eancia ocorreu em raz\u00e3o de o referido custodiado ter sido preso em comarca diversa daquela que expediu a ordem de pris\u00e3o, sendo o(a) [UNIDADE PRISIONAL DE DESTINO] a unidade respons\u00e1vel pela circunscri\u00e7\u00e3o da autoridade judici\u00e1ria expedidora. A movimenta\u00e7\u00e3o est\u00e1 em conformidade com as normas previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, tendo contado com a anu\u00eancia de todos os entes envolvidos, quais sejam, os Diretores das Unidades Prisionais de Origem e de Destino, o(s) Superintendente(s) Regional(is) competente(s), bem como com a an\u00e1lise e aprova\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas do Departamento de Pol\u00edcia Penal.\n\nO reeducando encontra-se devidamente registrado nos sistemas da unidade de destino, permanecendo \u00e0 inteira disposi\u00e7\u00e3o desse Douto Ju\u00edzo para os fins que Vossa Excel\u00eancia determinar.\n\nEsta coordenadoria permanece \u00e0 disposi\u00e7\u00e3o de Vossa Excel\u00eancia para eventuais esclarecimentos que se fizerem necess\u00e1rios.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO COORDENADOR DE EXECU\u00c7\u00c3O PENAL]\nCoordenador de Execu\u00e7\u00e3o Penal\n[UNIDADE PRISIONAL DE ORIGEM]\n\n\n\nAo(\u00c0) Merit\u00edssimo(a) Senhor(a)\n[NOME DO JUIZ/JU\u00cdZA]\n[VARA / JU\u00cdZO COMPETENTE]\n[COMARCA]"]);
 
 
 
@@ -2364,7 +2996,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
 
   // Active nav highlight on scroll
   (function() {
-    var sections = ['sec-hipoteses','sec-fluxo','sec-fluxogramas','sec-anuencia','sec-documentos','sec-prazos','sec-vedacoes','sec-oficios','sec-legislacao'];
+    var sections = ['sec-hipoteses','sec-fluxo','sec-fluxogramas','sec-anuencia','sec-documentos','sec-prazos','sec-vedacoes','sec-oficios','sec-srs','sec-legislacao'];
     var navItems = document.querySelectorAll('.nav-item');
     function onScroll() {
       var scrollY = window.scrollY + 120;
@@ -2400,28 +3032,11 @@ Ao(À) Meritíssimo(a) Senhor(a)
     <div class="modal-tabs" id="modalTabs"></div>
     <div class="modal-body" id="modalBody"></div>
     <div class="modal-footer">
-     
-
-</div><!-- /container -->
-
-<footer style="text-align:center; line-height:1.5;">
-  <div style="font-family:'Barlow Condensed',sans-serif; font-weight:400; font-size:12px; color:var(--muted); letter-spacing:0.8px; text-transform:uppercase;">Estado de Santa Catarina</div>
-  <div style="font-family:'Barlow Condensed',sans-serif; font-weight:400; font-size:12px; color:var(--muted); letter-spacing:0.8px; text-transform:uppercase;">Secretaria de Estado de Justiça e Reintegração Social</div>
-  <div style="font-family:'Barlow Condensed',sans-serif; font-weight:400; font-size:12px; color:var(--muted); letter-spacing:0.8px; text-transform:uppercase;">Departamento de Polícia Penal</div>
-  <div style="font-family:'Barlow Condensed',sans-serif; font-weight:400; font-size:12px; color:var(--muted); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:4px;">Central de Regulação de Vagas</div>
-  <div style="font-size:11px; color:var(--muted); letter-spacing:0.3px;">Rua Fúlvio Aducci, n.º 1214 – Bairro Estreito – CEP 88075-000 – Florianópolis/SC</div>
-  <div style="font-size:11px; color:var(--muted); letter-spacing:0.3px;">Fone: (48) 3665-7330 &nbsp;·&nbsp; e-mail: <a href="/cdn-cgi/l/email-protection#eb88999dab9b9bc59888c58c849dc58999" style="color:var(--muted); text-decoration:none;"><span class="__cf_email__" data-cfemail="e5869793a59595cb9686cb828a93cb8797">[email&#160;protected]</span></a></div>
-</footer>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-
-<!-- MODAL DE OFÍCIOS -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
-  <div class="modal-box" id="modalBox">
-    <div class="modal-header">
-      <div class="modal-title" id="modalTitle">Modelo de Ofício</div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <span class="modal-hint">✏️ Campos destacados em amarelo são editáveis &nbsp;·&nbsp; Edite, depois clique em Copiar</span>
+      <button class="oficio-copy-btn" id="modalCopyBtn" onclick="copiarModalAtivo()">📋 Copiar texto</button>
     </div>
-    <div class="modal-tabs" id="modalTabs"></div>
-    <div class="modal-body" id="modalBody"></div>
-    <div class="modal-footer">
+  </div>
+</div>
+
+</body>
+</html>
