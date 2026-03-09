@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<div class="step-circle">7</div><div class="step-circle">6</div><!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -966,6 +966,9 @@
     <a class="nav-item" href="#sec-prazos">Prazos</a>
     <a class="nav-item" href="#sec-vedacoes">Vedações</a>
     <a class="nav-item" href="#sec-legislacao">Legislação</a>
+    <a class="nav-item" href="#sec-oficios" style="color:var(--accent); border-bottom:2px solid var(--accent);">📄 Modelos de Ofícios</a>
+  </div>
+    </div>
   </div>
 </nav>
 
@@ -1413,9 +1416,9 @@ Florianópolis/SC</div>
         <div class="step-circle">1</div>
       </div>
       <div class="step-body" onclick="toggleStep('det1')">
-        <div class="step-actor">Unidade Prisional de Origem · Diretor</div>
-        <div class="step-title">Identificação da necessidade e elaboração do pedido</div>
-        <div class="step-desc">O Diretor da Unidade de Origem identifica a hipótese que justifica a transferência e elabora o pedido formal endereçado à CRV, com justificativa e documentação.</div>
+        <div class="step-actor">Unidade Prisional de Origem</div>
+        <div class="step-title">Identificação da necessidade e elaboração do Ofício</div>
+        <div class="step-desc">O responsável pelo cadastro deverá identificar a hipótese que justifica o pedido de transferência e elaborar o ofício endereçado à CRV, com justificativa e documentação.</div>
         <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det1')">
           <span class="toggle-arrow" id="arr1">›</span> Ver detalhes
         </span>
@@ -1423,8 +1426,6 @@ Florianópolis/SC</div>
           <ul>
             <li>Identificar claramente a hipótese: transferência emergencial, pedido voluntário apresentado pelo reeducando, familiar ou advogado, necessidade de equalização/regulação de vagas, ou cumprimento de mandado de prisão de comarca diversa</li>
             <li>Elaborar ofício com justificativa detalhada</li>
-            <li>Anexar Boletim Penal Informativo e Formulário de Saúde, ambos atualizados</li>
-            <li>Nos casos de pedidos apresentados pelos Reeducandos, Familiares e/ou Advogados, anexar o documento/memorando correspondente</li>
           </ul>
           <div class="step-alert info">
             ℹ️ &nbsp;A análise do perfil do preso é determinante para garantir que a transferência seja segura, justa e adequada à unidade de destino.
@@ -1439,20 +1440,21 @@ Florianópolis/SC</div>
         <div class="step-circle">2</div>
       </div>
       <div class="step-body" onclick="toggleStep('det2')">
-        <div class="step-actor">Unidade de Origem + Unidade de Destino · Diretores</div>
-        <div class="step-title">Assinaturas dos Diretores</div>
-        <div class="step-desc">O pedido deve ser assinado pelo Diretor da Unidade de Origem e pelo Diretor da Unidade de Destino, confirmando ciência e aceite da movimentação.</div>
+        <div class="step-actor">Unidade Prisional de Origem</div>
+        <div class="step-title">Registro no SGPe e materialização do pedido</div>
+        <div class="step-desc">Cada unidade prisional mantém um único processo SGPe para todas as transferências. O servidor insere os documentos do pedido nesse processo e, ao final, seleciona as peças pertinentes e realiza a materialização, gerando um único PDF a ser encaminhado.</div>
         <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det2')">
           <span class="toggle-arrow" id="arr2">›</span> Ver detalhes
         </span>
         <div class="step-details" id="det2">
           <ul>
-            <li>Assinatura do Diretor da Unidade de Origem: obrigatória em todos os casos</li>
-            <li>Assinatura do Diretor da Unidade de Destino: obrigatória em todos os casos</li>
-            <li>Ambas as assinaturas devem constar no mesmo documento antes do encaminhamento à SR</li>
+            <li>O processo SGPe é <strong>único por unidade prisional</strong> e permanente — acumula todos os pedidos de transferência ao longo do tempo</li>
+            <li>Inserir os documentos respeitando a <strong>ordem cronológica obrigatória: Ofício → BPI → Formulário de Saúde → demais documentos</strong></li>
+            <li><strong>Documentos obrigatórios em todas as transferências:</strong> Ofício endereçado à CRV, Boletim Penal Informativo (BPI) atualizado e Formulário de Saúde atualizado</li>
+            <li><strong>Documentos complementares</strong> — inserir conforme o caso: memorando do preso, carta ou e-mail de familiar, petição física de advogado, decisão judicial, relatório de inteligência, boletim de ocorrência interno, ou qualquer outro documento que subsidie o pedido de transferência</li>
           </ul>
-          <div class="step-alert warn">
-            ⚠️ &nbsp;Pedido sem as duas assinaturas não deve ser encaminhado à Superintendência Regional.
+          <div class="step-alert info">
+            ℹ️ &nbsp;O processo SGPe é institucional e permanente.
           </div>
         </div>
       </div>
@@ -1464,13 +1466,40 @@ Florianópolis/SC</div>
         <div class="step-circle">3</div>
       </div>
       <div class="step-body" onclick="toggleStep('det3')">
-        <div class="step-actor">Superintendência(s) Regional(is)</div>
-        <div class="step-title">Anuência do(s) Superintendente(s) Regional(is)</div>
-        <div class="step-desc">O Superintendente Regional da origem é sempre obrigatório. Se a transferência envolver outra Superintendência, o Superintendente de destino também deve anuir.</div>
+        
+        <div class="step-title">Assinaturas</div>
+        <div class="step-desc">O ofício deve ser assinado pelo Diretor da Unidade de Origem e pelo Diretor da Unidade de Destino, confirmando ciência e aceite da movimentação.</div>
         <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det3')">
           <span class="toggle-arrow" id="arr3">›</span> Ver detalhes
         </span>
         <div class="step-details" id="det3">
+          <ul>
+            <li>Assinatura do Diretor da Unidade de Origem: obrigatória em todos os casos</li>
+            <li>Assinatura do Diretor da Unidade de Destino: obrigatória em todos os casos</li>
+            <li>Ambas as assinaturas devem constar no mesmo documento antes do encaminhamento à SR</li>
+            <li>O <strong>Boletim Penal Informativo (BPI)</strong> deverá ser assinado pelo <strong>Coordenador de Execução Penal</strong>, de modo a atestar a veracidade e fidedignidade do documento juntado</li>
+            <li>O <strong>Formulário de Saúde</strong> deverá ser assinado pelo <strong>Responsável Técnico que elaborou o documento</strong> (médico ou enfermeiro) ou pelo <strong>Coordenador de Saúde da Unidade Prisional de Origem</strong>. Em caso de assinatura física, deverá constar obrigatoriamente o <strong>nome, matrícula e cargo/função</strong> do signatário</li>
+          </ul>
+          <div class="step-alert warn">
+            ⚠️ &nbsp;Ofício sem as duas assinaturas não deve ser encaminhado à Superintendência Regional.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" id="step4">
+      <div class="step-line"></div>
+      <div class="step-left">
+        <div class="step-circle">4</div>
+      </div>
+      <div class="step-body" onclick="toggleStep('det4')">
+        <div class="step-actor">Superintendência(s) Regional(is)</div>
+        <div class="step-title">Anuência do(s) Superintendente(s) Regional(is)</div>
+        <div class="step-desc">O Superintendente Regional da origem é sempre obrigatório. Se a transferência envolver outra Superintendência, o Superintendente de destino também deve anuir.</div>
+        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det4')">
+          <span class="toggle-arrow" id="arr4">›</span> Ver detalhes
+        </span>
+        <div class="step-details" id="det4">
           <ul>
             <li>Transferência <strong>dentro da mesma SR</strong>: anuência apenas do Superintendente da SR de origem</li>
             <li>Transferência <strong>entre SRs diferentes</strong>: anuência do Superintendente da SR de origem <em>e</em> do Superintendente da SR de destino</li>
@@ -1484,46 +1513,104 @@ Florianópolis/SC</div>
       </div>
     </div>
 
-    <div class="flow-step" id="step4">
-      <div class="step-line"></div>
-      <div class="step-left">
-        <div class="step-circle">4</div>
-      </div>
-      <div class="step-body" onclick="toggleStep('det4')">
-        <div class="step-actor">CRV — Central de Regulação de Vagas</div>
-        <div class="step-title">Recebimento e análise pela CRV</div>
-        <div class="step-desc">Com o pedido instruído, assinado e anuído, é encaminhado à CRV, que analisa a viabilidade, verifica a lotação do sistema e decide a destinação final.</div>
-        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det4')">
-          <span class="toggle-arrow" id="arr4">›</span> Ver detalhes
-        </span>
-        <div class="step-details" id="det4">
-          <ul>
-            <li>Verificar disponibilidade real de vaga na unidade de destino (taxa ≤ 100%)</li>
-            <li>Confirmar compatibilidade do perfil do preso com a unidade de destino</li>
-            <li>Checar se há restrições de segurança ou judiciais que impeçam a movimentação</li>
-            <li>Registrar a movimentação no Sistema Central de Regulação de Vagas</li>
-            <li>Emitir decisão fundamentada da Coordenação de Vagas</li>
-          </ul>
-          <div class="step-alert info">
-            ℹ️ &nbsp;Se não houver vaga em unidade próxima, a definição da unidade de destino deve seguir a ordem: (1) proximidade familiar; (2) unidade com menor taxa de lotação na regional; (3) unidade com menor taxa no Estado.
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="flow-step" id="step5">
       <div class="step-line"></div>
       <div class="step-left">
         <div class="step-circle">5</div>
       </div>
       <div class="step-body" onclick="toggleStep('det5')">
-        <div class="step-actor">SEJURI / Departamento de Polícia Penal</div>
-        <div class="step-title">Execução da transferência</div>
-        <div class="step-desc">Autorizada pela CRV, a SEJURI executa a movimentação. A unidade de destino recebe o preso e confirma o ingresso no sistema.</div>
+        <div class="step-title">Materialização do pedido no SGPe</div>
+        <div class="step-desc">Com todos os documentos devidamente assinados e inseridos no processo SGPe da unidade, o servidor seleciona as peças pertinentes ao pedido em questão e executa a materialização, gerando um único arquivo PDF consolidado a ser encaminhado.</div>
         <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det5')">
           <span class="toggle-arrow" id="arr5">›</span> Ver detalhes
         </span>
         <div class="step-details" id="det5">
+          <ul>
+            <li>Verificar se <strong>todos os documentos estão devidamente assinados</strong> pelos responsáveis antes de materializar</li>
+            <li>Selecionar apenas as peças pertinentes ao pedido de transferência em questão — o processo SGPe é único e acumulativo, portanto atenção para não incluir documentos de outros pedidos</li>
+            <li>Respeitar a <strong>ordem cronológica obrigatória dos documentos:</strong> Ofício → BPI → Formulário de Saúde → demais documentos</li>
+          </ul>
+          <div class="step-alert info">
+            ℹ️ &nbsp;O PDF gerado pela materialização é o documento formal do pedido de transferência que seguirá para a Superintendência Regional.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" id="step6">
+      <div class="step-line"></div>
+      <div class="step-left">
+        <div class="step-circle">6</div>
+      </div>
+      <div class="step-body" onclick="toggleStep('det6')">
+        <div class="step-title">Cadastro do pedido no IPEN</div>
+        <div class="step-desc">Após a materialização, o servidor deverá cadastrar o pedido de transferência no IPEN, inserindo o arquivo PDF materializado no respectivo pedido de transferência.</div>
+        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det6')">
+          <span class="toggle-arrow" id="arr6">›</span> Ver detalhes
+        </span>
+        <div class="step-details" id="det6">
+          <ul>
+            <li>O cadastro no IPEN deve ser realizado após a conclusão da materialização no SGPe</li>
+            <li>Anexar o arquivo PDF materializado ao pedido de transferência correspondente no IPEN</li>
+            <li>Verificar se os dados do reeducando e da unidade de destino estão corretos antes de finalizar o cadastro</li>
+          </ul>
+          <div class="step-alert info">
+            ℹ️ &nbsp;O cadastro no IPEN é etapa obrigatória antes do encaminhamento à CRV — sem ele, o pedido não será processado.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" id="step7">
+      <div class="step-line"></div>
+      <div class="step-left">
+        <div class="step-circle">7</div>
+      </div>
+      <div class="step-body" onclick="toggleStep('det7')">
+        <div class="step-actor">CRV — Central de Regulação de Vagas</div>
+        <div class="step-title">Recebimento e análise pela CRV</div>
+        <div class="step-desc">Com o pedido instruído, assinado e anuído, é encaminhado à CRV, que analisa a viabilidade, verifica a lotação do sistema e decide a destinação final.</div>
+        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det7')">
+          <span class="toggle-arrow" id="arr7">›</span> Ver detalhes
+        </span>
+        <div class="step-details" id="det7">
+          <ul>
+            <li>A CRV irá analisar o pedido e todos os documentos que o instruem, verificando a regularidade formal e a viabilidade da transferência</li>
+            <li>Verificar disponibilidade real de vaga na unidade de destino</li>
+            <li>Confirmar compatibilidade do perfil do preso com a unidade de destino</li>
+            <li>Checar se há restrições de segurança ou judiciais que impeçam a movimentação</li>
+          </ul>
+          <div style="display:flex; flex-direction:column; gap:8px; margin-top:12px;">
+            <div style="padding:10px 14px; border-radius:4px; border-left:3px solid #27ae60; background:rgba(39,174,96,0.08);">
+              <div style="font-size:11px; font-weight:700; letter-spacing:1px; color:#27ae60; margin-bottom:3px;">✅ APROVADO</div>
+              <div style="font-size:11.5px; color:#a0c8b0;">O pedido atende todos os requisitos. A transferência é autorizada e segue para execução pela SEJURI/DPP.</div>
+            </div>
+            <div style="padding:10px 14px; border-radius:4px; border-left:3px solid #c0392b; background:rgba(192,57,43,0.08);">
+              <div style="font-size:11px; font-weight:700; letter-spacing:1px; color:#e87060; margin-bottom:3px;">❌ NEGADO</div>
+              <div style="font-size:11.5px; color:#c8a0a0;">O pedido não atende os requisitos necessários ou há impedimento identificado. A unidade de origem será comunicada com a fundamentação da decisão.</div>
+            </div>
+            <div style="padding:10px 14px; border-radius:4px; border-left:3px solid #e8b84b; background:rgba(232,184,75,0.08);">
+              <div style="font-size:11px; font-weight:700; letter-spacing:1px; color:#e8b84b; margin-bottom:3px;">⚠️ CANCELADO</div>
+              <div style="font-size:11.5px; color:#c8b880;">O pedido foi cancelado antes da conclusão da análise, seja por solicitação da unidade de origem, decisão judicial superveniente ou outro motivo que torne a transferência desnecessária.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" id="step8">
+      <div class="step-line"></div>
+      <div class="step-left">
+        <div class="step-circle">8</div>
+      </div>
+      <div class="step-body" onclick="toggleStep('det8')">
+        <div class="step-actor">SEJURI / Departamento de Polícia Penal</div>
+        <div class="step-title">Execução da transferência</div>
+        <div class="step-desc">Autorizada pela CRV, a SEJURI executa a movimentação. A unidade de destino recebe o preso e confirma o ingresso no sistema.</div>
+        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det8')">
+          <span class="toggle-arrow" id="arr8">›</span> Ver detalhes
+        </span>
+        <div class="step-details" id="det8">
           <ul>
             <li>A execução é feita conforme decisão da CRV, com fundamento na Res. nº 1/2026 e na Lei nº 7.210/84</li>
             <li>A unidade de destino confirma recepção e atualiza o sistema de banco de dados</li>
@@ -1535,18 +1622,18 @@ Florianópolis/SC</div>
       </div>
     </div>
 
-    <div class="flow-step" id="step6">
+    <div class="flow-step" id="step9">
       <div class="step-left">
         <div class="step-circle" style="background:var(--accent);color:var(--navy);border-color:var(--accent);">✓</div>
       </div>
-      <div class="step-body" onclick="toggleStep('det6')">
+      <div class="step-body" onclick="toggleStep('det9')">
         <div class="step-actor">Unidade de Destino · CRV · Judiciário</div>
         <div class="step-title">Comunicação ao Judiciário em até 24 horas</div>
         <div class="step-desc">Após a transferência, a movimentação deve ser notificada nos autos do processo respectivo no prazo máximo de 24 horas, com justificativa.</div>
-        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det6')">
-          <span class="toggle-arrow" id="arr6">›</span> Ver detalhes e modelos de ofícios
+        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det9')">
+          <span class="toggle-arrow" id="arr9">›</span> Ver detalhes e modelos de ofícios
         </span>
-        <div class="step-details" id="det6">
+        <div class="step-details" id="det9">
           <ul>
             <li>Prazo: 24 horas corridas a partir da conclusão da transferência</li>
             <li>Em finais de semana ou feriados: comunicação no primeiro dia útil seguinte</li>
@@ -1857,7 +1944,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
       <div class="doc-icon">📋</div>
       <div>
         <div class="doc-title">Boletim Penal Informativo (BPI)</div>
-        <div class="doc-desc">Documento atualizado com os dados completos do preso: regime, pena, crimes, situação processual e disciplinar.</div>
+        <div class="doc-desc">Documento atualizado com os dados completos do preso: regime, pena, crimes, situação processual e disciplinar. Deve ser assinado pelo <strong>Coordenador de Execução Penal</strong>, de modo a atestar a veracidade e fidedignidade do documento.</div>
         <span class="doc-required obrig">Obrigatório</span>
       </div>
     </div>
@@ -1865,7 +1952,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
       <div class="doc-icon">🏥</div>
       <div>
         <div class="doc-title">Formulário do Setor de Saúde</div>
-        <div class="doc-desc">Avaliação de saúde atual da pessoa presa pela equipe de saúde da unidade de origem.</div>
+        <div class="doc-desc">Avaliação de saúde atual da pessoa presa pela equipe de saúde da unidade de origem. Deve ser assinado pelo <strong>Responsável Técnico que elaborou o documento</strong> (médico ou enfermeiro) ou pelo <strong>Coordenador de Saúde da Unidade Prisional de Origem</strong>. Em caso de assinatura física, deverá constar obrigatoriamente o nome, matrícula e cargo/função do signatário.</div>
         <span class="doc-required obrig">Obrigatório</span>
       </div>
     </div>
@@ -1959,8 +2046,53 @@ Ao(À) Meritíssimo(a) Senhor(a)
 
 
 
+
+  <!-- MODELOS DE OFÍCIOS -->
+  <div id="sec-oficios" class="section-label">09 — Modelos de ofícios</div>
+  <div style="margin-bottom: 40px;">
+    <p style="font-size:12px; color:var(--muted); margin-bottom:20px;">Clique em qualquer modelo para abrir, editar e copiar o texto do ofício correspondente.</p>
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:12px;">
+
+      <div onclick="openModal('oficio-emerg')" style="cursor:pointer; border:1px solid rgba(192,57,43,0.4); border-left:3px solid #c0392b; background:#0d1e35; padding:16px 18px; transition:all 0.2s;" onmouseover="this.style.background='rgba(192,57,43,0.1)'" onmouseout="this.style.background='#0d1e35'">
+        <div style="font-size:22px; margin-bottom:8px;">🚨</div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; color:#f0f4fa; margin-bottom:4px;">Segurança / Emergência</div>
+        <div style="font-size:10.5px; color:var(--muted);">Hipótese I · Art. 21, I</div>
+        <div style="margin-top:10px; font-size:10px; color:#c0392b; font-weight:700; letter-spacing:1px;">ABRIR MODELO ›</div>
+      </div>
+
+      <div onclick="openModal('oficio-vol')" style="cursor:pointer; border:1px solid rgba(200,144,10,0.4); border-left:3px solid #c8900a; background:#0d1e35; padding:16px 18px; transition:all 0.2s;" onmouseover="this.style.background='rgba(200,144,10,0.1)'" onmouseout="this.style.background='#0d1e35'">
+        <div style="font-size:22px; margin-bottom:8px;">👤</div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; color:#f0f4fa; margin-bottom:4px;">Pedido Voluntário</div>
+        <div style="font-size:10.5px; color:var(--muted);">Hipótese II · Art. 21, II · 3 modelos</div>
+        <div style="margin-top:10px; font-size:10px; color:#c8900a; font-weight:700; letter-spacing:1px;">ABRIR MODELO ›</div>
+      </div>
+
+      <div onclick="openModal('oficio-equal')" style="cursor:pointer; border:1px solid rgba(45,90,142,0.4); border-left:3px solid #2d5a8e; background:#0d1e35; padding:16px 18px; transition:all 0.2s;" onmouseover="this.style.background='rgba(45,90,142,0.15)'" onmouseout="this.style.background='#0d1e35'">
+        <div style="font-size:22px; margin-bottom:8px;">⚖️</div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; color:#f0f4fa; margin-bottom:4px;">Equalização de Lotação</div>
+        <div style="font-size:10.5px; color:var(--muted);">Hipótese III · Art. 21, III</div>
+        <div style="margin-top:10px; font-size:10px; color:#2d5a8e; font-weight:700; letter-spacing:1px;">ABRIR MODELO ›</div>
+      </div>
+
+      <div onclick="openModal('oficio-mandado')" style="cursor:pointer; border:1px solid rgba(90,130,170,0.4); border-left:3px solid #5a82aa; background:#0d1e35; padding:16px 18px; transition:all 0.2s;" onmouseover="this.style.background='rgba(90,130,170,0.1)'" onmouseout="this.style.background='#0d1e35'">
+        <div style="font-size:22px; margin-bottom:8px;">📜</div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; color:#f0f4fa; margin-bottom:4px;">Mandado de Comarca Diversa</div>
+        <div style="font-size:10.5px; color:var(--muted);">Hipótese IV · Art. 21, III</div>
+        <div style="margin-top:10px; font-size:10px; color:#5a82aa; font-weight:700; letter-spacing:1px;">ABRIR MODELO ›</div>
+      </div>
+
+      <div onclick="openModal('oficio-comunicacao')" style="cursor:pointer; border:1px solid rgba(39,174,96,0.4); border-left:3px solid #27ae60; background:#0d1e35; padding:16px 18px; transition:all 0.2s;" onmouseover="this.style.background='rgba(39,174,96,0.1)'" onmouseout="this.style.background='#0d1e35'">
+        <div style="font-size:22px; margin-bottom:8px;">📬</div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; color:#f0f4fa; margin-bottom:4px;">Comunicação ao Judiciário</div>
+        <div style="font-size:10.5px; color:var(--muted);">Pós-transferência · 3 modelos</div>
+        <div style="margin-top:10px; font-size:10px; color:#27ae60; font-weight:700; letter-spacing:1px;">ABRIR MODELO ›</div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- LEGISLAÇÃO -->
-  <div id="sec-legislacao" class="section-label">08 — Base legal e documentos de referência</div>
+  <div id="sec-legislacao" class="section-label">10 — Base legal e documentos de referência</div>
   <div class="leg-grid">
 
     <a class="leg-card" href="https://busca.tjsc.jus.br/buscatextual/integra.do?cdSistema=1&cdDocumento=188528&cdCategoria=261&q=&frase=&excluir=&qualquer=&prox1=&prox2=&proxc=" target="_blank" rel="noopener">
@@ -2206,7 +2338,6 @@ Ao(À) Meritíssimo(a) Senhor(a)
     panel.style.display = isOpen ? 'none' : 'block';
     if (arrow) arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
   }
-
   // Register all oficios
   registerOficio('oficio-emerg', '🚨 Segurança / Emergência', ['Modelo de Ofício'], ["Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise urgente dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], em raz\u00e3o de situa\u00e7\u00e3o de risco identificada pelas equipes desta unidade prisional.\n\nA solicita\u00e7\u00e3o fundamenta-se na exist\u00eancia de [DESCREVER BREVEMENTE A SITUA\u00c7\u00c3O: risco iminente \u00e0 integridade f\u00edsica, amea\u00e7a de morte, envolvimento em crise interna, motim, rebeli\u00e3o ou outro fator de seguran\u00e7a], que torna invi\u00e1vel a manuten\u00e7\u00e3o do reeducando nesta unidade sem preju\u00edzo \u00e0 sua integridade ou \u00e0 ordem e seguran\u00e7a do estabelecimento, nos termos do art. 21, inciso I, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nDiante da urg\u00eancia da situa\u00e7\u00e3o, solicita-se a transfer\u00eancia do referido reeducando para o(a) [UNIDADE PRISIONAL DE DESTINO], onde h\u00e1 condi\u00e7\u00f5es adequadas para sua cust\u00f3dia em seguran\u00e7a.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico. Encaminho ainda [OUTROS DOCUMENTOS: boletim de ocorr\u00eancia interno, relat\u00f3rio da equipe de seguran\u00e7a, etc.], que subsidiam a presente solicita\u00e7\u00e3o.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se an\u00e1lise e delibera\u00e7\u00e3o c\u00e9lere da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
   registerOficio('oficio-vol', '👤 Pedido Voluntário', ['📝 Memorando do Preso','👨‍👩‍👦 Pedido de Familiar','⚖️ Petição de Advogado'], ["Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo pr\u00f3prio reeducando por meio de memorando datado de [DATA DO MEMORANDO].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO REEDUCANDO: mudan\u00e7a de domic\u00edlio familiar, necessidade de aproxima\u00e7\u00e3o da fam\u00edlia, outro motivo relevante], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e memorando original do reeducando.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC","Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado por seu(ua) familiar [NOME DO FAMILIAR], [GRAU DE PARENTESCO], por meio de [carta / e-mail / peti\u00e7\u00e3o f\u00edsica] datado(a) de [DATA].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO FAMILIAR: mudan\u00e7a de domic\u00edlio, necessidade de aproxima\u00e7\u00e3o do n\u00facleo familiar, dificuldade de deslocamento para visitas, outro motivo relevante], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e [carta / e-mail / peti\u00e7\u00e3o f\u00edsica] original do familiar.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC","Of\u00edcio n.\u00ba [N\u00daMERO]/2026/PPSC/[UNIDADE]                                          [LOCAL], [DATA].\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo advogado constitu\u00eddo [NOME DO ADVOGADO], OAB/SC n.\u00ba [N\u00daMERO], por meio de peti\u00e7\u00e3o datada de [DATA].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO ADVOGADO: mudan\u00e7a de domic\u00edlio, aproxima\u00e7\u00e3o familiar, outro motivo relevante devidamente fundamentado], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e peti\u00e7\u00e3o original do advogado, com comprova\u00e7\u00e3o de mandato.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
@@ -2233,7 +2364,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
 
   // Active nav highlight on scroll
   (function() {
-    var sections = ['sec-hipoteses','sec-fluxo','sec-fluxogramas','sec-anuencia','sec-documentos','sec-prazos','sec-vedacoes','sec-legislacao'];
+    var sections = ['sec-hipoteses','sec-fluxo','sec-fluxogramas','sec-anuencia','sec-documentos','sec-prazos','sec-vedacoes','sec-oficios','sec-legislacao'];
     var navItems = document.querySelectorAll('.nav-item');
     function onScroll() {
       var scrollY = window.scrollY + 120;
