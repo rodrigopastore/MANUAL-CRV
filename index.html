@@ -3290,20 +3290,44 @@ Ao(À) Meritíssimo(a) Senhor(a)
 <!-- ── BOTÕES FLUTUANTES ── -->
 <button id="btnTopo" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao início" aria-label="Voltar ao início da página">▲ Início</button>
 
-
 <style>
-  #btnTopo,
-  #btnTopo  { right: 28px;   background: var(--accent); color: #0a1628; }
-  #btnTopo.visible,
-  #btnTopo:hover  { background: #f5cc6a; }
+  #btnTopo {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9999;
+    background: var(--accent);
+    color: #0a1628;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    width: 148px;
+    box-sizing: border-box;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateY(10px);
+  }
+  #btnTopo.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  #btnTopo:hover   { background: #f5cc6a; }
 </style>
 
 <script>
   window.addEventListener('scroll', () => {
     const visible = window.scrollY > 400;
-    const topo  = document.getElementById('btnTopo');
-    if (topo)  topo.classList.toggle('visible', visible);
-    if (whats) whats.classList.toggle('visible', visible);
+    const topo = document.getElementById('btnTopo');
+    if (topo) topo.classList.toggle('visible', visible);
   }, { passive: true });
 </script>
 
