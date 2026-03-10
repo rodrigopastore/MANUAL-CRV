@@ -1603,30 +1603,93 @@ Florianópolis/SC</div>
     </div>
 
     <div class="flow-step" id="step2">
-      <div class="step-line"></div>
-      <div class="step-left">
-        <div class="step-circle">2</div>
-      </div>
-      <div class="step-body" onclick="toggleStep('det2')">
-        <div class="step-actor">Unidade Prisional de Origem</div>
-        <div class="step-title">Registro no SGPe e materialização do pedido</div>
-        <div class="step-desc">Cada unidade prisional mantém um único processo SGPe para todas as transferências. O servidor insere os documentos do pedido nesse processo e, ao final, seleciona as peças pertinentes e realiza a materialização, gerando um único PDF a ser encaminhado.</div>
-        <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det2')">
-          <span class="toggle-arrow" id="arr2">›</span> Ver detalhes
-        </span>
-        <div class="step-details" id="det2">
-          <ul>
-            <li>O processo SGPe é <strong>único por unidade prisional</strong> e permanente — acumula todos os pedidos de transferência ao longo do tempo</li>
-            <li>Inserir os documentos respeitando a <strong>ordem cronológica obrigatória: Ofício → BPI → Formulário de Saúde → demais documentos</strong></li>
-            <li><strong>Documentos obrigatórios em todas as transferências:</strong> Ofício endereçado à CRV, Boletim Penal Informativo (BPI) atualizado e Formulário de Saúde atualizado</li>
-            <li><strong>Documentos complementares</strong> — inserir conforme o caso: memorando do preso, carta ou e-mail de familiar, petição física de advogado, decisão judicial, relatório de inteligência, boletim de ocorrência interno, ou qualquer outro documento que subsidie o pedido de transferência</li>
-          </ul>
-          <div class="step-alert info">
-            ℹ️ &nbsp;O processo SGPe é institucional e permanente.
-          </div>
-        </div>
-      </div>
+  <div class="step-line"></div>
+
+  <div class="step-left">
+    <div class="step-circle">2</div>
+  </div>
+
+  <div class="step-body" onclick="toggleStep('det2')">
+
+    <div class="step-actor">Unidade Prisional de Origem</div>
+
+    <div class="step-title">
+      Registro no SGPe e materialização do pedido
     </div>
+
+    <div class="step-desc">
+      Cada Unidade Prisional deverá possuir um <strong>Processo SGPe único e permanente</strong>, destinado exclusivamente à tramitação de pedidos de transferência de pessoas privadas de liberdade. Nesse processo serão inseridos todos os pedidos formulados pela unidade ao longo do tempo.
+    </div>
+
+    <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det2')">
+      <span class="toggle-arrow" id="arr2">›</span> Ver detalhes
+    </span>
+
+    <div class="step-details" id="det2">
+
+      <div class="step-alert info">
+        ℹ️ &nbsp;<strong>O processo SGPe é único por unidade prisional e permanente</strong>, acumulando todos os pedidos de transferência realizados pela unidade ao longo do tempo.
+      </div>
+
+      <ul>
+
+        <li>
+        <strong>a) Criação do processo SGPe</strong><br>
+        MENU → CADASTRO DE PROCESSO DIGITAL
+        </li>
+
+        <li>
+        <strong>Assunto:</strong> 2850 — Movimentação Penitenciária
+        </li>
+
+        <li>
+        <strong>Classe:</strong> 2 — Solicitação de Transferência da Pessoa Presa
+        </li>
+
+        <li>
+        <strong>b.1)</strong> Setor de Abertura e de Origem: Unidade Prisional de Origem
+        </li>
+
+        <li>
+        <strong>b.2)</strong> Setor de Competência: Central de Regulação de Vagas (PPSC/CRV)
+        </li>
+
+        <li>
+        <strong>b.3)</strong> Interessado: Diretor da Unidade Prisional de Origem
+        </li>
+
+        <li>
+        <strong>b.4)</strong> Detalhamento do assunto (utilizar o padrão):<br>
+        <em>“SGPe Único Para Transferência de Pessoas Privadas de Liberdade - NOME DA UNIDADE PRISIONAL”</em>
+        </li>
+
+        <li>
+        <strong>b.5)</strong> Município: Município em que a Unidade Prisional está localizada
+        </li>
+
+        <li>
+        <strong>c) Inserção dos documentos</strong><br>
+        Os documentos deverão ser inseridos respeitando a ordem cronológica obrigatória:
+        <strong>Ofício → BPI → Formulário de Saúde → demais documentos</strong>
+        </li>
+
+        <li>
+        <strong>d) Atualização dos documentos técnicos</strong><br>
+        O BPI e o Formulário de Saúde devem estar atualizados e confeccionados pelos responsáveis técnicos da área, Coordenador Setorial ou Diretor da Unidade Prisional.
+        </li>
+
+        <li>
+        <strong>e) Documentos complementares</strong><br>
+        Quando existentes, deverão ser inseridos para subsidiar a análise do pedido de transferência, tais como:
+        memorando do preso, carta ou e-mail de familiar, petição física de advogado, decisão judicial, relatório de inteligência, boletim de ocorrência interno ou qualquer outro documento pertinente.
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+</div>
 
     <div class="flow-step" id="step3">
       <div class="step-line"></div>
