@@ -662,9 +662,11 @@
   .nav-menu {
     background: #060e1c;
     border-bottom: 1px solid var(--border);
-    position: sticky;
+    position: fixed;
     top: 64px;
-    z-index: 99;
+    left: 0;
+    width: 100%;
+    z-index: 999;
     overflow-x: auto;
     white-space: nowrap;
     scrollbar-width: none;
@@ -694,6 +696,9 @@
   }
   .nav-item:hover { color: var(--white); border-bottom-color: var(--accent); }
   .nav-item.active { color: var(--accent); border-bottom-color: var(--accent); }
+    body {
+    padding-top: 110px;
+  }
 
   /* ── INTRO SECTION ── */
   .intro-section {
