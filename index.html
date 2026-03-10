@@ -532,6 +532,72 @@
   .prazo-card.p1 .prazo-num { color: var(--accent); }
   .prazo-card.p2 .prazo-num { color: #e87060; }
   .prazo-card.p3 .prazo-num { color: var(--light); }
+
+  /* Ícone no topo dos cards de prazo */
+  .prazo-icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* Badge de urgência */
+  .prazo-badge {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 9.5px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .prazo-badge.urgente {
+    background: rgba(232,176,75,0.15);
+    color: var(--accent);
+    border: 1px solid rgba(232,176,75,0.35);
+  }
+
+  /* Badge de tipo de norma na base legal */
+  .leg-type-badge {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 9px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+  .leg-type-badge.norma-principal {
+    background: rgba(232,176,75,0.15);
+    color: var(--accent);
+    border: 1px solid rgba(232,176,75,0.3);
+  }
+  .leg-type-badge.norma-federal {
+    background: rgba(45,90,142,0.25);
+    color: var(--light);
+    border: 1px solid rgba(45,90,142,0.4);
+  }
+
+  /* Acessibilidade — foco visível para navegação por teclado */
+  .nav-item:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+    border-radius: 2px;
+  }
+  .oficio-copy-btn:focus-visible,
+  #modalCopyBtn:focus-visible,
+  #modalPdfBtn:focus-visible,
+  #btnTopo:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .leg-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
   .prazo-unit {
     font-size: 13px;
     color: var(--muted);
@@ -1057,6 +1123,8 @@
   .oficio-copy-btn:hover { background: #3a72b0; }
   .oficio-copy-btn.copied { background: var(--success); }
 </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -1079,18 +1147,18 @@
 </header>
 
 <!-- NAV MENU -->
-<nav class="nav-menu">
+<nav class="nav-menu" role="navigation" aria-label="Seções do manual">
   <div class="nav-inner">
-    <a class="nav-item" href="#sec-hipoteses">Hipóteses</a>
-    <a class="nav-item" href="#sec-fluxo">Fluxo Operacional</a>
+    <a class="nav-item" href="#sec-hipoteses" aria-label="Seção: Hipóteses de transferência">Hipóteses</a>
+    <a class="nav-item" href="#sec-fluxo" aria-label="Seção: Fluxo operacional passo a passo">Fluxo Operacional</a>
     <a class="nav-item" href="#sec-fluxogramas">Diagramas</a>
     <a class="nav-item" href="#sec-anuencia">Tabela de Anuência</a>
     <a class="nav-item" href="#sec-documentos">Documentos</a>
-    <a class="nav-item" href="#sec-prazos">Prazos</a>
-    <a class="nav-item" href="#sec-vedacoes">Vedações</a>
+    <a class="nav-item" href="#sec-prazos" aria-label="Seção: Prazos críticos">Prazos</a>
+    <a class="nav-item" href="#sec-vedacoes" aria-label="Seção: Vedações e restrições">Vedações</a>
     <a class="nav-item" href="#sec-legislacao">Legislação</a>
     <a class="nav-item" href="#sec-srs">🏛️ Unidades Prisionais</a>
-    <a class="nav-item" href="#sec-oficios" style="color:var(--accent); border-bottom:2px solid var(--accent);">📄 Modelos de Ofícios</a>
+    <a class="nav-item" href="#sec-oficios" aria-label="Seção: Modelos de ofícios">📄 Modelos de Ofícios</a>
   </div>
     </div>
   </div>
@@ -1151,7 +1219,7 @@ A solicitação fundamenta-se na existência de [DESCREVER BREVEMENTE A SITUAÇ�
 
 Diante da urgência da situação, solicita-se a transferência do referido reeducando para o(a) [UNIDADE PRISIONAL DE DESTINO], onde há condições adequadas para sua custódia em segurança.
 
-Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal desta Instituição, bem como Relatório de Saúde, assinado pelo responsável técnico. Encaminho ainda [OUTROS DOCUMENTOS: boletim de ocorrência interno, relatório da equipe de segurança, etc.], que subsidiam a presente solicitação.
+Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor. Encaminho ainda [OUTROS DOCUMENTOS: boletim de ocorrência interno, relatório da equipe de segurança, etc.], que subsidiam a presente solicitação.
 
 Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.
 
@@ -1223,7 +1291,7 @@ Encaminho para análise dessa Central pedido de transferência do reeducando [NO
 
 A solicitação tem por fundamento [MOTIVO ALEGADO PELO REEDUCANDO: mudança de domicílio familiar, necessidade de aproximação da família, outro motivo relevante], nos termos do art. 21, inciso II, da Resolução Conjunta Interinstitucional n. 01/2026.
 
-Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal desta Instituição, bem como Relatório de Saúde, assinado pelo responsável técnico, e memorando original do reeducando.
+Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor, e memorando original do reeducando.
 
 Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.
 
@@ -1272,7 +1340,7 @@ Encaminho para análise dessa Central pedido de transferência do reeducando [NO
 
 A solicitação tem por fundamento [MOTIVO ALEGADO PELO FAMILIAR: mudança de domicílio, necessidade de aproximação do núcleo familiar, dificuldade de deslocamento para visitas, outro motivo relevante], nos termos do art. 21, inciso II, da Resolução Conjunta Interinstitucional n. 01/2026.
 
-Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal desta Instituição, bem como Relatório de Saúde, assinado pelo responsável técnico, e [carta / e-mail / petição física] original do familiar.
+Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor, e [carta / e-mail / petição física] original do familiar.
 
 Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.
 
@@ -1321,7 +1389,7 @@ Encaminho para análise dessa Central pedido de transferência do reeducando [NO
 
 A solicitação tem por fundamento [MOTIVO ALEGADO PELO ADVOGADO: mudança de domicílio, aproximação familiar, outro motivo relevante devidamente fundamentado], nos termos do art. 21, inciso II, da Resolução Conjunta Interinstitucional n. 01/2026.
 
-Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal desta Instituição, bem como Relatório de Saúde, assinado pelo responsável técnico, e petição original do advogado, com comprovação de mandato.
+Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor, e petição original do advogado, com comprovação de mandato.
 
 Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.
 
@@ -1389,7 +1457,7 @@ Considerando a necessidade de gestão e equalização da ocupação carcerária 
 
 A solicitação fundamenta-se na necessidade de equalização da lotação entre as unidades do sistema prisional, em conformidade com as diretrizes estabelecidas para a gestão de vagas e movimentações prisionais previstas na Resolução Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.
 
-Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal desta Instituição, bem como Relatório de Saúde, assinado pelo responsável técnico.
+Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor.
 
 Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.
 
@@ -1452,11 +1520,11 @@ Florianópolis/SC</div>
         <div class="oficio-wrapper" id="oficio-mandado">
           <div class="oficio-box" id="oficio-mandado-text" contenteditable="true">Senhor(a) Coordenador(a)
 
-Encaminho para análise pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], em razão do cumprimento de Mandado de Prisão expedido pelo [JUÍZO EXPEDIDOR — ex: Juízo da Vara de Execuções Penais da Comarca de Itapema].
+Encaminho para análise pedido de transferência do reeducando [NOME COMPLETO], IPEN [Nº], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], em razão do cumprimento de Mandado de Prisão expedido pelo(a) [JUÍZO EXPEDIDOR — Ex.: Vara Regional de Execuções Penais da Comarca de XXXXX / 2ª Vara Criminal da Comarca de XXX].
 
 Considerando que o referido custodiado foi preso em comarca diversa daquela que expediu a ordem de prisão, bem como que o(a) [UNIDADE PRISIONAL DE DESTINO] é a unidade responsável pela circunscrição da autoridade judiciária expedidora, a transferência mostra-se adequada, em conformidade com as diretrizes estabelecidas para a gestão de vagas e movimentações prisionais previstas na Resolução Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.
 
-Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal desta Instituição, bem como Relatório de Saúde, assinado pelo responsável técnico, e cópia do Mandado de Prisão.
+Para subsidiar a análise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional), bem como Relatório de Saúde, assinado pelo Responsável Técnico (Médico, Enfermeiro, Técnico de Enfermagem, etc.), pelo Coordenador de Saúde, ou pelo Diretor, e cópia do Mandado de Prisão.
 
 Uma vez efetivada a remoção — caso aprovada —, o r. Juízo competente será devidamente comunicado, no prazo legal estabelecido, qual seja, em até 24 horas.
 
@@ -1577,7 +1645,7 @@ Florianópolis/SC</div>
             <li>Assinatura do Diretor da Unidade de Origem: obrigatória em todos os casos</li>
             <li>Assinatura do Diretor da Unidade de Destino: obrigatória em todos os casos</li>
             <li>Ambas as assinaturas devem constar no mesmo documento antes do encaminhamento à SR</li>
-            <li>O <strong>Boletim Penal Informativo (BPI)</strong> deverá ser assinado pelo <strong>Coordenador de Execução Penal</strong>, de modo a atestar a veracidade e fidedignidade do documento juntado</li>
+            <li>O <strong>Boletim Penal Informativo (BPI)</strong> deverá ser assinado pelo <strong>Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional)</strong>, de modo a atestar a veracidade e fidedignidade do documento juntado</li>
             <li>O <strong>Formulário de Saúde</strong> deverá ser assinado pelo <strong>Responsável Técnico que elaborou o documento</strong> (médico ou enfermeiro) ou pelo <strong>Coordenador de Saúde da Unidade Prisional de Origem</strong>. Em caso de assinatura física, deverá constar obrigatoriamente o <strong>nome, matrícula e cargo/função</strong> do signatário</li>
           </ul>
           <div class="step-alert warn">
@@ -1706,7 +1774,7 @@ Florianópolis/SC</div>
       <div class="step-body" onclick="toggleStep('det8')">
         <div class="step-actor">SEJURI / Departamento de Polícia Penal</div>
         <div class="step-title">Execução da transferência</div>
-        <div class="step-desc">Autorizada pela CRV, a SEJURI executa a movimentação. A unidade de destino recebe o preso e confirma o ingresso no sistema.</div>
+        <div class="step-desc">Autorizada pela CRV, o DPP, através de seus Operadores, executam a movimentação. A unidade de destino recebe o preso e confirma o ingresso no sistema.</div>
         <span class="step-toggle" onclick="event.stopPropagation(); toggleStep('det8')">
           <span class="toggle-arrow" id="arr8">›</span> Ver detalhes
         </span>
@@ -2032,7 +2100,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
       <div class="doc-icon">📋</div>
       <div>
         <div class="doc-title">Boletim Penal Informativo (BPI)</div>
-        <div class="doc-desc">Documento atualizado com os dados completos do preso: regime, pena, crimes, situação processual e disciplinar. Deve ser assinado pelo <strong>Coordenador de Execução Penal</strong>, de modo a atestar a veracidade e fidedignidade do documento.</div>
+        <div class="doc-desc">Documento atualizado com os dados completos do preso: regime, pena, crimes, situação processual e disciplinar. Deve ser assinado pelo <strong>Coordenador de Execução Penal (ou pelo Diretor da Unidade Prisional)</strong>, de modo a atestar a veracidade e fidedignidade do documento.</div>
         <span class="doc-required obrig">Obrigatório</span>
       </div>
     </div>
@@ -2089,17 +2157,21 @@ Ao(À) Meritíssimo(a) Senhor(a)
   <!-- PRAZOS -->
   <div id="sec-prazos" class="section-label">06 — Prazos críticos</div>
   <div class="prazo-grid">
-    <div class="prazo-card p1">
+    <div class="prazo-card p1" role="region" aria-label="Prazo de 24 horas">
+      <div class="prazo-icon">⏱️</div>
       <div class="prazo-num">24h</div>
       <div class="prazo-unit">horas corridas</div>
       <div class="prazo-label">Prazo para comunicar a transferência ao Judiciário, contado a partir da efetivação da movimentação.</div>
+      <div class="prazo-badge urgente">⚠️ PRAZO CRÍTICO</div>
     </div>
-    <div class="prazo-card p2">
+    <div class="prazo-card p2" role="region" aria-label="Prazo de 10 dias">
+      <div class="prazo-icon">📋</div>
       <div class="prazo-num">10</div>
       <div class="prazo-unit">dias corridos</div>
       <div class="prazo-label">Prazo para SEJURI responder ao GMF quando uma movimentação for questionada como possivelmente irregular.</div>
     </div>
-    <div class="prazo-card p3">
+    <div class="prazo-card p3" role="region" aria-label="Prazo de 30 dias">
+      <div class="prazo-icon">⚖️</div>
       <div class="prazo-num">30</div>
       <div class="prazo-unit">dias</div>
       <div class="prazo-label">Prazo para SEJURI responder ao juízo sobre pedido de transferência voluntária formulado na via judicial.</div>
@@ -2119,7 +2191,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
     </div>
     <div class="proib-item">
       <span class="proib-icon">🚫</span>
-      <span>Os juízos das comarcas <strong>não podem impedir</strong> a entrada de novas pessoas privadas de liberdade nas unidades prisionais de sua jurisdição, respeitadas as atribuições legais da SEJURI e da CRV.</span>
+      <span>Os juízos das comarcas <strong>não podem impedir</strong> a entrada de novas pessoas privadas de liberdade nas unidades prisionais de sua jurisdição, respeitadas as atribuições legais da SEJURI, DPP e da CRV.</span>
     </div>
     <div class="proib-item">
       <span class="proib-icon">🚫</span>
@@ -2127,7 +2199,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
     </div>
     <div class="proib-item">
       <span class="proib-icon">🚫</span>
-      <span>Se a SEJURI não cumprir a ordem de retorno do preso determinada pelo GMF/Corregedoria, <strong>fica impedida de realizar qualquer nova transferência</strong> no Estado até a regularização da situação.</span>
+      <span>Se o DPP não cumprir a ordem de retorno do preso determinada pelo GMF/Corregedoria, <strong>fica impedido de realizar qualquer nova transferência</strong> no Estado até a regularização da situação.</span>
     </div>
   </div>
 
@@ -2375,7 +2447,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
     <a class="leg-card" href="https://busca.tjsc.jus.br/buscatextual/integra.do?cdSistema=1&cdDocumento=188528&cdCategoria=261&q=&frase=&excluir=&qualquer=&prox1=&prox2=&proxc=" target="_blank" rel="noopener">
       <div class="leg-icon">📜</div>
       <div class="leg-body">
-        <div class="leg-title">Res. Conj. Interinst. n.º 1/2026</div>
+        <div class="leg-title">Res. Conj. Interinst. n.º 1/2026</div><span class="leg-type-badge norma-principal">📌 Norma Principal</span>
         <div class="leg-sub">Cria e regulamenta a Central de Regulação de Vagas do sistema prisional de SC.</div>
         <span class="leg-badge ext">🔗 TJSC</span>
       </div>
@@ -2411,7 +2483,7 @@ Ao(À) Meritíssimo(a) Senhor(a)
     <a class="leg-card" href="https://www.planalto.gov.br/ccivil_03/leis/l7210.htm" target="_blank" rel="noopener">
       <div class="leg-icon">⚖️</div>
       <div class="leg-body">
-        <div class="leg-title">Lei de Execução Penal</div>
+        <div class="leg-title">Lei de Execução Penal</div><span class="leg-type-badge norma-federal">🏛️ Lei Federal</span>
         <div class="leg-sub">Lei n.º 7.210/1984 — regula a execução das penas e medidas de segurança.</div>
         <span class="leg-badge ext">🔗 Planalto</span>
       </div>
@@ -2920,6 +2992,165 @@ Ao(À) Meritíssimo(a) Senhor(a)
     });
   }
 
+  async function baixarPDF() {
+    const activePanel = document.querySelector('.modal-panel.active .modal-oficio');
+    if (!activePanel) return;
+
+    const btn = document.getElementById('modalPdfBtn');
+    btn.textContent = '⏳ Gerando...';
+    btn.disabled = true;
+
+    try {
+      const { jsPDF } = window.jspdf;
+
+      // Cria PDF A4
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+      // Margens A4 (mm): 30 esq, 20 dir, 30 cima, 20 baixo — padrão ABNT
+      const marginLeft   = 30;
+      const marginRight  = 20;
+      const marginTop    = 30;
+      const marginBottom = 20;
+      const pageWidth    = 210;
+      const pageHeight   = 297;
+      const contentWidth = pageWidth - marginLeft - marginRight;
+
+      pdf.setFont('helvetica'); // substituto Arial no jsPDF
+      pdf.setFontSize(11);
+      const lineHeight   = 11 * 0.3528 * 1.15; // pt → mm × line-height
+      const paraSpacing  = lineHeight;           // 1 linha entre parágrafos
+
+      // Extrai parágrafos do DOM (já estruturado em <p>)
+      let y = marginTop;
+
+      const paragraphs = activePanel.querySelectorAll('p');
+      paragraphs.forEach((p, pi) => {
+        // Coleta spans e textnodes para saber quais são bold
+        let segments = []; // [{text, bold}]
+        p.childNodes.forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            const t = node.textContent;
+            if (t) segments.push({ text: t, bold: false });
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            const t = node.textContent;
+            if (!t) return;
+            const isBold = node.classList.contains('oficio-auto');
+            // quebras de linha internas
+            t.split('\n').forEach((line, li) => {
+              if (li > 0) segments.push({ text: '\n', bold: false });
+              if (line) segments.push({ text: line, bold: isBold });
+            });
+          }
+        });
+
+        const isNoIndent = p.classList.contains('oficio-noindent');
+
+        // Monta linhas quebradas respeitando contentWidth
+        // Processa segmento a segmento fazendo word-wrap
+        let lines = []; // [{parts:[{text,bold}], noIndent}]
+        let currentLine = [];
+        let currentWidth = 0;
+
+        function flushLine(forceNewLine) {
+          if (currentLine.length) {
+            lines.push({ parts: currentLine, noIndent: isNoIndent });
+            currentLine = [];
+            currentWidth = 0;
+          }
+        }
+
+        segments.forEach(seg => {
+          if (seg.text === '\n') {
+            flushLine(true);
+            return;
+          }
+          // Quebra palavras
+          const words = seg.text.split(/(\s+)/);
+          words.forEach(word => {
+            if (!word) return;
+            pdf.setFont('helvetica', seg.bold ? 'bold' : 'normal');
+            const ww = pdf.getTextWidth(word);
+            if (currentWidth + ww > contentWidth && word.trim() !== '') {
+              flushLine(true);
+            }
+            currentLine.push({ text: word, bold: seg.bold });
+            currentWidth += ww;
+          });
+        });
+        flushLine(true);
+
+        // Renderiza linhas no PDF
+        lines.forEach((line, li) => {
+          // Nova página se necessário
+          if (y + lineHeight > pageHeight - marginBottom) {
+            pdf.addPage();
+            y = marginTop;
+          }
+
+          // Justificação: distribuir espaço extra na última linha apenas se não for última
+          const isLastLine = (li === lines.length - 1);
+          const allText = line.parts.map(p => p.text).join('');
+
+          if (!line.noIndent && !isLastLine && allText.trim()) {
+            // Calcula largura total dos tokens não-espaço
+            let totalTextW = 0;
+            let spaceCount = 0;
+            line.parts.forEach(part => {
+              if (part.text.trim() === '') {
+                spaceCount++;
+              } else {
+                pdf.setFont('helvetica', part.bold ? 'bold' : 'normal');
+                totalTextW += pdf.getTextWidth(part.text);
+              }
+            });
+            const baseSpaceW = spaceCount > 0
+              ? (contentWidth - totalTextW) / spaceCount
+              : pdf.getTextWidth(' ');
+
+            let x = marginLeft;
+            line.parts.forEach(part => {
+              pdf.setFont('helvetica', part.bold ? 'bold' : 'normal');
+              if (part.text.trim() === '' && spaceCount > 0) {
+                x += baseSpaceW;
+              } else {
+                pdf.text(part.text, x, y);
+                x += pdf.getTextWidth(part.text);
+              }
+            });
+          } else {
+            // Alinhamento à esquerda (última linha ou bloco noIndent)
+            let x = marginLeft;
+            line.parts.forEach(part => {
+              pdf.setFont('helvetica', part.bold ? 'bold' : 'normal');
+              pdf.text(part.text, x, y);
+              x += pdf.getTextWidth(part.text);
+            });
+          }
+
+          y += lineHeight;
+        });
+
+        // Espaço entre parágrafos
+        if (pi < paragraphs.length - 1) y += paraSpacing;
+      });
+
+      // Nome do arquivo baseado no título do modal
+      const titulo = document.getElementById('modalTitle').textContent
+        .replace(/[^a-zA-ZÀ-ÿ0-9\s]/g, '').trim().replace(/\s+/g, '_');
+      pdf.save(`Oficio_${titulo}_${new Date().toLocaleDateString('pt-BR').replace(/\//g,'-')}.pdf`);
+
+      btn.innerHTML = '✔ Baixado!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerHTML = '⬇️ Baixar PDF'; btn.disabled = false; btn.classList.remove('copied'); }, 2500);
+
+    } catch (err) {
+      console.error('Erro ao gerar PDF:', err);
+      btn.innerHTML = '⬇️ Baixar PDF';
+      btn.disabled = false;
+      alert('Erro ao gerar PDF. Verifique a conexão com a internet.');
+    }
+  }
+
   // Legacy compat (keep for inline calls still present)
   function toggleOficio(id) { openModal(id); }
   function switchTab(wrapId, idx) { switchModalTab(idx); }
@@ -2971,10 +3202,10 @@ Ao(À) Meritíssimo(a) Senhor(a)
     if (arrow) arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
   }
   // Register all oficios
-  registerOficio('oficio-emerg', '🚨 Segurança / Emergência', ['Modelo de Ofício'], ["[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise urgente dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], em raz\u00e3o de situa\u00e7\u00e3o de risco identificada pelas equipes desta unidade prisional.\n\nA solicita\u00e7\u00e3o fundamenta-se na exist\u00eancia de [DESCREVER BREVEMENTE A SITUA\u00c7\u00c3O: risco iminente \u00e0 integridade f\u00edsica, amea\u00e7a de morte, envolvimento em crise interna, motim, rebeli\u00e3o ou outro fator de seguran\u00e7a], que torna invi\u00e1vel a manuten\u00e7\u00e3o do reeducando nesta unidade sem preju\u00edzo \u00e0 sua integridade ou \u00e0 ordem e seguran\u00e7a do estabelecimento, nos termos do art. 21, inciso I, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nDiante da urg\u00eancia da situa\u00e7\u00e3o, solicita-se a transfer\u00eancia do referido reeducando para o(a) [UNIDADE PRISIONAL DE DESTINO], onde h\u00e1 condi\u00e7\u00f5es adequadas para sua cust\u00f3dia em seguran\u00e7a.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico. Encaminho ainda [OUTROS DOCUMENTOS: boletim de ocorr\u00eancia interno, relat\u00f3rio da equipe de seguran\u00e7a, etc.], que subsidiam a presente solicita\u00e7\u00e3o.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se an\u00e1lise e delibera\u00e7\u00e3o c\u00e9lere da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
-  registerOficio('oficio-vol', '👤 Pedido Voluntário', ['📝 Memorando do Preso','👨‍👩‍👦 Pedido de Familiar','⚖️ Petição de Advogado'], ["[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo pr\u00f3prio reeducando por meio de memorando datado de [DATA DO MEMORANDO].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO REEDUCANDO: mudan\u00e7a de domic\u00edlio familiar, necessidade de aproxima\u00e7\u00e3o da fam\u00edlia, outro motivo relevante], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e memorando original do reeducando.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC","[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado por seu(ua) familiar [NOME DO FAMILIAR], [GRAU DE PARENTESCO], por meio de [carta / e-mail / peti\u00e7\u00e3o f\u00edsica] datado(a) de [DATA].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO FAMILIAR: mudan\u00e7a de domic\u00edlio, necessidade de aproxima\u00e7\u00e3o do n\u00facleo familiar, dificuldade de deslocamento para visitas, outro motivo relevante], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e [carta / e-mail / peti\u00e7\u00e3o f\u00edsica] original do familiar.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC","[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo advogado constitu\u00eddo [NOME DO ADVOGADO], OAB/SC n.\u00ba [N\u00daMERO], por meio de peti\u00e7\u00e3o datada de [DATA].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO ADVOGADO: mudan\u00e7a de domic\u00edlio, aproxima\u00e7\u00e3o familiar, outro motivo relevante devidamente fundamentado], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e peti\u00e7\u00e3o original do advogado, com comprova\u00e7\u00e3o de mandato.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
-  registerOficio('oficio-equal', '⚖️ Equalização de Lotação', ['Modelo de Ofício'], ["[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nConsiderando a necessidade de gest\u00e3o e equaliza\u00e7\u00e3o da ocupa\u00e7\u00e3o carcer\u00e1ria no \u00e2mbito do(a) [UNIDADE PRISIONAL DE ORIGEM], bem como a adequada distribui\u00e7\u00e3o das pessoas privadas de liberdade entre as unidades prisionais, encaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado nesta unidade prisional, para o(a) [UNIDADE PRISIONAL DE DESTINO].\n\nA solicita\u00e7\u00e3o fundamenta-se na necessidade de equaliza\u00e7\u00e3o da lota\u00e7\u00e3o entre as unidades do sistema prisional, em conformidade com as diretrizes estabelecidas para a gest\u00e3o de vagas e movimenta\u00e7\u00f5es prisionais previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
-  registerOficio('oficio-mandado', '📜 Mandado de Comarca Diversa', ['Modelo de Ofício'], ["[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], em raz\u00e3o do cumprimento de Mandado de Pris\u00e3o expedido pelo [JU\u00cdZO EXPEDIDOR \u2014 ex: Ju\u00edzo da Vara de Execu\u00e7\u00f5es Penais da Comarca de Itapema].\n\nConsiderando que o referido custodiado foi preso em comarca diversa daquela que expediu a ordem de pris\u00e3o, bem como que o(a) [UNIDADE PRISIONAL DE DESTINO] \u00e9 a unidade respons\u00e1vel pela circunscri\u00e7\u00e3o da autoridade judici\u00e1ria expedidora, a transfer\u00eancia mostra-se adequada, em conformidade com as diretrizes estabelecidas para a gest\u00e3o de vagas e movimenta\u00e7\u00f5es prisionais previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal desta Institui\u00e7\u00e3o, bem como Relat\u00f3rio de Sa\u00fade, assinado pelo respons\u00e1vel t\u00e9cnico, e c\u00f3pia do Mandado de Pris\u00e3o.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
+  registerOficio('oficio-emerg', '🚨 Segurança / Emergência', ['Modelo de Ofício'], ["[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise urgente dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], em raz\u00e3o de situa\u00e7\u00e3o de risco identificada pelas equipes desta unidade prisional.\n\nA solicita\u00e7\u00e3o fundamenta-se na exist\u00eancia de [DESCREVER BREVEMENTE A SITUA\u00c7\u00c3O: risco iminente \u00e0 integridade f\u00edsica, amea\u00e7a de morte, envolvimento em crise interna, motim, rebeli\u00e3o ou outro fator de seguran\u00e7a], que torna invi\u00e1vel a manuten\u00e7\u00e3o do reeducando nesta unidade sem preju\u00edzo \u00e0 sua integridade ou \u00e0 ordem e seguran\u00e7a do estabelecimento, nos termos do art. 21, inciso I, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nDiante da urg\u00eancia da situa\u00e7\u00e3o, solicita-se a transfer\u00eancia do referido reeducando para o(a) [UNIDADE PRISIONAL DE DESTINO], onde h\u00e1 condi\u00e7\u00f5es adequadas para sua cust\u00f3dia em seguran\u00e7a.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal (ou pelo Diretor da Unidade Prisional), bem como Relat\u00f3rio de Sa\u00fade, assinado pelo Respons\u00e1vel T\u00e9cnico (M\u00e9dico, Enfermeiro, T\u00e9cnico de Enfermagem, etc.), pelo Coordenador de Sa\u00fade, ou pelo Diretor. Encaminho ainda [OUTROS DOCUMENTOS: boletim de ocorr\u00eancia interno, relat\u00f3rio da equipe de seguran\u00e7a, etc.], que subsidiam a presente solicita\u00e7\u00e3o.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se an\u00e1lise e delibera\u00e7\u00e3o c\u00e9lere da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
+  registerOficio('oficio-vol', '👤 Pedido Voluntário', ['📝 Memorando do Preso','👨‍👩‍👦 Pedido de Familiar','⚖️ Petição de Advogado'], ["[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo pr\u00f3prio reeducando por meio de memorando datado de [DATA DO MEMORANDO].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO REEDUCANDO: mudan\u00e7a de domic\u00edlio familiar, necessidade de aproxima\u00e7\u00e3o da fam\u00edlia, outro motivo relevante], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal (ou pelo Diretor da Unidade Prisional), bem como Relat\u00f3rio de Sa\u00fade, assinado pelo Respons\u00e1vel T\u00e9cnico (M\u00e9dico, Enfermeiro, T\u00e9cnico de Enfermagem, etc.), pelo Coordenador de Sa\u00fade, ou pelo Diretor, e memorando original do reeducando.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC","[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado por seu(ua) familiar [NOME DO FAMILIAR], [GRAU DE PARENTESCO], por meio de [carta / e-mail / peti\u00e7\u00e3o f\u00edsica] datado(a) de [DATA].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO FAMILIAR: mudan\u00e7a de domic\u00edlio, necessidade de aproxima\u00e7\u00e3o do n\u00facleo familiar, dificuldade de deslocamento para visitas, outro motivo relevante], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal (ou pelo Diretor da Unidade Prisional), bem como Relat\u00f3rio de Sa\u00fade, assinado pelo Respons\u00e1vel T\u00e9cnico (M\u00e9dico, Enfermeiro, T\u00e9cnico de Enfermagem, etc.), pelo Coordenador de Sa\u00fade, ou pelo Diretor, e [carta / e-mail / peti\u00e7\u00e3o f\u00edsica] original do familiar.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC","[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], formulado pelo advogado constitu\u00eddo [NOME DO ADVOGADO], OAB/SC n.\u00ba [N\u00daMERO], por meio de peti\u00e7\u00e3o datada de [DATA].\n\nA solicita\u00e7\u00e3o tem por fundamento [MOTIVO ALEGADO PELO ADVOGADO: mudan\u00e7a de domic\u00edlio, aproxima\u00e7\u00e3o familiar, outro motivo relevante devidamente fundamentado], nos termos do art. 21, inciso II, da Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal (ou pelo Diretor da Unidade Prisional), bem como Relat\u00f3rio de Sa\u00fade, assinado pelo Respons\u00e1vel T\u00e9cnico (M\u00e9dico, Enfermeiro, T\u00e9cnico de Enfermagem, etc.), pelo Coordenador de Sa\u00fade, ou pelo Diretor, e peti\u00e7\u00e3o original do advogado, com comprova\u00e7\u00e3o de mandato.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
+  registerOficio('oficio-equal', '⚖️ Equalização de Lotação', ['Modelo de Ofício'], ["[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nConsiderando a necessidade de gest\u00e3o e equaliza\u00e7\u00e3o da ocupa\u00e7\u00e3o carcer\u00e1ria no \u00e2mbito do(a) [UNIDADE PRISIONAL DE ORIGEM], bem como a adequada distribui\u00e7\u00e3o das pessoas privadas de liberdade entre as unidades prisionais, encaminho para an\u00e1lise dessa Central pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado nesta unidade prisional, para o(a) [UNIDADE PRISIONAL DE DESTINO].\n\nA solicita\u00e7\u00e3o fundamenta-se na necessidade de equaliza\u00e7\u00e3o da lota\u00e7\u00e3o entre as unidades do sistema prisional, em conformidade com as diretrizes estabelecidas para a gest\u00e3o de vagas e movimenta\u00e7\u00f5es prisionais previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal (ou pelo Diretor da Unidade Prisional), bem como Relat\u00f3rio de Sa\u00fade, assinado pelo Respons\u00e1vel T\u00e9cnico (M\u00e9dico, Enfermeiro, T\u00e9cnico de Enfermagem, etc.), pelo Coordenador de Sa\u00fade, ou pelo Diretor.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nAtenciosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
+  registerOficio('oficio-mandado', '📜 Mandado de Comarca Diversa', ['Modelo de Ofício'], ["[DATA_AUTO]\n\n\n\nSenhor(a) Coordenador(a)\n\nEncaminho para an\u00e1lise pedido de transfer\u00eancia do reeducando [NOME COMPLETO], IPEN [N\u00ba], atualmente custodiado no(a) [UNIDADE PRISIONAL DE ORIGEM], para o(a) [UNIDADE PRISIONAL DE DESTINO], em raz\u00e3o do cumprimento de Mandado de Pris\u00e3o expedido pelo(a) [JU\u00cdZO EXPEDIDOR \u2014 Ex.: Vara Regional de Execu\u00e7\u00f5es Penais da Comarca de XXXXX / 2\u00aa Vara Criminal da Comarca de XXX].\n\nConsiderando que o referido custodiado foi preso em comarca diversa daquela que expediu a ordem de pris\u00e3o, bem como que o(a) [UNIDADE PRISIONAL DE DESTINO] \u00e9 a unidade respons\u00e1vel pela circunscri\u00e7\u00e3o da autoridade judici\u00e1ria expedidora, a transfer\u00eancia mostra-se adequada, em conformidade com as diretrizes estabelecidas para a gest\u00e3o de vagas e movimenta\u00e7\u00f5es prisionais previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, especialmente em seu art. 21, inciso III.\n\nPara subsidiar a an\u00e1lise, encaminho em anexo Boletim Penal Informativo devidamente atualizado, assinado pelo Coordenador de Execu\u00e7\u00e3o Penal (ou pelo Diretor da Unidade Prisional), bem como Relat\u00f3rio de Sa\u00fade, assinado pelo Respons\u00e1vel T\u00e9cnico (M\u00e9dico, Enfermeiro, T\u00e9cnico de Enfermagem, etc.), pelo Coordenador de Sa\u00fade, ou pelo Diretor, e c\u00f3pia do Mandado de Pris\u00e3o.\n\nUma vez efetivada a remo\u00e7\u00e3o \u2014 caso aprovada \u2014, o r. Ju\u00edzo competente ser\u00e1 devidamente comunicado, no prazo legal estabelecido, qual seja, em at\u00e9 24 horas.\n\nInformo, por fim, que foram realizados contatos pr\u00e9vios com os entes envolvidos, quais sejam, o Diretor da Unidade Prisional de destino e o(s) respectivo(s) Superintendente(s) Regional(is), que subscrevem ou anuem ao presente expediente.\n\nDiante do exposto, solicita-se a an\u00e1lise e delibera\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas quanto \u00e0 viabilidade da transfer\u00eancia administrativa do referido reeducando.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE ORIGEM]\nDiretor do(a) [UNIDADE DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO DIRETOR DA UNIDADE PRISIONAL DE DESTINO]\nDiretor do(a) [UNIDADE DE DESTINO]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 ORIGEM]\nSuperintendente do(a) [SR DE ORIGEM]\n\n(documento assinado digitalmente)\n[NOME DO SUPERINTENDENTE REGIONAL \u2013 DESTINO \u2013 SE FOR O CASO]\nSuperintendente do(a) [SR DE DESTINO]\n\n\n\n\u00c0 Senhora\nJESSICA KARLA VEIGA\nCoordenadora de Controle de Vagas\nDepartamento de Pol\u00edcia Penal \u2013 DPP\nSecretaria de Estado de Justi\u00e7a e Reintegra\u00e7\u00e3o Social\nFlorian\u00f3polis/SC"]);
   registerOficio('oficio-comunicacao', '📬 Comunicação ao Judiciário', ['📤 Saída (Unidade de Origem)','📥 Entrada (Unidade de Destino)','📜 Mandado de Comarca Diversa'], ["[DATA_AUTO]\n\n\n\nSenhor(a) [JUIZ/JU\u00cdZA],\n\nCumpre-me comunicar a Vossa Excel\u00eancia que o reeducando [NOME COMPLETO], IPEN [N\u00ba], qualificado no Processo de Execu\u00e7\u00e3o Penal n. [N\u00daMERO DO PROCESSO], que tramita perante esse Douto Ju\u00edzo, foi transferido desta unidade prisional \u2014 [UNIDADE PRISIONAL DE ORIGEM] \u2014 para o(a) [UNIDADE PRISIONAL DE DESTINO], em [DATA DA TRANSFER\u00caNCIA].\n\nInformo que a transfer\u00eancia ocorreu em raz\u00e3o de [MOTIVO: equaliza\u00e7\u00e3o da lota\u00e7\u00e3o carcer\u00e1ria / situa\u00e7\u00e3o de risco \u00e0 integridade do reeducando / pedido volunt\u00e1rio formulado por requerimento do reeducando / familiar / advogado], estando em conformidade com as normas previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026. A movimenta\u00e7\u00e3o contou com a anu\u00eancia de todos os entes envolvidos, quais sejam, os Diretores das Unidades Prisionais de Origem e de Destino, o(s) Superintendente(s) Regional(is) competente(s), bem como com a an\u00e1lise e aprova\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas do Departamento de Pol\u00edcia Penal.\n\nEsta coordenadoria permanece \u00e0 disposi\u00e7\u00e3o de Vossa Excel\u00eancia para eventuais esclarecimentos que se fizerem necess\u00e1rios.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO COORDENADOR DE EXECU\u00c7\u00c3O PENAL]\nCoordenador de Execu\u00e7\u00e3o Penal\n[UNIDADE PRISIONAL DE ORIGEM]\n\n\n\nAo(\u00c0) Merit\u00edssimo(a) Senhor(a)\n[NOME DO JUIZ/JU\u00cdZA]\n[VARA / JU\u00cdZO COMPETENTE]\n[COMARCA]","[DATA_AUTO]\n\n\n\nSenhor(a) [JUIZ/JU\u00cdZA],\n\nCumpre-me comunicar a Vossa Excel\u00eancia que o reeducando [NOME COMPLETO], IPEN [N\u00ba], qualificado no Processo de Execu\u00e7\u00e3o Penal n. [N\u00daMERO DO PROCESSO], que tramita perante esse Douto Ju\u00edzo, foi recebido e regularmente custodiado nesta unidade prisional \u2014 [UNIDADE PRISIONAL DE DESTINO] \u2014 a partir de [DATA DE ENTRADA], proveniente do(a) [UNIDADE PRISIONAL DE ORIGEM].\n\nInformo que a transfer\u00eancia ocorreu em raz\u00e3o de [MOTIVO: equaliza\u00e7\u00e3o da lota\u00e7\u00e3o carcer\u00e1ria / situa\u00e7\u00e3o de risco \u00e0 integridade do reeducando / pedido volunt\u00e1rio formulado por requerimento do reeducando / familiar / advogado], estando em conformidade com as normas previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026. A movimenta\u00e7\u00e3o contou com a anu\u00eancia de todos os entes envolvidos, quais sejam, os Diretores das Unidades Prisionais de Origem e de Destino, o(s) Superintendente(s) Regional(is) competente(s), bem como com a an\u00e1lise e aprova\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas do Departamento de Pol\u00edcia Penal.\n\nO reeducando encontra-se devidamente registrado nos sistemas desta unidade, permanecendo \u00e0 inteira disposi\u00e7\u00e3o desse Douto Ju\u00edzo para os fins que Vossa Excel\u00eancia determinar.\n\nEsta coordenadoria permanece \u00e0 disposi\u00e7\u00e3o de Vossa Excel\u00eancia para eventuais esclarecimentos que se fizerem necess\u00e1rios.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO COORDENADOR DE EXECU\u00c7\u00c3O PENAL]\nCoordenador de Execu\u00e7\u00e3o Penal\n[UNIDADE PRISIONAL DE DESTINO]\n\n\n\nAo(\u00c0) Merit\u00edssimo(a) Senhor(a)\n[NOME DO JUIZ/JU\u00cdZA]\n[VARA / JU\u00cdZO COMPETENTE]\n[COMARCA]","[DATA_AUTO]\n\n\n\nSenhor(a) [JUIZ/JU\u00cdZA],\n\nCumpre-me comunicar a Vossa Excel\u00eancia que o reeducando [NOME COMPLETO], IPEN [N\u00ba], qualificado no Processo de Execu\u00e7\u00e3o Penal n. [N\u00daMERO DO PROCESSO], que tramita perante esse Douto Ju\u00edzo, foi transferido desta unidade prisional \u2014 [UNIDADE PRISIONAL DE ORIGEM] \u2014 para o(a) [UNIDADE PRISIONAL DE DESTINO], em [DATA DA TRANSFER\u00caNCIA], em raz\u00e3o do cumprimento de Mandado de Pris\u00e3o expedido por esse Douto Ju\u00edzo.\n\nInformo que a transfer\u00eancia ocorreu em raz\u00e3o de o referido custodiado ter sido preso em comarca diversa daquela que expediu a ordem de pris\u00e3o, sendo o(a) [UNIDADE PRISIONAL DE DESTINO] a unidade respons\u00e1vel pela circunscri\u00e7\u00e3o da autoridade judici\u00e1ria expedidora. A movimenta\u00e7\u00e3o est\u00e1 em conformidade com as normas previstas na Resolu\u00e7\u00e3o Conjunta Interinstitucional n. 01/2026, tendo contado com a anu\u00eancia de todos os entes envolvidos, quais sejam, os Diretores das Unidades Prisionais de Origem e de Destino, o(s) Superintendente(s) Regional(is) competente(s), bem como com a an\u00e1lise e aprova\u00e7\u00e3o da Central de Regula\u00e7\u00e3o de Vagas do Departamento de Pol\u00edcia Penal.\n\nO reeducando encontra-se devidamente registrado nos sistemas da unidade de destino, permanecendo \u00e0 inteira disposi\u00e7\u00e3o desse Douto Ju\u00edzo para os fins que Vossa Excel\u00eancia determinar.\n\nEsta coordenadoria permanece \u00e0 disposi\u00e7\u00e3o de Vossa Excel\u00eancia para eventuais esclarecimentos que se fizerem necess\u00e1rios.\n\n\n\nRespeitosamente,\n\n\n\n(documento assinado digitalmente)\n[NOME DO COORDENADOR DE EXECU\u00c7\u00c3O PENAL]\nCoordenador de Execu\u00e7\u00e3o Penal\n[UNIDADE PRISIONAL DE ORIGEM]\n\n\n\nAo(\u00c0) Merit\u00edssimo(a) Senhor(a)\n[NOME DO JUIZ/JU\u00cdZA]\n[VARA / JU\u00cdZO COMPETENTE]\n[COMARCA]"]);
 
 
@@ -2994,22 +3225,36 @@ Ao(À) Meritíssimo(a) Senhor(a)
     window.addEventListener('resize', updateScrollMargin);
   })();
 
-  // Active nav highlight on scroll
+  // Scrollspy — destaca item ativo no menu conforme seção visível
   (function() {
-    var sections = ['sec-hipoteses','sec-fluxo','sec-fluxogramas','sec-anuencia','sec-documentos','sec-prazos','sec-vedacoes','sec-oficios','sec-srs','sec-legislacao'];
+    var sectionIds = ['sec-hipoteses','sec-fluxo','sec-fluxogramas','sec-anuencia','sec-documentos','sec-prazos','sec-vedacoes','sec-oficios','sec-srs','sec-legislacao'];
     var navItems = document.querySelectorAll('.nav-item');
+
+    function getNavHeight() {
+      var h = document.querySelector('header');
+      var n = document.querySelector('.nav-menu');
+      return (h ? h.offsetHeight : 0) + (n ? n.offsetHeight : 0) + 16;
+    }
+
     function onScroll() {
-      var scrollY = window.scrollY + 120;
-      var current = '';
-      sections.forEach(function(id) {
+      var offset = getNavHeight();
+      var scrollY = window.scrollY + offset;
+      var current = sectionIds[0];
+      sectionIds.forEach(function(id) {
         var el = document.getElementById(id);
-        if (el && el.offsetTop <= scrollY) current = id;
+        if (el && el.getBoundingClientRect().top + window.scrollY <= scrollY) {
+          current = id;
+        }
       });
       navItems.forEach(function(a) {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+        var isActive = a.getAttribute('href') === '#' + current;
+        a.classList.toggle('active', isActive);
+        a.setAttribute('aria-current', isActive ? 'true' : 'false');
       });
     }
+
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('load', onScroll);
   })();
 
   // Animate steps on load
@@ -3032,11 +3277,34 @@ Ao(À) Meritíssimo(a) Senhor(a)
     <div class="modal-tabs" id="modalTabs"></div>
     <div class="modal-body" id="modalBody"></div>
     <div class="modal-footer">
-      <span class="modal-hint">✏️ Campos destacados em amarelo são editáveis &nbsp;·&nbsp; Edite, depois clique em Copiar</span>
-      <button class="oficio-copy-btn" id="modalCopyBtn" onclick="copiarModalAtivo()">📋 Copiar texto</button>
+      <span class="modal-hint">✏️ Campos destacados em amarelo são editáveis &nbsp;·&nbsp; Edite, depois clique em Copiar ou Baixar PDF</span>
+      <div style="display:flex;gap:8px;flex-shrink:0;">
+        <button class="oficio-copy-btn" id="modalCopyBtn" onclick="copiarModalAtivo()" aria-label="Copiar texto do ofício para a área de transferência">📋 Copiar texto</button>
+        <button class="oficio-copy-btn" id="modalPdfBtn" onclick="baixarPDF()" style="background:var(--steel);" aria-label="Baixar ofício em formato PDF">⬇️ Baixar PDF</button>
+      </div>
     </div>
   </div>
 </div>
 
+
+<!-- ── BOTÕES FLUTUANTES ── -->
+<button id="btnTopo" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao início" aria-label="Voltar ao início da página">▲ Início</button>
+
+
+<style>
+  #btnTopo,
+  #btnTopo  { right: 28px;   background: var(--accent); color: #0a1628; }
+  #btnTopo.visible,
+  #btnTopo:hover  { background: #f5cc6a; }
+</style>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const visible = window.scrollY > 400;
+    const topo  = document.getElementById('btnTopo');
+    if (topo)  topo.classList.toggle('visible', visible);
+    if (whats) whats.classList.toggle('visible', visible);
+  }, { passive: true });
+</script>
+
 </body>
-</html>
